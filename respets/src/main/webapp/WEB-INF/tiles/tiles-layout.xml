@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+<tiles-definitions>
+
+	<!--  default_template -->
+	<definition name="layout.basic" template="/WEB-INF/views/layouts/basic.jsp"> 
+		  	<put-attribute name="header"		value="/WEB-INF/views/layouts/topBar.jsp"/>
+		  	<put-attribute name="body" 			value=""/>
+		  	<put-attribute name="footer" 	  	value="/WEB-INF/views/layouts/footer.jsp"/>
+	</definition>
+	
+	<!-- 서브페이지 공통 -->
+	<definition name="tiles/*/*" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+
+</tiles-definitions>
