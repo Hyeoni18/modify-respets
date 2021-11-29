@@ -6,10 +6,10 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 <!DOCTYPE html>
-<html lang="ko">
-<%-- <head>
+<html>
+<head>
 	<tiles:insertAttribute name="title" />
-</head> --%>
+</head>
 <body>
 <div>
 	<tiles:insertAttribute name="header" />

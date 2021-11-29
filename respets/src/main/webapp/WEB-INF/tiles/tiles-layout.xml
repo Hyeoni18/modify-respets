@@ -7,12 +7,17 @@
 
 	<!--  default_template -->
 	<definition name="layout.basic" template="/WEB-INF/views/layouts/basic.jsp"> 
-		  	<put-attribute name="header"		value="/WEB-INF/views/layouts/topBar.jsp"/>
+			<put-attribute name="title" 		value="/WEB-INF/views/layouts/title.jsp" />
+		  	<put-attribute name="header"		value="/WEB-INF/views/layouts/topbar-landing.jsp"/>
 		  	<put-attribute name="body" 			value=""/>
 		  	<put-attribute name="footer" 	  	value="/WEB-INF/views/layouts/footer.jsp"/>
 	</definition>
 	
 	<!-- 서브페이지 공통 -->
+	<definition name="tiles/*" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
 	<definition name="tiles/*/*" extends="layout.basic">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>

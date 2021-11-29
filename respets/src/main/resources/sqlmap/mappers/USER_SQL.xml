@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.teamx.respets.user.mapper.UserMapper">
+	
+	<!-- 개인회원가입 -->
+    <insert id="insertPersonalJoin" parameterType="map">
+    	INSERT INTO PERSONAL_TB VALUES
+    	(
+    		'P'||NEXTVAL('PER_SEQ')
+    		,#{per_email}
+    		,#{per_pw}
+    		,#{per_name}
+    		,#{per_phone}
+    		,#{per_photo}
+    		,#{per_loc}
+    		,default
+    		,default
+    		,NULL
+    	)
+    </insert>
+    
+    <!-- 이메일인증성공 -->
+	<update id="emailConfirmSuccess" parameterType="String">
+		UPDATE PERSONAL_TB 
+		SET
+			PER_EMCHK='O' 
+		WHERE PER_EMAIL=#{per_email}
+	</update>
+	
+	<!-- 기업 회원 가입 시 업종 선택 -->
+	<select id="selectBusCategory" resultType="map">
+		SELECT CMMN_CD
+			, CD_DESC
+		FROM CMMN_CODE 
+		WHERE GRP_CD='BC00'
+	</select>
+	
+	<!-- 기업 회원 가입 -->
+	<insert id="insertBusinessJoin" parameterType="map">
+		<selectKey keyProperty="bus_seq" resultType="int" order="BEFORE">
+			SELECT NEXTVAL('BUS_SEQ') 
+		</selectKey>
+		INSERT INTO BUSINESS_TB VALUES
+		(
+			'B'||#{bus_seq}
+			,#{bus_email, jdbcType=VARCHAR}
+			,#{bus_pw, jdbcType=VARCHAR}
+			,#{bus_name, jdbcType=VARCHAR}
+			,#{bus_ceo, jdbcType=VARCHAR}
+			,#{bus_lcno, jdbcType=VARCHAR}
+			,#{bus_phone, jdbcType=VARCHAR}
+			,#{bus_post, jdbcType=VARCHAR}
+			,#{bus_addr, jdbcType=VARCHAR}
+			,#{bus_dtl_addr, jdbcType=VARCHAR}
+			,'O'
+			,default
+			,default
+			,NOW()
+		)
+	</insert>
+	
+	<!-- 기업 회원 가입 -->
+	<insert id="insertBusJoinSvc" parameterType="map">
+		INSERT INTO SERVICE_TB VALUES
+		(
+			#{bct_code}
+			,#{bus_no}
+			,1
+		)
+	</insert>
+	
+	<!-- 기업 회원 가입 사업자등록증 GALLERY_TB INSERT -->
+	<insert id="insertLicense" parameterType="map">
+		INSERT INTO GALLERY_TB VALUES
+		(
+			#{bus_no}
+			,#{bct_code}
+			,1
+			,#{file}
+			,#{location}
+		)
+	</insert>
+</mapper>

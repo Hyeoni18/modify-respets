@@ -11,25 +11,6 @@
 	name="description" />
 <meta content="Coderthemes" name="author" />
 
-<!-- App favicon -->
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/images/logo-sm.png">
-
-<!-- third party css -->
-<link
-	href="${pageContext.request.contextPath}/resources/dist/assets/css/vendor/jquery-jvectormap-1.2.2.css"
-	rel="stylesheet" type="text/css" />
-<!-- third party css end -->
-
-<!-- App css -->
-<link
-	href="${pageContext.request.contextPath}/resources/dist/assets/css/icons.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/resources/dist/assets/css/app.min.css"
-	rel="stylesheet" type="text/css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body onunload="logout();">
 	<!-- Topbar Start -->
@@ -189,23 +170,6 @@
 			</a>
 		</div>
 	</div>
-
-	<!-- App js -->
-	<script src="<c:url value="/resources/dist/assets/js/app.min.js"/>"></script>
-
-	<!-- third party js -->
-	<script
-		src="<c:url value="/resources/dist/assets/js/vendor/Chart.bundle.min.js"/>"></script>
-	<script
-		src="<c:url value="/resources/dist/assets/js/vendor/jquery-jvectormap-1.2.2.min.js"/>"></script>
-	<script
-		src="<c:url value="/resources/dist/assets/js/vendor/jquery-jvectormap-world-mill-en.js"/>"></script>
-	<!-- third party js ends -->
-
-	<!-- demo app -->
-	<script
-		src="<c:url value="/resources/dist/assets/js/pages/demo.dashboard.js"/>"></script>
-	<!-- end demo js-->
 
 	<div id="no">${no}</div>
 </body>

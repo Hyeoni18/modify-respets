@@ -23,7 +23,7 @@
 			<property name="mapperLocations" value="classpath:/sqlmap/mappers/*.xml" />
 		</bean>
 		
-	 	<mybatis-spring:scan base-package="com.teamx.respets.mapper"/> 
+	 	<mybatis-spring:scan base-package="com.teamx.respets.*.mapper"/> 
 	</beans>
 	
 </beans>
