@@ -7,13 +7,6 @@
 <head>
 <meta charset="UTF-8" />
 <title>Respets</title>
-<!-- App favicon -->
-<!-- <link rel="shortcut icon" href="resources/images/logo-sm.png"> -->
-<!-- App css -->
-<!-- <link href="resources/dist/assets/css/icons.min.css" rel="stylesheet"
-	type="text/css" /> -->
-<!-- <link href="resources/dist/assets/css/app.min.css" rel="stylesheet"
-	type="text/css" /> -->
 </head>
 <body data-layout="topnav">
 	${alert}
@@ -30,13 +23,6 @@
 
 		<div class="content-page">
 			<div class="content">
-
-				<!-- Topbar Start -->
-				<%-- <jsp:include page="layouts/topbar-landing.jsp">
-					<jsp:param name="no" value="${no}" /> 
-				</jsp:include> --%>
-				<!-- end Topbar -->
-
 
 				<!-- Start Content-->
 				<div class="container-fluid">
@@ -257,21 +243,10 @@
 			</div>
 			<!-- content -->
 
-			<!-- Footer Start -->
-			<%-- <jsp:include page="layouts/footer.jsp"/> --%>
-			<!-- end Footer -->
-
 		</div>
-
-		<!-- ============================================================== -->
-		<!-- End Page content -->
-		<!-- ============================================================== -->
-
 
 	</div>
 	<!-- END wrapper -->
-
-
 
 	<!-- App js -->
 	<script src="resources/dist/assets/js/app.min.js"></script>
