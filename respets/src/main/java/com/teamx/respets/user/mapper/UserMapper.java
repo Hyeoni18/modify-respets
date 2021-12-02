@@ -32,4 +32,8 @@ public interface UserMapper {
 
 	public boolean insertRND(Map<String, Object> map) throws SQLException;
 
+	public Map<String,Object> loginProcess(Map<String, Object> map) throws SQLException;
+
+	public Integer selectBlackList(Map<String, Object> map) throws SQLException;
+
 }

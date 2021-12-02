@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,13 +41,13 @@
 									<small>이메일/비밀번호 찾기</small></a> 
 																		
 									<label for="email">이메일 주소</label> 
-									<input class="form-control" type="text" id="email" name="email" placeholder="이메일을 입력해주세요.">
+									<input class="form-control" type="text" id="per_email" name="per_email" placeholder="이메일을 입력해주세요.">
 								</div>
 
 								<div class="form-group">
 									
 									<label for="pw">비밀번호</label> <input
-										class="form-control" type="password" id="pw" name="pw"
+										class="form-control" type="password" id="per_pw" name="per_pw"
 										placeholder="비밀번호를 입력해주세요.">
 								</div>
 								
@@ -96,9 +95,6 @@ pw: <input type="password" id="pw" name="pw"/> <br/>
 	<!--비밀번호 변경이 완료됐다는 안내 alert -->
 </body>
 <script>
-	${alert}
-	${loginFailed}
-	${noEmail}
-	${leave}
+	${paramMap.alert}
 </script>
 </html>

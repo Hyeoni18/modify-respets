@@ -21,6 +21,7 @@ public class BusinessVO {
 	private String bus_post;
 	private String bus_addr;
 	private String bus_dtl_addr;
+	private String bus_file_id;
 	private String bus_emchk;
 	private String bus_chk;
 	private String bus_leave;

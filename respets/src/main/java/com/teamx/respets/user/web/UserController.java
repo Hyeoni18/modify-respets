@@ -32,6 +32,20 @@ public class UserController {
 	}
 	
 	/**
+	 * 로그인
+	 * @Method : loginProcess
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value ="/loginProcess")
+	public String loginProcess(@RequestParam Map<String, Object> map, HttpServletRequest request, Model model) throws Exception {
+		Map<String, Object> resultMap = userService.loginProcess(map, request);
+		model.addAttribute("paramMap", resultMap);
+		String view = String.valueOf(resultMap.get("view"));
+		return view;
+	}
+	
+	/**
 	 * 회원가입 첫 화면 (회원선택)
 	 * @Method : joinChoiceForm
 	 * @return
@@ -158,6 +172,30 @@ public class UserController {
 		String result = userService.findPw(map);
 		model.addAttribute("findPw", result);
 		return "tiles/index";
+	}
+	
+	/**
+	 * 로그아웃
+	 * @Method : logout
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/logout")
+	public String logout(HttpServletRequest request, Model model) throws Exception {
+		request.getSession().invalidate();
+		model.addAttribute("alert","alert('로그아웃 되었습니다.');");
+		return "tiles/index";
+	}
+	
+	/**
+	 * 마이페이지
+	 * @Method : myPage
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/myPage")
+	public String myPage() throws Exception {
+		return "myTiles/user/recentMyBookingList";
 	}
 
 }

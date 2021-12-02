@@ -1,18 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
 <title>Respets</title>
+<script>
+${alert} /* 메일의 유효시간이 경과했다는 안내 || 존재하지 않는 메일이라는 안내 alert */
+${findPw} /* 비밀번호 설정 이메일을 보냈다는 안내 alert */
+</script>
 </head>
 <body data-layout="topnav">
-	${alert}
-	<!-- 메일의 유효시간이 경과했다는 안내 || 존재하지 않는 메일이라는 안내 alert -->
-	${findPw}
-	<!-- 비밀번호 설정 이메일을 보냈다는 안내 alert -->
+	
 
 	<!-- Begin page -->
 	<div class="wrapper">
@@ -37,10 +37,10 @@
 								</c:if>
 									<c:if test="${no != null}">
 										<c:if test="${fn:substring(no,0,1) eq 'P'}">
-											${name} 회원님, 반갑습니다! 반려동물 관련 예약서비스를 편리하게 누려보세요:)
+											${paramMap.name} 회원님, 반갑습니다! 반려동물 관련 예약서비스를 편리하게 누려보세요:)
 										</c:if>
 										<c:if test="${fn:substring(no,0,1) eq 'B'}">
-											${name} 회원님, 반갑습니다! 새로운 예약을 확인해보세요:)
+											${paramMap.name} 회원님, 반갑습니다! 새로운 예약을 확인해보세요:)
 										</c:if>
 										<c:if test="${fn:substring(no,0,1) eq '1'}">
 											관리자로 로그인 했습니다.

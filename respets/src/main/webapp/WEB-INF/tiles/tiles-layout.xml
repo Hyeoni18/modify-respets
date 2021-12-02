@@ -22,4 +22,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 
+	<!--  mypage_template -->
+	<definition name="layout.myBasic" template="/WEB-INF/views/layouts/myBasic.jsp"> 
+			<put-attribute name="title" 		value="/WEB-INF/views/layouts/title.jsp" />
+		  	<put-attribute name="left"			value="/WEB-INF/views/layouts/left-sidebar.jsp"/>
+		  	<put-attribute name="tabbar"		value="/WEB-INF/views/layouts/topbar-dashboard.jsp"/>
+		  	<put-attribute name="body" 			value=""/>
+		  	<put-attribute name="footer" 	  	value="/WEB-INF/views/layouts/footer.jsp"/>
+	</definition>
+	
+	<definition name="myTiles/*/*" extends="layout.myBasic">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
 </tiles-definitions>

@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 		if(!busiVO.getMainPhoto().isEmpty()) {
 			fileMap = uploadFileUtils.fileUpload(busiVO.getMainPhoto());
 			commonMapper.insertFile(fileMap);
-			busiVO.setBct_file_id(String.valueOf(fileMap.get("FILE_ID")));
+			busiVO.setBus_file_id(String.valueOf(fileMap.get("FILE_ID")));
 		}
 
 		userMapper.insertBusinessJoin(busiVO); // 기업 회원 테이블
@@ -200,6 +200,52 @@ public class UserServiceImpl implements UserService {
 		
 		return "<script>alert('이메일로 비밀번호 재설정 링크를 보냈습니다.');</script>";
 		
+	}
+
+	@Override
+	public Map<String, Object> loginProcess(Map<String, Object> map, HttpServletRequest request) throws Exception {
+		Map<String, Object> resultMap = userMapper.loginProcess(map);
+		if(resultMap != null) {
+			request.getSession().setAttribute("no", resultMap.get("no"));
+			//탈퇴회원 구분
+			if(resultMap.get("leave").equals("O")) {
+				String alert = "alert('탈퇴한 회원의 이메일 입니다. 로그인 할 수 없습니다.');";
+				resultMap.put("alert", alert);
+				resultMap.put("view", "tiles/user/loginForm");
+				request.getSession().invalidate();
+			} else {
+				//블랙리스트 구분
+				Integer outNumber = userMapper.selectBlackList(map);
+				
+				if(outNumber != null && (outNumber == 1 || outNumber == 2)) {
+					String alert = "alert('이용이 정지된 계정입니다. 로그인 할 수 없습니다.');";
+					resultMap.put("alert", alert);
+					resultMap.put("view", "tiles/user/loginForm");
+					request.getSession().invalidate(); 
+				}
+			}
+			
+			//인증회원 확인
+			if(resultMap.get("emchk").equals("O")) {
+				resultMap.put("view", "tiles/index");
+			} else {
+				String tomail = String.valueOf(resultMap.get("email"));
+				String title = "[Respets] 계정 인증 메일";
+				String content = "링크를 클릭해주세요. http://localhost/emailConfirmSuccess?per_email="
+						+ tomail;
+				mailSending(tomail, title, content);
+				request.getSession().invalidate();
+				String alert = "alert('미인증 회원입니다. 인증을 완료해주세요.');";
+				resultMap.put("alert", alert);
+				resultMap.put("view", "tiles/user/emailConfirmOffer");
+			}
+		} else {
+			String alert = "alert('로그인에 실패하였습니다. \\n계정과 비밀번호를 확인해주세요.')";
+			resultMap = new HashMap<String, Object>();
+			resultMap.put("alert", alert);
+			resultMap.put("view", "tiles/user/loginForm");
+		}
+		return resultMap;
 	}
 	
 }

@@ -21,8 +21,9 @@ public class UploadFileUtils {
 		
 		HttpServletRequest request =((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		String realPath=request.getSession().getServletContext().getRealPath("/");	
-		String dirPath = realPath + "resources\\upload\\";
-		File dir = new File(realPath);
+		String location = "resources/upload/";
+		String dirPath = realPath + location;
+		File dir = new File(dirPath);
 		if(!dir.isDirectory()){
 			dir.mkdirs();
 		}
@@ -36,7 +37,7 @@ public class UploadFileUtils {
 		UUID uid = UUID.randomUUID();
 		String fileName = uid.toString() + "_" + originalName;;
 		fileInfoMap.put("FILE_NM", fileName);
-		fileInfoMap.put("FILE_COURS", dirPath + fileName);
+		fileInfoMap.put("FILE_COURS", location + fileName);
 		fileInfoMap.put("FILE_SIZE", file.getSize());
 		//저장할 파일준비
 		File target = new File(dirPath + fileName);

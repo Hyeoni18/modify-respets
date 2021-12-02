@@ -21,4 +21,6 @@ public interface UserService {
 
 	public String findPw(Map<String, Object> map) throws Exception;
 
+	public Map<String, Object> loginProcess(Map<String, Object> map, HttpServletRequest request) throws Exception;
+
 }

@@ -53,6 +53,7 @@
 			,#{bus_post, jdbcType=VARCHAR}
 			,#{bus_addr, jdbcType=VARCHAR}
 			,#{bus_dtl_addr, jdbcType=VARCHAR}
+			,#{bus_file_id, jdbcType=VARCHAR}
 			,'O'
 			,default
 			,default
@@ -67,7 +68,7 @@
 			#{bct_code}
 			,#{bus_no}
 			,1
-			,#{bct_file_id}
+			,#{bus_file_id} <!-- 임시 -->
 		)
 	</insert>
 
@@ -104,4 +105,28 @@
 				,default
 			)
 	</insert>
+	
+	<!-- 로그인 -->
+	<select id="loginProcess" parameterType="map" resultType="map">
+		SELECT NO
+			,EMAIL
+			,PW
+			,NAME
+			,PHONE
+			,LEAVE
+			,EMCHK
+			,LOC
+			,PHOTO
+		FROM FIND_VIEW 
+		WHERE EMAIL=#{per_email} 
+			AND PW=#{per_pw}
+	</select> 
+	
+	<!-- 블랙리스트 조회 -->
+	<select id="selectBlackList" parameterType="map" resultType="Integer">
+		SELECT OUT_NO 
+		FROM BLACKLIST_TB 
+		WHERE PER_NO=#{no}
+	</select>
+	
 </mapper>
