@@ -70,7 +70,7 @@
                                     
                                     <div class="form-group">
                                         <label for="file">프로필 사진(선택사항)</label>
-                                        <input class="form-control" type="file" id="photo" name="photo" onchange="fileChk(this);">
+                                        <input class="form-control" type="file" id="upload" name="upload" onchange="fileChk(this);">
                                         <input type="hidden" name="fileCheck" id="fileCheck" value="0" />
                                     </div>
 

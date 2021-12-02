@@ -7,13 +7,12 @@
     <insert id="insertPersonalJoin" parameterType="map">
     	INSERT INTO PERSONAL_TB VALUES
     	(
-    		'P'||NEXTVAL('PER_SEQ')
-    		,#{per_email}
+    		#{per_email}
+    		,'P'||NEXTVAL('PER_SEQ')
     		,#{per_pw}
     		,#{per_name}
     		,#{per_phone}
-    		,#{per_photo}
-    		,#{per_loc}
+    		,#{per_file_id}
     		,default
     		,default
     		,NULL
@@ -49,6 +48,7 @@
 			,#{bus_name, jdbcType=VARCHAR}
 			,#{bus_ceo, jdbcType=VARCHAR}
 			,#{bus_lcno, jdbcType=VARCHAR}
+			,#{bus_lcno_file_id, jdbcType=VARCHAR}
 			,#{bus_phone, jdbcType=VARCHAR}
 			,#{bus_post, jdbcType=VARCHAR}
 			,#{bus_addr, jdbcType=VARCHAR}
@@ -60,25 +60,48 @@
 		)
 	</insert>
 	
-	<!-- 기업 회원 가입 -->
+	<!-- 기업 서비스 가입 -->
 	<insert id="insertBusJoinSvc" parameterType="map">
 		INSERT INTO SERVICE_TB VALUES
 		(
 			#{bct_code}
 			,#{bus_no}
 			,1
+			,#{bct_file_id}
 		)
 	</insert>
+
+	<!-- 아이디찾기 -->
+	<select id="findId" parameterType="map" resultType="map">
+		SELECT EMAIL, #{type} as type
+		FROM FIND_VIEW 
+		WHERE NAME=#{per_name} 
+			AND	PHONE=#{per_phone} 
+			AND NO LIKE '${type}%' 
+	</select>
 	
-	<!-- 기업 회원 가입 사업자등록증 GALLERY_TB INSERT -->
-	<insert id="insertLicense" parameterType="map">
-		INSERT INTO GALLERY_TB VALUES
-		(
-			#{bus_no}
-			,#{bct_code}
-			,1
-			,#{file}
-			,#{location}
-		)
+	<!-- 기존 랜덤값 조회 -->
+	<select id="findRND" parameterType="map" resultType="map"> 
+		SELECT RND_CODE 
+		FROM RANDOM_TB 
+		WHERE RND_EMAIL=#{email}
+	</select>
+	
+	<!-- 기존 랜덤값 삭제 -->
+	<delete id="deleteRND" parameterType="map"> 
+		DELETE FROM RANDOM_TB 
+		WHERE RND_EMAIL=#{email}
+	</delete>
+	
+	<!-- 새로운 랜덤값 등록 -->
+	<insert id="insertRND" parameterType="map">
+		INSERT INTO RANDOM_TB
+		VALUES
+			(
+				#{email}
+				,#{rndCode}
+				,#{type}
+				,default
+			)
 	</insert>
 </mapper>

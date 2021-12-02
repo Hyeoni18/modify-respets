@@ -7,11 +7,12 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.teamx.respets.user.vo.BusinessVO;
+import com.teamx.respets.user.vo.UserVO;
 
 @Mapper
 public interface UserMapper {
 
-	public void insertPersonalJoin(Map<String, Object> hmap) throws SQLException;
+	public void insertPersonalJoin(UserVO userVo) throws SQLException;
 
 	public void emailConfirmSuccess(String email) throws SQLException;
 
@@ -22,5 +23,13 @@ public interface UserMapper {
 	public void insertBusJoinSvc(BusinessVO busiVO) throws SQLException;
 
 	public void insertLicense(Map<String, Object> hMap) throws SQLException;
+
+	public Map<String, Object> findId(Map<String, Object> map) throws SQLException;
+
+	public List<Map<String, Object>> findRND(Map<String, Object> map) throws SQLException;
+
+	public void deleteRND(Map<String, Object> map) throws SQLException;
+
+	public boolean insertRND(Map<String, Object> map) throws SQLException;
 
 }

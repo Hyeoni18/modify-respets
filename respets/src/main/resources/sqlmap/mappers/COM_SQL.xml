@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.teamx.respets.common.mapper.CommonMapper">
+
+    <insert id="insertFile" parameterType="map">
+    	<selectKey resultType="Integer" keyProperty="FILE_ID" order="BEFORE">
+			SELECT COALESCE(MAX(CAST(FILE_ID AS INTEGER)),0)+1 AS FILE_ID FROM FILE_TB
+		</selectKey>
+    	INSERT INTO 
+    		FILE_TB (
+    			FILE_ID
+    			,FILE_NM
+    			,FILE_ORGINL_NM
+    			,FILE_COURS
+    			,FILE_SIZE
+    			,FILE_INPUT_DT
+    		) VALUES (
+    			#{FILE_ID}
+    			,#{FILE_NM}
+    			,#{FILE_ORGINL_NM}
+    			,#{FILE_COURS}
+    			,#{FILE_SIZE}
+    			,NOW()
+    		)
+    </insert>
+</mapper>
