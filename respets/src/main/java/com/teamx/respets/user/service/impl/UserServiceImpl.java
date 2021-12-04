@@ -247,5 +247,46 @@ public class UserServiceImpl implements UserService {
 		}
 		return resultMap;
 	}
+
+
+	@Override
+	public Map<String, Object> selectMyInfo(HttpServletRequest request) throws Exception {
+		String no = String.valueOf(request.getAttribute("no"));
+		return userMapper.selectMyInfo(no);
+	}
+
+
+	@Override
+	public int myPwCheck(String now, HttpServletRequest request) throws Exception {
+		UserVO userVO = new UserVO();
+		userVO.setPer_no(request.getSession().getAttribute("no").toString());
+		userVO.setPer_pw(now);
+		int result = userMapper.myPwCheck(userVO);
+		return result;
+	}
+
+
+	@Override
+	public int updatePw(String newPw, HttpServletRequest request) throws Exception {
+		UserVO userVO = new UserVO();
+		userVO.setPer_no(request.getSession().getAttribute("no").toString());
+		userVO.setPer_pw(newPw);
+		int result = userMapper.updatePw(userVO);
+		return result;
+	}
+
+
+	@Override
+	public void updateUserInfo(HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public boolean deleteUser(HttpServletRequest request) throws Exception {
+		String no = String.valueOf(request.getAttribute("no"));
+		return userMapper.deleteUser(no);
+	}
 	
 }

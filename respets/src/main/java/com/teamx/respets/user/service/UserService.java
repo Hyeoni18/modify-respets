@@ -23,4 +23,14 @@ public interface UserService {
 
 	public Map<String, Object> loginProcess(Map<String, Object> map, HttpServletRequest request) throws Exception;
 
+	public Map<String, Object> selectMyInfo(HttpServletRequest request) throws Exception;
+
+	public int myPwCheck(String now, HttpServletRequest request) throws Exception;
+
+	public int updatePw(String newPw, HttpServletRequest request) throws Exception;
+
+	public void updateUserInfo(HttpServletRequest request) throws Exception;
+
+	public boolean deleteUser(HttpServletRequest request) throws Exception;
+	
 }

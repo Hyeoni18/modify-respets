@@ -129,4 +129,33 @@
 		WHERE PER_NO=#{no}
 	</select>
 	
+	<!-- 회원 정보 조회 -->
+	<select id="selectMyInfo" parameterType="map" resultType="map">
+		SELECT *
+		FROM PERSONAL_TB 
+		WHERE PER_NO = #{no}
+	</select>
+	
+	<!-- 비밀번호 확인 -->
+	<select id="myPwCheck" resultType="Integer" parameterType="map">
+		SELECT COUNT(*) 
+		FROM PERSONAL_TB 
+		WHERE PER_NO = #{per_no} 
+			AND PER_PW = #{per_pw}
+	</select>
+	
+	<!-- 비밀번호 수정 -->
+	<update id="updatePw" parameterType="map">
+		UPDATE PERSONAL_TB 
+		SET PER_PW = #{per_pw} 
+		WHERE PER_NO = #{per_no}
+	</update>
+	
+	<!-- 개인 회원탈퇴 -->
+	<update id="deleteUser" parameterType="String">
+		UPDATE PERSONAL_TB 
+		SET PER_LEAVE = 'O', PER_LTIME = NOW() 
+		WHERE PER_NO = #{no}
+	</update>
+	
 </mapper>
