@@ -64,7 +64,7 @@ ${findPw} /* 비밀번호 설정 이메일을 보냈다는 안내 alert */
 											<div class="col-lg-2" data-select2-id="276"
 												style="float: left;">
 												<h5>서비스 선택</h5>
-												<select name="bct_code" id="bct_code"
+												<select name="svc_cd" id="svc_cd"
 													class="form-control select2" data&ndash;toggle="select2">
 												</select>
 											</div>
@@ -144,7 +144,7 @@ ${findPw} /* 비밀번호 설정 이메일을 보냈다는 안내 alert */
 										<img class="card-img-top img-fluid"
 											src="resources/images/card-medical.jpg" alt="Card image cap">
 										<div class="card-body">
-											<a href="./businessList?bct_code=M"
+											<a href="./businessList?svc_cd=M"
 												class="btn btn-block btn-success">병원</a>
 										</div>
 									</div>
@@ -153,7 +153,7 @@ ${findPw} /* 비밀번호 설정 이메일을 보냈다는 안내 alert */
 										<img class="card-img-top img-fluid"
 											src="resources/images/card-beauty.jpg" alt="Card image cap">
 										<div class="card-body">
-											<a href="./businessList?bct_code=B"
+											<a href="./businessList?svc_cd=B"
 												class="btn btn-block btn-success">미용</a>
 										</div>
 									</div>
@@ -162,7 +162,7 @@ ${findPw} /* 비밀번호 설정 이메일을 보냈다는 안내 alert */
 										<img class="card-img-top img-fluid"
 											src="resources/images/card-hotel.jpg" alt="Card image cap">
 										<div class="card-body">
-											<a href="./businessList?bct_code=H"
+											<a href="./businessList?svc_cd=H"
 												class="btn btn-block btn-success">호텔</a>
 										</div>
 									</div>
@@ -257,13 +257,13 @@ ${findPw} /* 비밀번호 설정 이메일을 보냈다는 안내 alert */
 
 </body>
 <script>
-	document.getElementById('bct_code').innerHTML = "${bct}";
+	document.getElementById('svc_cd').innerHTML = "${bct}";
 
 	$("#searchBtn").click(function() {
 		var frm = document.searchFrm;
 		for (var i = 0; i < frm.length; i++) {
 			if (frm[i].value == "" || frm[i].value == null) {
-				if (frm[i].name == "bct_code") {
+				if (frm[i].name == "svc_cd") {
 					alert("서비스를 선택해주세요");
 					frm[i].focus();
 					return false;

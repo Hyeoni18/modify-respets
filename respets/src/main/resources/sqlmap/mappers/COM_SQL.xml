@@ -10,6 +10,7 @@
     	INSERT INTO 
     		FILE_TB (
     			FILE_ID
+    			,FILE_GRP_ID
     			,FILE_NM
     			,FILE_ORGINL_NM
     			,FILE_COURS
@@ -17,6 +18,7 @@
     			,FILE_INPUT_DT
     		) VALUES (
     			#{FILE_ID}
+    			,#{FILE_GRP_ID}
     			,#{FILE_NM}
     			,#{FILE_ORGINL_NM}
     			,#{FILE_COURS}

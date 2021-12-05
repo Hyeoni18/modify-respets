@@ -7,8 +7,8 @@
     <insert id="insertPersonalJoin" parameterType="map">
     	INSERT INTO PERSONAL_TB VALUES
     	(
-    		#{per_email}
-    		,'P'||NEXTVAL('PER_SEQ')
+    		'P'||NEXTVAL('PER_SEQ')
+    		,#{per_email}
     		,#{per_pw}
     		,#{per_name}
     		,#{per_phone}
@@ -32,7 +32,8 @@
 		SELECT CMMN_CD
 			, CD_DESC
 		FROM CMMN_CODE 
-		WHERE GRP_CD='BC00'
+		WHERE CMMN_CD LIKE 'BCT%'
+		ORDER BY SORT_SN DESC
 	</select>
 	
 	<!-- 기업 회원 가입 -->
@@ -56,6 +57,7 @@
 			,#{bus_file_id, jdbcType=VARCHAR}
 			,'O'
 			,default
+			,NOW()
 			,default
 			,NOW()
 		)
@@ -65,10 +67,10 @@
 	<insert id="insertBusJoinSvc" parameterType="map">
 		INSERT INTO SERVICE_TB VALUES
 		(
-			#{bct_code}
+			#{svc_cd}
 			,#{bus_no}
 			,1
-			,#{bus_file_id} <!-- 임시 -->
+			,#{svc_file_id} <!-- 임시 -->
 		)
 	</insert>
 
@@ -83,7 +85,7 @@
 	
 	<!-- 기존 랜덤값 조회 -->
 	<select id="findRND" parameterType="map" resultType="map"> 
-		SELECT RND_CODE 
+		SELECT RND_NMBR 
 		FROM RANDOM_TB 
 		WHERE RND_EMAIL=#{email}
 	</select>
@@ -100,9 +102,8 @@
 		VALUES
 			(
 				#{email}
-				,#{rndCode}
-				,#{type}
-				,default
+				,#{rndNmbr}
+				,NOW()
 			)
 	</insert>
 	
@@ -123,8 +124,8 @@
 	</select> 
 	
 	<!-- 블랙리스트 조회 -->
-	<select id="selectBlackList" parameterType="map" resultType="Integer">
-		SELECT OUT_NO 
+	<select id="selectBlackList" parameterType="map" resultType="String">
+		SELECT OUT_CD
 		FROM BLACKLIST_TB 
 		WHERE PER_NO=#{no}
 	</select>
@@ -154,7 +155,7 @@
 	<!-- 개인 회원탈퇴 -->
 	<update id="deleteUser" parameterType="String">
 		UPDATE PERSONAL_TB 
-		SET PER_LEAVE = 'O', PER_LTIME = NOW() 
+		SET PER_LEAVE = 'O', PER_LEAVE_DT = NOW() 
 		WHERE PER_NO = #{no}
 	</update>
 	

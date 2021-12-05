@@ -24,13 +24,13 @@ public class BusinessVO {
 	private String bus_file_id;
 	private String bus_emchk;
 	private String bus_chk;
+	private String bus_input_dt;
 	private String bus_leave;
-	private String bus_time;
-	private String bus_ltime;
+	private String bus_leave_dt;
 	
-	private String bct_code;
-	private int bct_pri;
-	private String bct_file_id;
+	private String svc_cd;
+	private int svc_sort;
+	private String svc_file_id;
 	
 	private MultipartFile busLicense;
 	private MultipartFile mainPhoto;

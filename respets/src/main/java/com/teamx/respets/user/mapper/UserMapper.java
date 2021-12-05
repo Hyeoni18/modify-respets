@@ -34,7 +34,7 @@ public interface UserMapper {
 
 	public Map<String,Object> loginProcess(Map<String, Object> map) throws SQLException;
 
-	public Integer selectBlackList(Map<String, Object> map) throws SQLException;
+	public String selectBlackList(Map<String, Object> map) throws SQLException;
 
 	public Map<String, Object> selectMyInfo(String no) throws SQLException;
 

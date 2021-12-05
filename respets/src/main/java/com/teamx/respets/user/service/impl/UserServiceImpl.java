@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 		if(!busiVO.getMainPhoto().isEmpty()) {
 			fileMap = uploadFileUtils.fileUpload(busiVO.getMainPhoto());
 			commonMapper.insertFile(fileMap);
-			busiVO.setBus_file_id(String.valueOf(fileMap.get("FILE_ID")));
+			busiVO.setSvc_file_id(String.valueOf(fileMap.get("FILE_ID")));
 		}
 
 		userMapper.insertBusinessJoin(busiVO); // 기업 회원 테이블
@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
 		List<Map<String, String>> list = userMapper.selectBusCategory();
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < list.size(); i++) {
-			sb.append("<input type='radio' name='bct_code' class='주력 서비스' value='");
+			sb.append("<input type='radio' name='svc_cd' class='주력 서비스' value='");
 			sb.append(list.get(i).get("cmmn_cd"));
 			sb.append("'/>" + list.get(i).get("cd_desc") + "</label>");
 		} 
@@ -190,7 +190,7 @@ public class UserServiceImpl implements UserService {
 				break;
 			}
 		}
-		map.put("rndCode", temp);
+		map.put("rndNmbr", temp);
 		boolean result = userMapper.insertRND(map);
 		if(result) {
 			String content = findContent+"per_email=" + map.get("email") + "&code=" + temp	+ "&type=" + map.get("type");
@@ -215,9 +215,9 @@ public class UserServiceImpl implements UserService {
 				request.getSession().invalidate();
 			} else {
 				//블랙리스트 구분
-				Integer outNumber = userMapper.selectBlackList(map);
+				String outCd = userMapper.selectBlackList(map);
 				
-				if(outNumber != null && (outNumber == 1 || outNumber == 2)) {
+				if(!outCd.isEmpty() && (outCd.equals("OUT0001") || outCd.equals("OUT0002"))) { //1은 노쇼, 2는 경고
 					String alert = "alert('이용이 정지된 계정입니다. 로그인 할 수 없습니다.');";
 					resultMap.put("alert", alert);
 					resultMap.put("view", "tiles/user/loginForm");

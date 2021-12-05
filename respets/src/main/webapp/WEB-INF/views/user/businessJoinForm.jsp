@@ -181,7 +181,7 @@
 			return false;
 		} // if End
 
-		if ($(":radio[name='bct_code']:checked").length < 1) {
+		if ($(":radio[name='svc_cd']:checked").length < 1) {
 			alert("'주력 서비스'를 선택해주세요.");
 			return false;
 		} // if End

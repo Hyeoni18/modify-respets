@@ -17,7 +17,7 @@ public class UserVO {
 	private String per_file_id;
 	private String per_emchk;
 	private String per_leave;
-	private String per_ltime;
+	private String per_leave_dt;
 
 	private MultipartFile upload;
 }
