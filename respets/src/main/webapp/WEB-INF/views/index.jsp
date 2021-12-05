@@ -7,8 +7,7 @@
 <meta charset="UTF-8" />
 <title>Respets</title>
 <script>
-${alert} /* 메일의 유효시간이 경과했다는 안내 || 존재하지 않는 메일이라는 안내 alert */
-${findPw} /* 비밀번호 설정 이메일을 보냈다는 안내 alert */
+${alert} 
 </script>
 </head>
 <body data-layout="topnav">
@@ -32,17 +31,17 @@ ${findPw} /* 비밀번호 설정 이메일을 보냈다는 안내 alert */
 						<div class="col-12">
 							<div class="page-title-box">
 								<h4 class="page-title" style="text-align: center;">
-									<c:if test="${no == null}">
+									<c:if test="${userInfo.no == null}">
 								로그인을 하면 더 많은 서비스 이용이 가능합니다!
 								</c:if>
-									<c:if test="${no != null}">
-										<c:if test="${fn:substring(no,0,1) eq 'P'}">
-											${paramMap.name} 회원님, 반갑습니다! 반려동물 관련 예약서비스를 편리하게 누려보세요:)
+									<c:if test="${userInfo.no != null}">
+										<c:if test="${fn:substring(userInfo.no,0,1) eq 'P'}">
+											${userInfo.name} 회원님, 반갑습니다! 반려동물 관련 예약서비스를 편리하게 누려보세요:)
 										</c:if>
-										<c:if test="${fn:substring(no,0,1) eq 'B'}">
-											${paramMap.name} 회원님, 반갑습니다! 새로운 예약을 확인해보세요:)
+										<c:if test="${fn:substring(userInfo.no,0,1) eq 'B'}">
+											${userInfo.name} 회원님, 반갑습니다! 새로운 예약을 확인해보세요:)
 										</c:if>
-										<c:if test="${fn:substring(no,0,1) eq '1'}">
+										<c:if test="${fn:substring(userInfo.no,0,1) eq '1'}">
 											관리자로 로그인 했습니다.
 										</c:if>
 									</c:if>
@@ -247,14 +246,12 @@ ${findPw} /* 비밀번호 설정 이메일을 보냈다는 안내 alert */
 
 	</div>
 	<!-- END wrapper -->
-
-	<!-- App js -->
+<!-- App js -->
 	<script src="resources/dist/assets/js/app.min.js"></script>
 
 	<!-- demo app -->
 	<script src="resources/dist/assets/js/pages/demo.dashboard.js"></script>
 	<!-- end demo js-->
-
 </body>
 <script>
 	document.getElementById('svc_cd').innerHTML = "${bct}";

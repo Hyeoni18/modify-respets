@@ -8,13 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="resources/dist/assets/images/logo-sm.png">
-
-        <!-- App css -->
-        <link href="resouces/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
     <body class="authentication-bg">
@@ -64,10 +57,6 @@
         </div>
         <!-- end page -->
 
-        <footer class="footer footer-alt"> Copyright Respets Corp. All rights reserved. </footer>
-
-        <!-- App js -->
-        <script src="/resources/dist/assets/js/app.min.js"></script>
     </body>
 <body>
 <script>

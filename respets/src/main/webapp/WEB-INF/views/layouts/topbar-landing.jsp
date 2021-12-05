@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>topbar-landing</title>
 </head>
 <body>
 
@@ -23,31 +22,31 @@
 			</a>
 
 			<ul class="list-unstyled topbar-right-menu float-right mb-0">
-				<c:if test="${no == null}">
-					<li style="margin-top: 17px;"><a href="loginForm"
+				<c:if test="${userInfo.no == null}">
+					<li style="margin-top: 17px;"><a href="./loginForm"
 						class="btn btn-outline-success">로그인</a></li>
 					<li style="margin-top: 17px; margin-left: 10px;"><a
-						href="joinChoiceForm" class="btn btn-outline-success">회원가입</a></li>
+						href="./joinChoiceForm" class="btn btn-outline-success">회원가입</a></li>
 					<li></li>
 				</c:if>
-				<c:if test="${no != null}">
+				<c:if test="${userInfo.no != null}">
 					<li class="dropdown notification-list"><a
 						class="nav-link dropdown-toggle nav-user arrow-none mr-0"
 						data-toggle="dropdown" href="#" role="button"
 						aria-haspopup="false" aria-expanded="false"> <span
 							class="account-user-avatar"> <c:if
-									test="${fn:substring(no,0,1) == 'P' || fn:substring(no,0,1) == 'B'}">
-									<img src="${paramMap.loc}" alt="user-image"
+									test="${fn:substring(userInfo.no,0,1) == 'P' || fn:substring(userInfo.no,0,1) == 'B'}">
+									<img src="${userInfo.file_id}" alt="user-image"
 										class="rounded-circle">
-								</c:if> <c:if test="${fn:substring(no,0,1) == '1'}">
+								</c:if> <c:if test="${fn:substring(userInfo.no,0,1) == '1'}">
 									<img src="resources/images/defaultProfile/user.png"
 										alt="user-image" class="rounded-circle">
 								</c:if>
-						</span> <span> <span class="account-user-name"> ${paramMap.name} </span> <span
+						</span> <span> <span class="account-user-name"> ${userInfo.name} </span> <span
 								class="account-position"> <c:if
-										test="${fn:substring(no,0,1) == 'P'}">개인회원</c:if> <c:if
-										test="${fn:substring(no,0,1) == 'B'}">기업회원</c:if> <c:if
-										test="${fn:substring(no,0,1) == '1'}">관리자</c:if>
+										test="${fn:substring(userInfo.no,0,1) == 'P'}">개인회원</c:if> <c:if
+										test="${fn:substring(userInfo.no,0,1) == 'B'}">기업회원</c:if> <c:if
+										test="${fn:substring(userInfo.no,0,1) == '1'}">관리자</c:if>
 							</span>
 						</span>
 					</a>
@@ -63,7 +62,7 @@
 								class="mdi mdi-account-circle"></i> <span>마이페이지</span>
 							</a>
 
-							<c:if test="${fn:substring(no,0,1) == 'P'}">
+							<c:if test="${fn:substring(userInfo.no,0,1) == 'P'}">
 								<!-- item-->
 								<a href="./personalCalendar" class="dropdown-item notify-item">
 									<i class="mdi mdi-calendar"></i> <span>캘린더</span>

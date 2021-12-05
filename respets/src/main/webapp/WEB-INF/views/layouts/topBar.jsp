@@ -171,23 +171,23 @@
 		</div>
 	</div>
 
-	<div id="no">${no}</div>
+	<div id="no">${userInfo.no}</div>
 </body>
 <script>
 	$('#no').hide();
 
-	var no = '${no}';
+	var no = '${userInfo.no}';
 	console.log(no);
 
 	$('#dashboard').hide();
 	$('#myPage').hide();
 	$('#personalCalendar').hide();
 
-	if ('${no}'.match(/B/)) {
+	if ('${userInfo.no}'.match(/B/)) {
 		$('#dashboard').hide();
 		$('#myPage').show();
 		$('#personalCalendar').hide();
-	} else if ('${no}'.indexOf(/P/)) {
+	} else if ('${userInfo.no}'.indexOf(/P/)) {
 		$('#dashboard').show();
 		$('#myPage').hide();
 		$('#personalCalendar').show();
@@ -201,9 +201,9 @@
 		$('#logoutTopBar').hide();
 	}
 
-	if ('${no}'.match(/P/)) {
+	if ('${userInfo.no}'.match(/P/)) {
 		$('#memberType').html('개인회원');
-	} else if ('${no}'.match(/B/)) {
+	} else if ('${userInfo.no}'.match(/B/)) {
 		$('#memberType').html('기업회원');
 	} else {
 		$('#memberType').html(' ');

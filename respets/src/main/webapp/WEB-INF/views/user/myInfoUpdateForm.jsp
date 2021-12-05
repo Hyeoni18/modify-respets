@@ -37,18 +37,18 @@
 												</div>
 												<div class="form-group mb-3">
 													<label>이메일 <span style="color: red">*</span></label> <input
-														type="text" class="form-control" value="${mb.per_email}"
+														type="text" class="form-control" value="${userInfo.email}"
 														disabled="disabled" />
 												</div>
 												<div class="form-group mb-3">
 													<label>이름 <span style="color: red">*</span></label> <input
-														type="text" class="form-control" value="${mb.per_name}"
+														type="text" class="form-control" value="${userInfo.name}"
 														disabled="disabled" />
 												</div>
 												<div class="form-group mb-3">
 													<label>연락처 <span style="color: red">*</span></label> <input
 														type="text" class="form-control" name="per_phone"
-														value="${mb.per_phone}" />
+														value="${userInfo.phone}" />
 													<div class="registrationFormAlert" id="same"></div>
 												</div>
 												<div>

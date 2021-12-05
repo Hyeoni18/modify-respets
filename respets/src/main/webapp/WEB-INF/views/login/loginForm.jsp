@@ -4,15 +4,10 @@
 <head>
 <meta charset="utf-8">
 <title>Respets :: 로그인</title>
-<!-- App favicon -->
-<link rel="shortcut icon" href="resources/dist/assets/images/logo-sm.png">
-
-<!-- App css -->
-<link href="resources/dist/assets/css/icons.min.css" rel="stylesheet"
-	type="text/css">
-<link href="resources/dist/assets/css/app.min.css" rel="stylesheet"
-	type="text/css">
-
+<script>
+	${paramMap.alert}
+	${alert}
+</script>
 </head>
 <body class="authentication-bg enlarged">
 	<div class="account-pages mt-5 mb-5">
@@ -91,10 +86,5 @@ pw: <input type="password" id="pw" name="pw"/> <br/>
 	<!-- <form name="findIdForm" action="findIdForm">
 <button> 아이디 찾기 </button> -->
 
-	${updateMyPw}
-	<!--비밀번호 변경이 완료됐다는 안내 alert -->
 </body>
-<script>
-	${paramMap.alert}
-</script>
 </html>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.teamx.respets.login.mapper.LoginMapper">
+	<resultMap id="loginVO" type="com.teamx.respets.login.vo.LoginVO"></resultMap>
+	
+	<!-- 로그인 -->
+	<select id="getUser" parameterType="map" resultMap="loginVO">
+		SELECT NO
+			,EMAIL
+			,PW
+			,NAME
+			,PHONE
+			,FILE_ID
+			,EMCHK
+			,LEAVE
+			,TYPE
+		FROM LOGIN_VIEW 
+		WHERE EMAIL=#{per_email} 
+			AND PW=#{per_pw}
+	</select> 
+	
+	<!-- 블랙리스트 조회 -->
+	<select id="selectBlackList" parameterType="map" resultType="String">
+		SELECT OUT_CD
+		FROM BLACKLIST_TB 
+		WHERE PER_NO=#{no}
+	</select>
+	
+	<!-- 기업 회원 가입 시 업종 선택 -->
+	<select id="selectBusCategory" resultType="map">
+		SELECT CMMN_CD
+			, CD_DESC
+		FROM CMMN_CODE 
+		WHERE GRP_CD = 'SVC'
+		ORDER BY SORT_SN DESC
+	</select>
+	
+	<!-- 개인회원가입 -->
+    <insert id="insertPersonalJoin" parameterType="map">
+    	INSERT INTO PERSONAL_TB VALUES
+    	(
+    		'P'||NEXTVAL('PER_SEQ')
+    		,#{per_email}
+    		,#{per_pw}
+    		,#{per_name}
+    		,#{per_phone}
+    		,#{per_file_id}
+    		,default
+    		,default
+    		,NULL
+    	)
+    </insert>
+    
+    <!-- 기업 회원 가입 -->
+	<insert id="insertBusinessJoin" parameterType="map">
+		<selectKey keyProperty="bus_seq" resultType="int" order="BEFORE">
+			SELECT NEXTVAL('BUS_SEQ') 
+		</selectKey>
+		INSERT INTO BUSINESS_TB VALUES
+		(
+			'B'||#{bus_seq}
+			,#{bus_email, jdbcType=VARCHAR}
+			,#{bus_pw, jdbcType=VARCHAR}
+			,#{bus_name, jdbcType=VARCHAR}
+			,#{bus_ceo, jdbcType=VARCHAR}
+			,#{bus_lcno, jdbcType=VARCHAR}
+			,#{bus_lcno_file_id, jdbcType=VARCHAR}
+			,#{bus_phone, jdbcType=VARCHAR}
+			,#{bus_post, jdbcType=VARCHAR}
+			,#{bus_addr, jdbcType=VARCHAR}
+			,#{bus_dtl_addr, jdbcType=VARCHAR}
+			,#{bus_file_id, jdbcType=VARCHAR}
+			,'O'
+			,default
+			,NOW()
+			,default
+			,NOW()
+		)
+	</insert>
+	
+	<!-- 기업 서비스 가입 -->
+	<insert id="insertBusJoinSvc" parameterType="map">
+		INSERT INTO SERVICE_TB VALUES
+		(
+			#{svc_cd}
+			,#{bus_no}
+			,1
+			,#{svc_file_id} 
+		)
+	</insert>
+	
+	<!-- 이메일인증성공 -->
+	<update id="updateEmailChk" parameterType="String">
+		UPDATE PERSONAL_TB 
+		SET
+			PER_EMCHK='O' 
+		WHERE PER_EMAIL=#{per_email}
+	</update>
+	
+	<!-- 아이디찾기 -->
+	<select id="findId" parameterType="map" resultType="map">
+		SELECT EMAIL, #{type} as type
+		FROM LOGIN_VIEW 
+		WHERE NAME=#{per_name} 
+			AND	PHONE=#{per_phone} 
+			AND NO LIKE '${type}%' 
+	</select>
+	
+	<!-- 기존 랜덤값 조회 -->
+	<select id="findRND" parameterType="map" resultType="map"> 
+		SELECT RND_NMBR 
+		FROM RANDOM_TB 
+		WHERE RND_EMAIL=#{email}
+	</select>
+	
+	<!-- 기존 랜덤값 삭제 -->
+	<delete id="deleteRND" parameterType="map"> 
+		DELETE FROM RANDOM_TB 
+		WHERE RND_EMAIL=#{email}
+	</delete>
+	
+	<!-- 새로운 랜덤값 등록 -->
+	<insert id="insertRND" parameterType="map">
+		INSERT INTO RANDOM_TB
+		VALUES
+			(
+				#{email}
+				,#{rndNmbr}
+				,NOW()
+			)
+	</insert>
+	
+	<!-- 랜덤값확인 -->
+	<select id="checkRcode" resultType="map" parameterType="map">
+		SELECT RND_EMAIL
+			, RND_NMBR
+		FROM RANDOM_TB 
+		WHERE RND_EMAIL=#{rndEmail}
+			AND RND_NMBR=#{rndCode}
+			AND RND_DT BETWEEN (CURRENT_TIMESTAMP - INTERVAL '30 MIN') AND CURRENT_TIMESTAMP
+	</select>
+	
+	<!-- 개인회원 비밀번호 변경 -->
+	<update id="updatePerPw" parameterType="map">
+		UPDATE PERSONAL_TB 
+		SET PER_PW=#{newPw} 
+		WHERE PER_EMAIL=#{email}
+	</update>
+	
+	<!-- 기업회원 비밀번호 변경 -->
+	<update id="updateBusPw" parameterType="map">
+		UPDATE BUSINESS_TB 
+		SET BUS_PW=#{newPw} 
+		WHERE BUS_EMAIL=#{email}
+	</update>
+</mapper>

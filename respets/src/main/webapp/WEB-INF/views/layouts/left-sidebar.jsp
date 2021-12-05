@@ -27,7 +27,7 @@
 
 			<!--- Sidemenu -->
 			<ul class="metismenu side-nav">
-				<c:if test="${fn:substring(no,0,1) eq 'P'}">
+				<c:if test="${fn:substring(userInfo.no,0,1) eq 'P'}">
 					<li class="side-nav-title side-nav-item"><h5>${name} 님의 마이페이지</h5></li>
 	
 					<li class="side-nav-item"><a href="recentMyBookingList" class="side-nav-link">
@@ -52,7 +52,7 @@
 					</a></li>
 				</c:if>
 
-				<c:if test="${fn:substring(no,0,1) eq 'B'}">
+				<c:if test="${fn:substring(userInfo.no,0,1) eq 'B'}">
 					<li class="side-nav-title side-nav-item"><h5>${name} 마이페이지</h5></li>
 	
 					<li class="side-nav-item"><a href="todayScheduleList" class="side-nav-link">
@@ -86,7 +86,7 @@
 				
 				</c:if>
 
-				<c:if test="${fn:substring(no,0,1) eq '1'}">
+				<c:if test="${fn:substring(userInfo.no,0,1) eq '1'}">
 					<li class="side-nav-title side-nav-item"><h5>관리자 마이페이지</h5></li>
 	
 					<li class="side-nav-item"><a href="unconfirmBusiness" class="side-nav-link">
