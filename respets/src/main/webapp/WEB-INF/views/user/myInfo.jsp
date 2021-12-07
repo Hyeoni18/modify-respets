@@ -27,14 +27,14 @@
 										<div class="row">
 											<div class="media">
 												<span class="float-left mr-4"> <img id="perProfile"
-													src="${mb.per_loc}${mb.per_photo}"
+													src="${userInfo.file_id}"
 													style="width: 150px; height: 150px; margin-top: 15px; margin-left: 20px;"
 													class="rounded-circle img-thumbnail"></span>
 												<div class="media-body">
 													<br />
-													<h3 class="mt-1 mb-1 text-white">${mb.per_name}</h3>
-													<h5 class="mt-1 mb-1 text-white">${mb.per_email}</h5>
-													<h5 class="mt-1 mb-1 text-white">${mb.per_phone}</h5>
+													<h3 class="mt-1 mb-1 text-white">${userInfo.name}</h3>
+													<h5 class="mt-1 mb-1 text-white">${userInfo.email}</h5>
+													<h5 class="mt-1 mb-1 text-white">${userInfo.phone}</h5>
 													<br /> <br />
 													<button type="button" class="btn btn-light"
 														onclick="javascript:forward(this)" id="pw">

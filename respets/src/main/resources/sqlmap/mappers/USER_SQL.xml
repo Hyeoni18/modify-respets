@@ -25,6 +25,16 @@
 		WHERE PER_NO = #{no}
 	</update>
 	
+	<!-- 개인 정보수정 -->
+	<update id="updateUserInfo" parameterType="map">
+		UPDATE PERSONAL_TB 
+		SET PER_PHONE = #{per_phone}
+		<if test="per_file_id != ''.toString() and per_file_id != null">
+			,PER_FILE_ID = #{per_file_id}
+		</if>
+		WHERE PER_NO = #{per_no}
+	</update>
+	
 </mapper>
 
 

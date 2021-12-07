@@ -68,7 +68,7 @@ public class LoginServiceImpl implements LoginService{
 			} else {
 				String tomail = loginVO.getEmail();
 				String title = "[Respets] 계정 인증 메일";
-				String content = "링크를 클릭해주세요. http://localhost/emailConfirmSuccess?per_email="+ tomail;
+				String content = "링크를 클릭해주세요. http://localhost:8080/emailConfirmSuccess?per_email="+ tomail;
 				mailSending(tomail, title, content);
 				String alert = "alert('미인증 회원입니다. 인증을 완료해주세요.');";
 				loginVO.setAlert(alert);

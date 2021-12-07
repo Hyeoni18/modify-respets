@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teamx.respets.login.vo.LoginVO;
 import com.teamx.respets.user.service.UserService;
+import com.teamx.respets.user.vo.UserVO;
 
 @Controller
 public class UserController {
@@ -88,8 +89,9 @@ public class UserController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/myInfoUpdate")
-	public String updateUserInfo(HttpServletRequest request) throws Exception {
-		userService.updateUserInfo(request);
+	public String updateUserInfo(UserVO userVo) throws Exception {
+		userService.updateUserInfo(userVo);
+		//세션 새로고침 추가 필요
 		return "myTiles/user/myInfo";
 	}
 	

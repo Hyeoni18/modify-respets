@@ -16,4 +16,6 @@ public interface UserMapper {
 
 	public boolean deleteUser(String no) throws SQLException;
 
+	public void updateUserInfo(UserVO userVo) throws SQLException;
+
 }

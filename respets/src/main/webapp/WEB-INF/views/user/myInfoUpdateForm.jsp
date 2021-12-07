@@ -31,9 +31,9 @@
 											<div class="col-lg-12">
 												<div class="form-group mb-3">
 													<label style="margin-right: 15px;">프로필 사진</label> <input
-														type="file" name="mainPhoto" onchange="fileChk(this)" />
-													<input type="hidden" name="fileCheck" id="fileCheck"
-														value="0" />
+														type="file" name="upload" />
+													<input type="hidden" name="per_no" id="per_no"
+														value="${userInfo.no}" />
 												</div>
 												<div class="form-group mb-3">
 													<label>이메일 <span style="color: red">*</span></label> <input
@@ -78,12 +78,5 @@
 		}
 		return false;
 	}
-	function fileChk(file) {
-		if (file.value == "") {
-			$("#fileCheck").val(0);
-		} else {
-			$("#fileCheck").val(1);
-		} // else End
-	} // fct End
 </script>
 </html>
