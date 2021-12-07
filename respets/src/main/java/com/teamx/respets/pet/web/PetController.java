@@ -1,23 +1,52 @@
 package com.teamx.respets.pet.web;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.teamx.respets.login.vo.LoginVO;
+import com.teamx.respets.pet.service.PetService;
+import com.teamx.respets.user.vo.UserVO;
 
 @Controller
 public class PetController {
+	
+	@Autowired
+	private PetService petService;
 
 	/**
-	 * 반려동물 목록 조회
+	 * 반려동물 목록 화면
 	 * @Method : petList
 	 * @return
 	 */
 	@RequestMapping(value ="/petList")
 	public String petList(HttpSession session) {
-		//목록조회
 		return "myTiles/pet/petList";
 	}
+	
+	/**
+	 * 반려동물 목록 조회 
+	 * @Method : selectAccdtExaminDtaList
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/selectPetList")
+	public Map<String, Object> selectPetList(HttpSession session) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		List<Map<String,Object>> petList = petService.selectPetList(loginVO);
+		Integer petListCnt = petService.selectPetListCnt(loginVO);
+		result.put("petList", petList);
+		result.put("total", petListCnt);
+		return result;
+	}	
 	
 	/**
 	 * 반려동물 등록 화면

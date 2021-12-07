@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>topbar-dashboard</title>
 </head>
 <body>
 	<div class="navbar-custom">

@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>left-sidebar</title>
 </head>
 <body>
 

@@ -22,7 +22,67 @@
 }
 </style>
 <script>
-${alert}
+
+$(document).ready(function(){
+	selectPetList();
+});
+
+function selectPetList(){
+	
+	var data = {};
+	//data.currentPage = page;
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/selectPetList",	
+		type : 'POST',
+		data : data,
+		success : function(result){
+			var tbody = $(".card-deck");
+			tbody.children().remove();
+			
+			if(result.petList.length > 0){
+				$(result.petList).each(function(index, item){
+					tbodyHtml = "";
+					tbodyHtml += '<div class="col-lg-4" style="padding: 0;">';
+					tbodyHtml += '<div class="card d-block" style="text-align: center; margin-bottom: 20px;">';
+					tbodyHtml += '<a href="petInfoDetail?pet_no='+item["pet_no"]+'">';
+					tbodyHtml += '<img class="rounded-circle img-thumbnail" id="petProfile" src="'+item["pet_cours"]+'" alt="pet profile"></a>';
+					tbodyHtml += '<div class="card-body">';
+					tbodyHtml += '<h5 class="card-title">'+item["pet_name"]+'</h5>';
+					tbodyHtml += '<p class="card-text">품종 : '+item["pet_cd"]+'<br/>성별 : '+item["pet_ntr"]+'<br/>나이 : '+item["pet_birth"]+'살</p>';
+					tbodyHtml += '</div></div></div>';
+					tbody.append(tbodyHtml);
+				}); 
+			/* 	if(result.total % $('#pagePerRowSelect'+tab).val() == 0) {
+					var totPage = Math.floor(result.total / $('#pagePerRowSelect'+tab).val());
+					totPage = totPage == 0 ? totPage+1 : totPage;
+					showPaging(totPage,10,parseInt(page),'selectAccdtExaminDtaList', $("#paging"+tab));
+				} else {
+					showPaging(Math.floor(result.total / $('#pagePerRowSelect'+tab).val()) + 1,10,parseInt(page),'selectAccdtExaminDtaList', $("#paging"+tab));
+				} */
+			} /* else {
+				tbodyHtml = "";
+				tbodyHtml += '<tr class="noData">';
+				if(authCd=="AUTH000" || authCd=="AUTH001") {
+					tbodyHtml += '<td colspan=9>';
+				} else {
+					tbodyHtml += '<td colspan=8>';
+				}
+				tbodyHtml += '<div class="text">';
+				tbodyHtml += '<i class="fa fa-exclamation-triangle"></i><br/>검색된 데이터가 없습니다.';
+				tbodyHtml += '</div>';
+				tbodyHtml += '</td>';
+				tbodyHtml += '</tr>';
+				tbody.append(tbodyHtml);
+				showPaging(Math.floor(result.total / 10) + 1,10,parseInt(page),'selectAccdtExaminDtaList', $("#paging"+tab));
+			}  */ 
+		},
+		error : function(){
+			console.log("error");
+		}
+	});	
+};
+
 </script>
 </head>
 <body>
@@ -52,37 +112,7 @@ ${alert}
 							<div class="card-deck-wrapper">
 								<div class="card-deck">
 									
-									<c:forEach var="petList" items="${petList}" varStatus="status">
-										<div class="col-lg-4" style="padding: 0;">
-											<div class="card d-block"
-												style="text-align: center; margin-bottom: 20px;">
-												<a href="petInfoDetail?pet_no=${petList.pet_no}"> <img
-													class="rounded-circle img-thumbnail" id="petProfile"
-													src="${petList.pet_loc}/${petList.pet_photo}"
-													alt="pet profile">
-												</a>
-												<div class="card-body">
-													<h5 class="card-title">
-														<%-- 내동물${status.count}. --%>
-														${petList.pet_name}
-													</h5>
-													<p class="card-text">
-														품종 : ${petList.pet_vrt}<br> 성별 :
-														<c:if test="${'F' eq petList.pet_sex}">암컷</c:if>
-														<c:if test="${'M' eq petList.pet_sex}">수컷</c:if>
-														<br>
-														<c:set var="now" value="<%=new java.util.Date()%>" />
-														<c:set var="sysYear">
-															<fmt:formatDate value="${now}" pattern="yyyy" />
-														</c:set>
-														나이 : ${sysYear-petList.pet_age+1}살
-													</p>
-												</div>
-											</div>
-										</div>
-
-									</c:forEach>
-
+									
 								</div>
 								<!-- end card-deck-->
 							</div>
