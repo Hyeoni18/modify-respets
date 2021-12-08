@@ -36,7 +36,7 @@
 						aria-haspopup="false" aria-expanded="false"> <span
 							class="account-user-avatar"> <c:if
 									test="${fn:substring(userInfo.no,0,1) == 'P' || fn:substring(userInfo.no,0,1) == 'B'}">
-									<img src="${userInfo.file_id}" alt="user-image"
+									<img src="${userInfo.fileId}" alt="user-image"
 										class="rounded-circle">
 								</c:if> <c:if test="${fn:substring(userInfo.no,0,1) == '1'}">
 									<img src="resources/images/defaultProfile/user.png"

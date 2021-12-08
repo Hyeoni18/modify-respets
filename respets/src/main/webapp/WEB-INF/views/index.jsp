@@ -8,6 +8,33 @@
 <title>Respets</title>
 <script>
 ${alert} 
+
+function selectSvcCode(){
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/selectSvcCode",	
+		type : 'POST',
+		success : function(result){
+			var tbody = $("#svcCd");
+			tbody.children().remove();
+			
+			if(result.svcCode.length > 0){
+				$(result.svcCode).each(function(index, item){
+					tbodyHtml = "";
+					tbodyHtml += '<option value="'+item["cmmnCd"]+'">'+item["cdDesc"]+'</option> ';
+					tbody.append(tbodyHtml);
+				}); 
+			}
+		},
+		error : function(){
+			console.log("error");
+		}
+	});	
+};
+
+$(document).ready(function(){
+	selectSvcCode();
+});
 </script>
 </head>
 <body data-layout="topnav">
@@ -63,8 +90,7 @@ ${alert}
 											<div class="col-lg-2" data-select2-id="276"
 												style="float: left;">
 												<h5>서비스 선택</h5>
-												<select name="svc_cd" id="svc_cd"
-													class="form-control select2" data&ndash;toggle="select2">
+												<select name="svcCd" id="svcCd" class="form-control select2" data&ndash;toggle="select2">
 												</select>
 											</div>
 
@@ -121,7 +147,7 @@ ${alert}
 											<div class="col-lg-5" style="float: left;">
 												<div class="form-group mb-3">
 													<h5>날짜 선택</h5>
-													<input type="text" name="bk_date" class="form-control date"
+													<input type="text" name="bkDate" class="form-control date"
 														id="singledaterange" data-toggle="date-picker"
 														data-cancel-class="btn-warning">
 												</div>
@@ -143,7 +169,7 @@ ${alert}
 										<img class="card-img-top img-fluid"
 											src="resources/images/card-medical.jpg" alt="Card image cap">
 										<div class="card-body">
-											<a href="./businessList?svc_cd=M"
+											<a href="./businessList?svcCd=M"
 												class="btn btn-block btn-success">병원</a>
 										</div>
 									</div>
@@ -152,7 +178,7 @@ ${alert}
 										<img class="card-img-top img-fluid"
 											src="resources/images/card-beauty.jpg" alt="Card image cap">
 										<div class="card-body">
-											<a href="./businessList?svc_cd=B"
+											<a href="./businessList?svcCd=B"
 												class="btn btn-block btn-success">미용</a>
 										</div>
 									</div>
@@ -161,7 +187,7 @@ ${alert}
 										<img class="card-img-top img-fluid"
 											src="resources/images/card-hotel.jpg" alt="Card image cap">
 										<div class="card-body">
-											<a href="./businessList?svc_cd=H"
+											<a href="./businessList?svcCd=H"
 												class="btn btn-block btn-success">호텔</a>
 										</div>
 									</div>
@@ -254,13 +280,11 @@ ${alert}
 	<!-- end demo js-->
 </body>
 <script>
-	document.getElementById('svc_cd').innerHTML = "${bct}";
-
 	$("#searchBtn").click(function() {
 		var frm = document.searchFrm;
 		for (var i = 0; i < frm.length; i++) {
 			if (frm[i].value == "" || frm[i].value == null) {
-				if (frm[i].name == "svc_cd") {
+				if (frm[i].name == "svcCd") {
 					alert("서비스를 선택해주세요");
 					frm[i].focus();
 					return false;
@@ -268,7 +292,7 @@ ${alert}
 					alert("지역을 선택해주세요");
 					frm[i].focus();
 					return false;
-				} else if (frm[i].name == "bk_date") {
+				} else if (frm[i].name == "bkDate") {
 					alert("날짜를 선택해주세요");
 					frm[i].focus();
 					return false;

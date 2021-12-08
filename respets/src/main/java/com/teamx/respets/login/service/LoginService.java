@@ -12,8 +12,6 @@ public interface LoginService {
 
 	public LoginVO getUser(Map<String, Object> map) throws Exception;
 
-	public String selectBusCategory() throws Exception;
-
 	public void insertPersonalJoin(UserVO userVo) throws Exception;
 
 	public void insertBusinessJoin(BusinessVO busiVO) throws Exception;

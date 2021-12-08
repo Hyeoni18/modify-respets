@@ -1,12 +1,13 @@
 package com.teamx.respets.user.service.impl;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.teamx.respets.common.mapper.CommonMapper;
 import com.teamx.respets.common.util.UploadFileUtils;
@@ -33,26 +34,20 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectMyInfo(no);
 	}
 
-
 	@Override
-	public int myPwCheck(String now, HttpServletRequest request) throws Exception {
-		UserVO userVO = new UserVO();
-		userVO.setPer_no(request.getSession().getAttribute("no").toString());
-		userVO.setPer_pw(now);
-		int result = userMapper.myPwCheck(userVO);
-		return result;
-	}
-
-	@Override
-	public void updateUserInfo(UserVO userVo) throws Exception {
-		
-		if(!userVo.getUpload().isEmpty()) {
-			Map<String, Object> fileMap = uploadFileUtils.fileUpload(userVo.getUpload());
+	public void updateUserInfo(UserVO userVO) throws Exception {
+		HttpServletRequest request =((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+		LoginVO loginVO = (LoginVO) request.getSession().getAttribute("userInfo");
+		if(!userVO.getUpload().isEmpty()) {
+			Map<String, Object> fileMap = uploadFileUtils.fileUpload(userVO.getUpload());
 			commonMapper.insertFile(fileMap);
-			userVo.setPer_file_id(String.valueOf(fileMap.get("FILE_ID")));
+			userVO.setPerFileId(String.valueOf(fileMap.get("fileId")));
+			loginVO.setFileId(String.valueOf(fileMap.get("fileCours")));
 		}
 
-		userMapper.updateUserInfo(userVo); // 회원정보 수정
+		userMapper.updateUserInfo(userVO); // 회원정보 수정
+		loginVO.setPhone(userVO.getPerPhone());
+		request.getSession().setAttribute("userInfo", loginVO);
 	}
 
 

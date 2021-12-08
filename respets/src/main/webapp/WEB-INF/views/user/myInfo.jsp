@@ -27,7 +27,7 @@
 										<div class="row">
 											<div class="media">
 												<span class="float-left mr-4"> <img id="perProfile"
-													src="${userInfo.file_id}"
+													src="${userInfo.fileId}"
 													style="width: 150px; height: 150px; margin-top: 15px; margin-left: 20px;"
 													class="rounded-circle img-thumbnail"></span>
 												<div class="media-body">

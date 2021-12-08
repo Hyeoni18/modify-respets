@@ -12,7 +12,7 @@ public class LoginVO {
 	private String pw;
 	private String name;
 	private String phone;
-	private String file_id;
+	private String fileId;
 	private String emchk;
 	private String leave;
 	private String type;

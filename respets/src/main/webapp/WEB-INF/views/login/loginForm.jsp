@@ -36,13 +36,13 @@
 									<small>이메일/비밀번호 찾기</small></a> 
 																		
 									<label for="email">이메일 주소</label> 
-									<input class="form-control" type="text" id="per_email" name="per_email" placeholder="이메일을 입력해주세요.">
+									<input class="form-control" type="text" id="email" name="email" placeholder="이메일을 입력해주세요.">
 								</div>
 
 								<div class="form-group">
 									
 									<label for="pw">비밀번호</label> <input
-										class="form-control" type="password" id="per_pw" name="per_pw"
+										class="form-control" type="password" id="pw" name="pw"
 										placeholder="비밀번호를 입력해주세요.">
 								</div>
 								
@@ -76,15 +76,6 @@
 	<!-- end page -->
 
 	<footer class="footer footer-alt"> Copyright Respets Corp. All rights reserved. </footer>
-
-	<!-- <form name="loginProcess" action="loginProcess" method="post">
-id: <input type="text" id="email" name="email"/> <br/>
-pw: <input type="password" id="pw" name="pw"/> <br/>
-<button>로그인</button>
-</form> -->
-	<!-- <button id="joinChoiceForm" onclick="location.href='./joinChoiceForm'">회원가입</button> -->
-	<!-- <form name="findIdForm" action="findIdForm">
-<button> 아이디 찾기 </button> -->
 
 </body>
 </html>

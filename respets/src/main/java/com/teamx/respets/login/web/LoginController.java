@@ -100,9 +100,7 @@ public class LoginController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value ="/businessJoinForm")
-	public String businessJoinForm(Model model) throws Exception {
-		String sb = loginService.selectBusCategory(); //code 함수로 변경 후 list 반환, sb 제거
-		model.addAttribute("input", sb);
+	public String businessJoinForm() throws Exception {
 		return "tiles/login/businessJoinForm";
 	}
 	
@@ -115,7 +113,7 @@ public class LoginController {
 	@RequestMapping(value ="/personalJoin") 
 	public String personalJoin(Model model, UserVO userVo) throws Exception {
 		loginService.insertPersonalJoin(userVo);
-		model.addAttribute("email", userVo.getPer_email());
+		model.addAttribute("email", userVo.getPerEmail());
 		return "tiles/login/emailConfirmOffer";
 	}
 	
@@ -140,7 +138,7 @@ public class LoginController {
 	@RequestMapping(value = "/emailConfirmSuccess")
 	public String updateEmailChk(Model model, HttpServletRequest request) throws Exception {
 		loginService.updateEmailChk(request);
-		model.addAttribute("email", request.getParameter("per_email"));
+		model.addAttribute("email", request.getParameter("email"));
 		return "tiles/login/emailConfirmSuccess";
 	}
 	
@@ -188,8 +186,9 @@ public class LoginController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/resetMyPwForm")
-	public String resetMyPwForm(HttpServletRequest request) throws Exception {
+	public String resetMyPwForm(HttpServletRequest request, Model model) throws Exception {
 		Map<String, Object> resultMap = loginService.resetMyPwForm(request);
+		model.addAttribute("paramMap", resultMap);
 		return "tiles/"+resultMap.get("view");
 	}
 	
@@ -207,6 +206,7 @@ public class LoginController {
 			map.put("type", loginVO.getType());
 		}
 		loginService.updatePw(map);
+		session.removeAttribute("userInfo");
 		model.addAttribute("alert", "alert('비밀번호가 변경되었습니다.다시 로그인 해주세요.');");
 		return "tiles/login/loginForm";
 	}

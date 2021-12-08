@@ -31,14 +31,14 @@ public class UploadFileUtils {
 		Map<String, Object> fileInfoMap = new HashMap<String, Object>();
 		
 		String originalName = file.getOriginalFilename();
-		fileInfoMap.put("FILE_ORGINL_NM", originalName);
+		fileInfoMap.put("fileOrginlNm", originalName);
 		
 		//겹쳐지지 않는 파일명을 위한 유니크한 값 생성
 		UUID uid = UUID.randomUUID();
 		String fileName = uid.toString() + "_" + originalName;;
-		fileInfoMap.put("FILE_NM", fileName);
-		fileInfoMap.put("FILE_COURS", location + fileName);
-		fileInfoMap.put("FILE_SIZE", file.getSize());
+		fileInfoMap.put("fileNm", fileName);
+		fileInfoMap.put("fileCours", location + fileName);
+		fileInfoMap.put("fileSize", file.getSize());
 		//저장할 파일준비
 		File target = new File(dirPath + fileName);
 

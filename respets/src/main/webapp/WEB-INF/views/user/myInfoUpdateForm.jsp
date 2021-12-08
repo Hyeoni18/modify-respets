@@ -32,7 +32,7 @@
 												<div class="form-group mb-3">
 													<label style="margin-right: 15px;">프로필 사진</label> <input
 														type="file" name="upload" />
-													<input type="hidden" name="per_no" id="per_no"
+													<input type="hidden" name="perNo" id="perNo"
 														value="${userInfo.no}" />
 												</div>
 												<div class="form-group mb-3">
@@ -47,7 +47,7 @@
 												</div>
 												<div class="form-group mb-3">
 													<label>연락처 <span style="color: red">*</span></label> <input
-														type="text" class="form-control" name="per_phone"
+														type="text" class="form-control" name="perPhone"
 														value="${userInfo.phone}" />
 													<div class="registrationFormAlert" id="same"></div>
 												</div>

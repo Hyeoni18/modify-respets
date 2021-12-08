@@ -65,26 +65,14 @@ $('#success').hide();
 $('#same').hide();
 	function nowPwCheck() {
 		var nowPw = $("#nowPw").val();
-		$.ajax({
-			url : "myPwCheck",
-			data : {
-				"now" : nowPw
-			},
-			type : "post",
-			success : function(result) {
-				if (result == 1) {
-					$('#success').html("비밀번호 확인 성공").css('color', 'blue');
-					$('#success').show();
-				} else {
-					$("#success").html("비밀번호가 일치하지 않습니다.").css('color', 'red');
-					$('#success').show();
-					$('#pwOk').attr('disabled', 'disabled');
-				}
-			},
-			error : function(error) {
-				console.log(error);
-			}
-		});
+		if(nowPw=="${userInfo.pw}") {
+			$('#success').html("비밀번호 확인 성공").css('color', 'blue');
+			$('#success').show();
+		} else {
+			$("#success").html("비밀번호가 일치하지 않습니다.").css('color', 'red');
+			$('#success').show();
+			$('#pwOk').attr('disabled', 'disabled');
+		}
 	}
 	function pw_check() {
 		var newPw = $("#newPw").val();

@@ -16,8 +16,8 @@
 			,LEAVE
 			,TYPE
 		FROM LOGIN_VIEW 
-		WHERE EMAIL=#{per_email} 
-			AND PW=#{per_pw}
+		WHERE EMAIL=#{email} 
+			AND PW=#{pw}
 	</select> 
 	
 	<!-- 블랙리스트 조회 -->
@@ -27,25 +27,16 @@
 		WHERE PER_NO=#{no}
 	</select>
 	
-	<!-- 기업 회원 가입 시 업종 선택 -->
-	<select id="selectBusCategory" resultType="map">
-		SELECT CMMN_CD
-			, CD_DESC
-		FROM CMMN_CODE 
-		WHERE GRP_CD = 'SVC'
-		ORDER BY SORT_SN DESC
-	</select>
-	
 	<!-- 개인회원가입 -->
     <insert id="insertPersonalJoin" parameterType="map">
     	INSERT INTO PERSONAL_TB VALUES
     	(
-    		'P'||NEXTVAL('PER_SEQ')
-    		,#{per_email}
-    		,#{per_pw}
-    		,#{per_name}
-    		,#{per_phone}
-    		,#{per_file_id}
+    		(SELECT COALESCE('P'||(SELECT SPLIT_PART(PER_NO, 'P', 2)::INTEGER FROM PERSONAL_TB ORDER BY PER_NO DESC LIMIT 1)+1,'P1000001'))
+    		,#{perEmail}
+    		,#{perPw}
+    		,#{perName}
+    		,#{perPhone}
+    		,#{perFileId}
     		,default
     		,default
     		,NULL
@@ -54,24 +45,24 @@
     
     <!-- 기업 회원 가입 -->
 	<insert id="insertBusinessJoin" parameterType="map">
-		<selectKey keyProperty="bus_seq" resultType="int" order="BEFORE">
-			SELECT NEXTVAL('BUS_SEQ') 
+		<selectKey keyProperty="busNo" resultType="string" order="BEFORE">
+			SELECT COALESCE('B'||(SELECT SPLIT_PART(BUS_NO, 'B', 2)::INTEGER FROM BUSINESS_TB ORDER BY BUS_NO DESC LIMIT 1)+1,'B1000001')
 		</selectKey>
 		INSERT INTO BUSINESS_TB VALUES
 		(
-			'B'||#{bus_seq}
-			,#{bus_email, jdbcType=VARCHAR}
-			,#{bus_pw, jdbcType=VARCHAR}
-			,#{bus_name, jdbcType=VARCHAR}
-			,#{bus_ceo, jdbcType=VARCHAR}
-			,#{bus_lcno, jdbcType=VARCHAR}
-			,#{bus_lcno_file_id, jdbcType=VARCHAR}
-			,#{bus_phone, jdbcType=VARCHAR}
-			,#{bus_post, jdbcType=VARCHAR}
-			,#{bus_addr, jdbcType=VARCHAR}
-			,#{bus_dtl_addr, jdbcType=VARCHAR}
-			,#{bus_file_id, jdbcType=VARCHAR}
-			,'O'
+			#{busNo}
+			,#{busEmail, jdbcType=VARCHAR}
+			,#{busPw, jdbcType=VARCHAR}
+			,#{busName, jdbcType=VARCHAR}
+			,#{busCeo, jdbcType=VARCHAR}
+			,#{busLcno, jdbcType=VARCHAR}
+			,#{busLcnoFileId, jdbcType=VARCHAR}
+			,#{busPhone, jdbcType=VARCHAR}
+			,#{busPost, jdbcType=VARCHAR}
+			,#{busAddr, jdbcType=VARCHAR}
+			,#{busDtlAddr, jdbcType=VARCHAR}
+			,#{busFileId, jdbcType=VARCHAR}
+			,default
 			,default
 			,NOW()
 			,default
@@ -83,32 +74,41 @@
 	<insert id="insertBusJoinSvc" parameterType="map">
 		INSERT INTO SERVICE_TB VALUES
 		(
-			#{svc_cd}
-			,#{bus_no}
+			#{svcCd}
+			,#{busNo}
 			,1
-			,#{svc_file_id} 
+			,#{busFileId} 
 		)
 	</insert>
 	
-	<!-- 이메일인증성공 -->
-	<update id="updateEmailChk" parameterType="String">
+	<!-- 개인 이메일인증성공 -->
+	<update id="updatePerEmailChk" parameterType="String">
 		UPDATE PERSONAL_TB 
 		SET
 			PER_EMCHK='O' 
-		WHERE PER_EMAIL=#{per_email}
+		WHERE PER_EMAIL=#{email}
+	</update>
+	
+	<!-- 기업 이메일인증성공 -->
+	<update id="updateBusEmailChk" parameterType="String">
+		UPDATE BUSINESS_TB 
+		SET
+			BUS_EMCHK='O' 
+		WHERE BUS_EMAIL=#{email}
 	</update>
 	
 	<!-- 아이디찾기 -->
-	<select id="findId" parameterType="map" resultType="map">
+	<select id="findId" parameterType="map" resultType="camelMap">
 		SELECT EMAIL, #{type} as type
 		FROM LOGIN_VIEW 
-		WHERE NAME=#{per_name} 
-			AND	PHONE=#{per_phone} 
-			AND NO LIKE '${type}%' 
+		WHERE NAME=#{name} 
+			AND	PHONE=#{phone} 
+			AND NO LIKE '${type}%'
+			AND LEAVE = 'X'
 	</select>
 	
 	<!-- 기존 랜덤값 조회 -->
-	<select id="findRND" parameterType="map" resultType="map"> 
+	<select id="findRND" parameterType="map" resultType="camelMap"> 
 		SELECT RND_NMBR 
 		FROM RANDOM_TB 
 		WHERE RND_EMAIL=#{email}
@@ -132,12 +132,12 @@
 	</insert>
 	
 	<!-- 랜덤값확인 -->
-	<select id="checkRcode" resultType="map" parameterType="map">
-		SELECT RND_EMAIL
-			, RND_NMBR
+	<select id="checkRcode" resultType="camelMap" parameterType="map">
+		SELECT RND_EMAIL AS EMAIL
+			, RND_NMBR AS CODE
 		FROM RANDOM_TB 
-		WHERE RND_EMAIL=#{rndEmail}
-			AND RND_NMBR=#{rndCode}
+		WHERE RND_EMAIL=#{email}
+			AND RND_NMBR=#{code}
 			AND RND_DT BETWEEN (CURRENT_TIMESTAMP - INTERVAL '30 MIN') AND CURRENT_TIMESTAMP
 	</select>
 	

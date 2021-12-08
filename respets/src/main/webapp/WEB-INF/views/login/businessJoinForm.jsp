@@ -1,20 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
 <title>Respets :: 기업 회원 가입</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="resources/dist/assets/images/logo-sm.png">
+<script type="text/javascript">
+function selectSvcCode(){
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/selectSvcCode",	
+		type : 'POST',
+		success : function(result){
+			var tbody = $("#svcCd");
+			tbody.children().remove();
+			
+			if(result.svcCode.length > 0){
+				$(result.svcCode).each(function(index, item){
+					tbodyHtml = "";
+					tbodyHtml += '<input type="radio" name="svcCd" class="주력 서비스" value="'+item["cmmnCd"]+'"/>'+item["cdDesc"];
+					tbody.append(tbodyHtml);
+				}); 
+			}
+		},
+		error : function(){
+			console.log("error");
+		}
+	});	
+};
 
-        <!-- App css -->
-        <link href="resources/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" />
-        
+$(document).ready(function(){
+	selectSvcCode();
+});
+</script>        
 </head>
  <body class="authentication-bg">
          <div class="account-pages mt-5 mb-5">
@@ -43,31 +62,31 @@
 								<!-- 필수 입력 항목에 빨간 * 추가하기 -->
 								<!-- 이메일 유효성 검사 추가할 것 -->
 								<div class="form-group">
-									<label for="bus_email">이메일 주소 <span style="color: red">*</span></label>
-									<input type="text" class="form-control" name="bus_email" id="이메일"
+									<label for="busEmail">이메일 주소 <span style="color: red">*</span></label>
+									<input type="text" class="form-control" name="busEmail" id="이메일"
 										onchange="emailChk();" placeholder="ex)respets@respets.com"
 										required >
 									<div id="emailChkMsg"></div>
 								</div>
 								<!-- 비밀번호 유효성 검사, 확인 폼 추가할 것 -->
 								<div class="form-group">
-									<label for="bus_pw">비밀번호 <span style="color: red">*</span></label>
-									<input type="password" class="form-control" name="bus_pw" id="비밀번호" placeholder="비밀번호를 입력해주세요." required >
+									<label for="busPw">비밀번호 <span style="color: red">*</span></label>
+									<input type="password" class="form-control" name="busPw" id="비밀번호" placeholder="비밀번호를 입력해주세요." required >
 								</div>
 									
 								<div class="form-group">
-									<label for="bus_name">업체명 <span style="color: red">*</span></label>
-									<input type="text" class="form-control" name="bus_name" id="업체명" placeholder="업체명을 입력해주세요." required>
+									<label for="busName">업체명 <span style="color: red">*</span></label>
+									<input type="text" class="form-control" name="busName" id="업체명" placeholder="업체명을 입력해주세요." required>
 								</div>
 							
 								<div class="form-group">
-									<label for="bus_ceo">대표자명 <span style="color: red">*</span></label>
-									<input type="text" class="form-control" name="bus_ceo" id="대표자명" placeholder="대표자명을 입력해주세요." required>
+									<label for="busCeo">대표자명 <span style="color: red">*</span></label>
+									<input type="text" class="form-control" name="busCeo" id="대표자명" placeholder="대표자명을 입력해주세요." required>
 								</div>
 								
 								<div class="form-group">
-									<label for="bus_lcno">사업자등록번호 <span style="color: red">*</span></label>
-									<input type="text" class="form-control" name="bus_lcno" id="사업자 등록 번호" placeholder="ex)000-00-00000" onchange="taxIdChk();" required/>
+									<label for="busLcno">사업자등록번호 <span style="color: red">*</span></label>
+									<input type="text" class="form-control" name="busLcno" id="사업자 등록 번호" placeholder="ex)000-00-00000" onchange="taxIdChk();" required/>
 									<div id="taxIdChkMsg"></div>
 								</div>
 								
@@ -77,15 +96,15 @@
 								</div>
 								
 								<div class="form-group">
-									<label for="bus_phone">업체 연락처 <span style="color: red">*</span></label>
-									<input type="text" class="form-control" name="bus_phone" id="업체 연락처" />
+									<label for="busPhone">업체 연락처 <span style="color: red">*</span></label>
+									<input type="text" class="form-control" name="busPhone" id="업체 연락처" />
 								</div>
 								<div class="form-row">								
 									<div class="form-group col-md-12" style="margin-bottom:0;">										
-										<label for="bus_address">업체 주소 <span style="color: red">*</span></label>
+										<label for="busAddress">업체 주소 <span style="color: red">*</span></label>
 									</div>
 									<div class="form-group col-md-6">
-										<input type="text" class="form-control" name="bus_post" id="우편번호" placeholder="우편번호" readonly="readonly" />
+										<input type="text" class="form-control" name="busPost" id="우편번호" placeholder="우편번호" readonly="readonly" />
 									</div>
 									<div class="form-group col-md-6">
 										<input type="button" onclick="findAddr()" value="우편번호 찾기" class="btn btn-outline-success"/>
@@ -93,17 +112,16 @@
 								</div>
 								
 								<div class="form-group">
-									<input type="text" class="form-control" name="bus_addr" id="주소" placeholder="주소" readonly="readonly" /> 
+									<input type="text" class="form-control" name="busAddr" id="주소" placeholder="주소" readonly="readonly" /> 
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" name="bus_addr2" id="상세주소" placeholder="상세주소" />
+									<input type="text" class="form-control" name="busDtlAddr" id="상세주소" placeholder="상세주소" />
 								</div>
 				
 								
 								<div class="form-group">
 									<label for="service">주력 서비스 <span style="color: red">*</span></label>
-									<br />
-									${input}
+									<div id="svcCd"></div>
 								</div>
 								<div class="form-group">
 									<label for="mainPhoto">대표 사진</label>
@@ -181,7 +199,7 @@
 			return false;
 		} // if End
 
-		if ($(":radio[name='svc_cd']:checked").length < 1) {
+		if ($(":radio[name='svcCd']:checked").length < 1) {
 			alert("'주력 서비스'를 선택해주세요.");
 			return false;
 		} // if End
@@ -241,7 +259,7 @@
 <!-- 사업자 등록 번호 사용 가능 여부를 확인하는 Ajax Script -->
 <script>
 	function taxIdChk() {
-		var taxId = $('input[name=bus_lcno]').val();
+		var taxId = $('input[name=busLcno]').val();
 		$.ajax({
 			url : 'taxIdCheck',
 			type : 'post',
@@ -267,7 +285,7 @@
 <!-- 이메일 사용 가능 여부를 확인하는 Ajax Script -->
 <script>
 	function emailChk() {
-		var email = $('input[name=bus_email]').val();
+		var email = $('input[name=busEmail]').val();
 		$.ajax({
 			url : 'emailCheck',
 			type : 'post',

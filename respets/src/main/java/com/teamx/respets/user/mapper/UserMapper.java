@@ -12,8 +12,6 @@ public interface UserMapper {
 
 	public Map<String, Object> selectMyInfo(String no) throws SQLException;
 
-	public Integer myPwCheck(UserVO userVO) throws SQLException;
-
 	public boolean deleteUser(String no) throws SQLException;
 
 	public void updateUserInfo(UserVO userVo) throws SQLException;

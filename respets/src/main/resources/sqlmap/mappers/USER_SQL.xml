@@ -4,18 +4,10 @@
 <mapper namespace="com.teamx.respets.user.mapper.UserMapper">
 	
 	<!-- 회원 정보 조회 -->
-	<select id="selectMyInfo" parameterType="map" resultType="map">
+	<select id="selectMyInfo" parameterType="map" resultType="camelMap">
 		SELECT *
 		FROM PERSONAL_TB 
 		WHERE PER_NO = #{no}
-	</select>
-	
-	<!-- 비밀번호 확인 -->
-	<select id="myPwCheck" resultType="Integer" parameterType="map">
-		SELECT COUNT(*) 
-		FROM PERSONAL_TB 
-		WHERE PER_NO = #{per_no} 
-			AND PER_PW = #{per_pw}
 	</select>
 	
 	<!-- 개인 회원탈퇴 -->
@@ -28,11 +20,11 @@
 	<!-- 개인 정보수정 -->
 	<update id="updateUserInfo" parameterType="map">
 		UPDATE PERSONAL_TB 
-		SET PER_PHONE = #{per_phone}
-		<if test="per_file_id != ''.toString() and per_file_id != null">
-			,PER_FILE_ID = #{per_file_id}
+		SET PER_PHONE = #{perPhone}
+		<if test="perFileId != ''.toString() and perFileId != null">
+			,PER_FILE_ID = #{perFileId}
 		</if>
-		WHERE PER_NO = #{per_no}
+		WHERE PER_NO = #{perNo}
 	</update>
 	
 </mapper>

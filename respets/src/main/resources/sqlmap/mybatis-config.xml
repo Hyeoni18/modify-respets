@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="callSettersOnNulls" value="true" />
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="cacheEnabled" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
+    <typeAliases>
+   		<typeAlias alias="camelMap" type="com.teamx.respets.common.util.CamelMap"/>
+		<typeAlias alias="HashMap" type="java.util.HashMap"/>
+		<typeAlias alias="String" type="java.lang.String"/>
+		<typeAlias alias="Integer" type="java.lang.Integer"/>
+		<typeAlias alias="Long" type="java.lang.Long"/>
+		<typeAlias alias="List" type="java.util.List"/>
+		<typeAlias alias="Boolean" type="java.lang.Boolean"/>
+    </typeAliases>
+</configuration>

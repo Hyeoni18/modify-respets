@@ -8,9 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.teamx.respets.common.service.CommonService;
 import com.teamx.respets.login.vo.LoginVO;
 import com.teamx.respets.pet.service.PetService;
 import com.teamx.respets.user.vo.UserVO;
@@ -20,6 +22,9 @@ public class PetController {
 	
 	@Autowired
 	private PetService petService;
+	
+	@Autowired
+	private CommonService commonService;
 
 	/**
 	 * 반려동물 목록 화면
@@ -52,9 +57,11 @@ public class PetController {
 	 * 반려동물 등록 화면
 	 * @Method : petInsertForm
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value ="/petInsertForm")
-	public String petInsertForm(HttpSession session) {
+	public String petInsertForm(HttpSession session, Model model) throws Exception {
+		model.addAttribute("petCode", commonService.selectCode("PTY"));
 		return "myTiles/pet/petInsertForm";
 	}
 

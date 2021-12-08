@@ -3,8 +3,18 @@
 
 <mapper namespace="com.teamx.respets.common.mapper.CommonMapper">
 
+	<!-- 공통코드 검색 -->
+    <select id="selectCode" resultType="camelMap" parameterType="String">
+        SELECT CMMN_CD
+        	,CD_DESC 
+        FROM CMMN_CODE 
+        WHERE GRP_CD=#{code} 
+        	AND LVL='001'
+        ORDER BY SORT_SN
+    </select>
+    
     <insert id="insertFile" parameterType="map">
-    	<selectKey resultType="Integer" keyProperty="FILE_ID" order="BEFORE">
+    	<selectKey resultType="Integer" keyProperty="fileId" order="BEFORE">
 			SELECT COALESCE(MAX(CAST(FILE_ID AS INTEGER)),0)+1 AS FILE_ID FROM FILE_TB
 		</selectKey>
     	INSERT INTO 
@@ -17,12 +27,12 @@
     			,FILE_SIZE
     			,FILE_INPUT_DT
     		) VALUES (
-    			#{FILE_ID}
-    			,#{FILE_GRP_ID}
-    			,#{FILE_NM}
-    			,#{FILE_ORGINL_NM}
-    			,#{FILE_COURS}
-    			,#{FILE_SIZE}
+    			#{fileId}
+    			,#{fileGrpId}
+    			,#{fileNm}
+    			,#{fileOrginlNm}
+    			,#{fileCours}
+    			,#{fileSize}
     			,NOW()
     		)
     </insert>

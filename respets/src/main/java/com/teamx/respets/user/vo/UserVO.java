@@ -9,15 +9,15 @@ import lombok.Setter;
 @Setter
 public class UserVO {
 	
-	private String per_no;
-	private String per_email;
-	private String per_pw;
-	private String per_name;
-	private String per_phone;
-	private String per_file_id;
-	private String per_emchk;
-	private String per_leave;
-	private String per_leave_dt;
+	private String perNo;
+	private String perEmail;
+	private String perPw;
+	private String perName;
+	private String perPhone;
+	private String perFileId;
+	private String perEmchk;
+	private String perLeave;
+	private String perLeaveDt;
 
 	private MultipartFile upload;
 }

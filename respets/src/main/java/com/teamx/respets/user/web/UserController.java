@@ -57,20 +57,6 @@ public class UserController {
 	}
 
 	/**
-	 * 현재 비밀번호 확인
-	 * @Method : myPwCheck
-	 * @return
-	 * @throws Exception 
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/myPwCheck")
-	public int myPwCheck(String now, HttpServletRequest request) throws Exception {
-		int result = userService.myPwCheck(now, request);
-		System.err.println(result);
-		return result;
-	}
-	
-	/**
 	 * 회원정보 수정 화면
 	 * @Method : myInfoUpdateForm
 	 * @return
@@ -91,7 +77,6 @@ public class UserController {
 	@RequestMapping(value = "/myInfoUpdate")
 	public String updateUserInfo(UserVO userVo) throws Exception {
 		userService.updateUserInfo(userVo);
-		//세션 새로고침 추가 필요
 		return "myTiles/user/myInfo";
 	}
 	

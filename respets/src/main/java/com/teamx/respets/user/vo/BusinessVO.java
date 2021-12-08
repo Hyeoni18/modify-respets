@@ -9,28 +9,27 @@ import lombok.Setter;
 @Setter
 public class BusinessVO {
 
-	private int bus_seq;
-	private String bus_no;
-	private String bus_email;
-	private String bus_pw;
-	private String bus_name;
-	private String bus_ceo;
-	private String bus_lcno;
-	private String bus_lcno_file_id;
-	private String bus_phone;
-	private String bus_post;
-	private String bus_addr;
-	private String bus_dtl_addr;
-	private String bus_file_id;
-	private String bus_emchk;
-	private String bus_chk;
-	private String bus_input_dt;
-	private String bus_leave;
-	private String bus_leave_dt;
+	private String busNo;
+	private String busEmail;
+	private String busPw;
+	private String busName;
+	private String busCeo;
+	private String busLcno;
+	private String busLcnoFileId;
+	private String busPhone;
+	private String busPost;
+	private String busAddr;
+	private String busDtlAddr;
+	private String busFileId;
+	private String busEmchk;
+	private String busChk;
+	private String busInputDt;
+	private String busLeave;
+	private String busLeaveDt;
 	
-	private String svc_cd;
-	private int svc_sort;
-	private String svc_file_id;
+	private String svcCd;
+	private int svcSort;
+	private String svcFileId;
 	
 	private MultipartFile busLicense;
 	private MultipartFile mainPhoto;

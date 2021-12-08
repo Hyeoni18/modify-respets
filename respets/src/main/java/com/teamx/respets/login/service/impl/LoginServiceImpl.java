@@ -1,6 +1,5 @@
 package com.teamx.respets.login.service.impl;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +67,7 @@ public class LoginServiceImpl implements LoginService{
 			} else {
 				String tomail = loginVO.getEmail();
 				String title = "[Respets] 계정 인증 메일";
-				String content = "링크를 클릭해주세요. http://localhost:8080/emailConfirmSuccess?per_email="+ tomail;
+				String content = "링크를 클릭해주세요. http://localhost:8080/emailConfirmSuccess?email="+ tomail + "&type=" + map.get("type");
 				mailSending(tomail, title, content);
 				String alert = "alert('미인증 회원입니다. 인증을 완료해주세요.');";
 				loginVO.setAlert(alert);
@@ -106,32 +105,19 @@ public class LoginServiceImpl implements LoginService{
 	    Transport.send(message);
 	}
 	
-
-	@Override
-	public String selectBusCategory() throws Exception {
-		List<Map<String, String>> list = loginMapper.selectBusCategory();
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < list.size(); i++) {
-			sb.append("<input type='radio' name='svc_cd' class='주력 서비스' value='");
-			sb.append(list.get(i).get("cmmn_cd"));
-			sb.append("'/>" + list.get(i).get("cd_desc") + "</label>");
-		} 
-		return sb.toString();
-	}
-	
 	@Override
 	public void insertPersonalJoin(UserVO userVo) throws Exception {
 		if (!userVo.getUpload().isEmpty()) {
 			Map<String, Object> fileMap = uploadFileUtils.fileUpload(userVo.getUpload());
 			
 			commonMapper.insertFile(fileMap);
-			userVo.setPer_file_id(String.valueOf(fileMap.get("FILE_ID")));
+			userVo.setPerFileId(String.valueOf(fileMap.get("fileId")));
 		}
 		
 		loginMapper.insertPersonalJoin(userVo);
-		String email = userVo.getPer_email();
+		String email = userVo.getPerEmail();
         String title = "[Respets] 계정 인증 메일";
-        String content = "링크를 클릭해주세요. http://localhost:8080/emailConfirmSuccess?per_email=" + userVo.getPer_email();
+        String content = "링크를 클릭해주세요. http://localhost:8080/emailConfirmSuccess?email=" + email + "&type=P";
 		mailSending(email, title, content);
 	}
 	
@@ -140,25 +126,33 @@ public class LoginServiceImpl implements LoginService{
 		//사업자등록증 사진 등록
 		Map<String, Object> fileMap = uploadFileUtils.fileUpload(busiVO.getBusLicense());
 		commonMapper.insertFile(fileMap);
-		busiVO.setBus_lcno_file_id(String.valueOf(fileMap.get("FILE_ID")));
+		busiVO.setBusLcnoFileId(String.valueOf(fileMap.get("fileId")));
 		
 		// 대표 사진 이미지가 있을 경우 대표 사진 넣기
 		if(!busiVO.getMainPhoto().isEmpty()) {
 			fileMap = uploadFileUtils.fileUpload(busiVO.getMainPhoto());
 			commonMapper.insertFile(fileMap);
-			busiVO.setSvc_file_id(String.valueOf(fileMap.get("FILE_ID")));
+			busiVO.setBusFileId(String.valueOf(fileMap.get("fileId")));
 		}
 
 		loginMapper.insertBusinessJoin(busiVO); // 기업 회원 테이블
-		busiVO.setBus_no("B" + busiVO.getBus_seq());
-		
 		loginMapper.insertBusJoinSvc(busiVO); // 서비스 테이블
+		
+		String email = busiVO.getBusEmail();
+        String title = "[Respets] 계정 인증 메일";
+        String content = "링크를 클릭해주세요. http://localhost:8080/emailConfirmSuccess?email=" + email + "&type=B";
+		mailSending(email, title, content);
 	}
 	
 	@Override
 	public void updateEmailChk(HttpServletRequest request) throws Exception {
-		String email = request.getParameter("per_email");
-		loginMapper.updateEmailChk(email);
+		String email = request.getParameter("email");
+		String type = request.getParameter("type");
+		if(type.equals("P")) {
+			loginMapper.updatePerEmailChk(email);
+		} else if(type.equals("B")) {
+			loginMapper.updateBusEmailChk(email);
+		}
 	}
 	
 	@Override
@@ -185,7 +179,7 @@ public class LoginServiceImpl implements LoginService{
 		} else { // 맞는 정보가 없을 경우.
 			resultMap = new HashMap<String, Object>();
 			String text = "alert('찾으시는 아이디 정보가 없습니다.');";
-			resultMap.put("none", text);
+			resultMap.put("alert", text);
 			resultMap.put("view", "findIdForm");
 		}
 		
@@ -225,7 +219,7 @@ public class LoginServiceImpl implements LoginService{
 		map.put("rndNmbr", temp);
 		boolean result = loginMapper.insertRND(map);
 		if(result) {
-			String content = findContent+"per_email=" + map.get("email") + "&code=" + temp	+ "&type=" + map.get("type");
+			String content = findContent+"email=" + map.get("email") + "&code=" + temp	+ "&type=" + map.get("type");
 			mailSending(String.valueOf(map.get("email")), findTitle, content);
 		}
 		
@@ -236,12 +230,12 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public Map<String, Object> resetMyPwForm(HttpServletRequest request) throws Exception {
 		// 메일을 보낼 때 함께 담아서 보내진 email, code, type
-		String email = request.getParameter("per_email");
+		String email = request.getParameter("email");
 		String code = request.getParameter("code");
 		String type = request.getParameter("type");
 		Map<String, Object> rndMap = new HashMap<String, Object>();
-		rndMap.put("rndEmail", email);
-		rndMap.put("rndCode", code);
+		rndMap.put("email", email);
+		rndMap.put("code", code);
 		// 랜덤 코드가 맞는지 확인한다.
 		rndMap = loginMapper.checkRcode(rndMap);
 		if (rndMap != null) { 

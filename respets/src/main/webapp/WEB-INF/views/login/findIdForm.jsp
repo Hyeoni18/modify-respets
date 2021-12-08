@@ -41,8 +41,7 @@
 									찾기</h4>
 								<p class="text-muted mb-4"></p>
 							</div>
-							<!--아이디 찾는 메소드로 이동 ,
-		  					기업을 클릭해도 Personal bean을 이용하기 위해 name을 per_로 설정 -->
+							<!--아이디 찾는 메소드로 이동 -->
 							<form action="findId" method="POST">
 
 								<div class="form-group">
@@ -68,13 +67,13 @@
 								</div>
 
 								<div class="form-group">
-									<label for="per_name">이름(대표자명)</label> <input
-										class="form-control" type="text" name="per_name" />
+									<label for="name">이름(대표자명)</label> <input
+										class="form-control" type="text" name="name" />
 								</div>
 
 								<div class="form-group">
-									<label for="per_phone">전화번호(사업자번호)</label> <input
-										class="form-control" type="text" name="per_phone" /> <br />
+									<label for="phone">전화번호(사업자번호)</label> <input
+										class="form-control" type="text" name="phone" /> <br />
 								</div>
 								<div class="form-group mb-0 text-center">
 									<button class="btn btn-success">아이디 찾기</button>
@@ -95,7 +94,6 @@
 	<!-- end container -->
 	<!-- end page -->
 
-	${paramMap.none}
 	<!-- 찾는 아이디가 없을 경우 alert창이 뜬다. -->
 	<footer class="footer footer-alt"> Copyright Respets Corp. All
 		rights reserved. </footer>
@@ -103,5 +101,6 @@
 <script>
 	/* 개인,기업 선택 하지 않으면 넘어가지 않도록. */
 	/* 유효성 검사 나중 */
+	${paramMap.alert}
 </script>
 </html>

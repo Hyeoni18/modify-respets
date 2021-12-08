@@ -42,13 +42,13 @@
 
                                     <div class="form-group">
                                         <label for="email">이메일 주소 <span style="color: red">*</span></label>
-                                        <input class="form-control" type="text" id="per_email" name="per_email" onchange="emailChk()" placeholder="ex)respets@respets.com" required/>
+                                        <input class="form-control" type="text" id="perEmail" name="perEmail" onchange="emailChk()" placeholder="ex)respets@respets.com" required/>
                                     	<div id="chkMsg"></div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="pw">비밀번호 <span style="color: red">*</span></label>
-                                        <input class="form-control" type="password" id="per_pw" name="per_pw" required placeholder="비밀번호를 입력해주세요.">
+                                        <input class="form-control" type="password" id="perPw" name="perPw" required placeholder="비밀번호를 입력해주세요.">
                                     </div>
 
                                     <div class="form-group">
@@ -60,12 +60,12 @@
                                     
                                     <div class="form-group">
                                         <label for="name">이름 <span style="color: red">*</span></label>
-                                        <input class="form-control" type="text" id="per_name" name="per_name" placeholder="이름을 입력해주세요." required>
+                                        <input class="form-control" type="text" id="perName" name="perName" placeholder="이름을 입력해주세요." required>
                                     </div>
                                     
                                     <div class="form-group">
                                         <label for="phone">연락처 <span style="color: red">*</span></label>
-                                        <input class="form-control" type="text" id="per_phone" name="per_phone" placeholder="연락처를 입력해주세요(010-0000-0000)" required>
+                                        <input class="form-control" type="text" id="perPhone" name="perPhone" placeholder="연락처를 입력해주세요(010-0000-0000)" required>
                                     </div>
                                     
                                     <div class="form-group">
@@ -110,7 +110,7 @@ $(function(){
 	$('#chkSame').hide();
 	$('#chkAlert').hide();
 	$('#pwChk').keyup(function(){
-		var pw = $('#per_pw').val();
+		var pw = $('#perPw').val();
 		var pwChk = $('#pwChk').val();
 		
 		if(pw == "" || pwChk== "") {
@@ -132,7 +132,7 @@ $(function(){
 
 <script>
 function emailChk() {
-	var email = $('#per_email').val();
+	var email = $('#perEmail').val();
 	console.log(email);
 	$.ajax({
 		url:'emailCheck',
@@ -156,11 +156,11 @@ function emailChk() {
 
 <script>
 function formChk() {
-	var email = $('#per_email');
-	var pw = $('#per_pw');
+	var email = $('#perEmail');
+	var pw = $('#perPw');
 	var pwChk = $('#pwChk');
-	var name = $('#per_name');
-	var phone = $('#per_phone');
+	var name = $('#perName');
+	var phone = $('#perPhone');
 	
 	if(email.val() == "" || email.val() == null ) {
 		alert("이메일 주소를 입력해주세요.");

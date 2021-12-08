@@ -14,15 +14,15 @@ public interface LoginMapper {
 
 	public String selectBlackList(Map<String, Object> map) throws SQLException;
 
-	public List<Map<String, String>> selectBusCategory() throws SQLException;
-
 	public void insertPersonalJoin(UserVO userVo) throws SQLException;
 
 	public void insertBusinessJoin(BusinessVO busiVO) throws SQLException;
 
 	public void insertBusJoinSvc(BusinessVO busiVO) throws SQLException;
 
-	public void updateEmailChk(String email) throws SQLException;
+	public void updatePerEmailChk(String email) throws SQLException;
+	
+	public void updateBusEmailChk(String email) throws SQLException;
 
 	public Map<String, Object> findId(Map<String, Object> map) throws SQLException;
 

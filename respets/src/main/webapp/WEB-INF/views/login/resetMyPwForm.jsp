@@ -37,9 +37,9 @@
 							새 비밀번호: <input type="password" class="form-control" name="newPw" id="newPw"/> <br/>
 							새 비밀번호 확인: <input type="password" class="form-control" name="checkPw" id="checkPw"/> <br/>
 							</div>
-							<input type="hidden" name="email" value="${email}"/>
-							<input type="hidden" name="code" value="${code}"/>
-							<input type="hidden" name="type" value="${type}"/>
+							<input type="hidden" name="email" value="${paramMap.email}"/>
+							<input type="hidden" name="code" value="${paramMap.code}"/>
+							<input type="hidden" name="type" value="${paramMap.type}"/>
 							<div class="form-group mb-0 text-center">
 							<button class="btn btn-success" onclick="pwCheck()">비밀번호 변경하기</button>
 							</div>

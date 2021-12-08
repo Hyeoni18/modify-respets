@@ -23,10 +23,6 @@
 </style>
 <script>
 
-$(document).ready(function(){
-	selectPetList();
-});
-
 function selectPetList(){
 	
 	var data = {};
@@ -45,11 +41,11 @@ function selectPetList(){
 					tbodyHtml = "";
 					tbodyHtml += '<div class="col-lg-4" style="padding: 0;">';
 					tbodyHtml += '<div class="card d-block" style="text-align: center; margin-bottom: 20px;">';
-					tbodyHtml += '<a href="petInfoDetail?pet_no='+item["pet_no"]+'">';
-					tbodyHtml += '<img class="rounded-circle img-thumbnail" id="petProfile" src="'+item["pet_cours"]+'" alt="pet profile"></a>';
+					tbodyHtml += '<a href="petInfoDetail?petNo='+item["petNo"]+'">';
+					tbodyHtml += '<img class="rounded-circle img-thumbnail" id="petProfile" src="'+item["petCours"]+'" alt="pet profile"></a>';
 					tbodyHtml += '<div class="card-body">';
-					tbodyHtml += '<h5 class="card-title">'+item["pet_name"]+'</h5>';
-					tbodyHtml += '<p class="card-text">품종 : '+item["pet_cd"]+'<br/>성별 : '+item["pet_ntr"]+'<br/>나이 : '+item["pet_birth"]+'살</p>';
+					tbodyHtml += '<h5 class="card-title">'+item["petName"]+'</h5>';
+					tbodyHtml += '<p class="card-text">품종 : '+item["petCd"]+'<br/>성별 : '+item["petNtr"]+'<br/>나이 : '+item["petBirth"]+'살</p>';
 					tbodyHtml += '</div></div></div>';
 					tbody.append(tbodyHtml);
 				}); 
@@ -83,6 +79,9 @@ function selectPetList(){
 	});	
 };
 
+$(document).ready(function(){
+	selectPetList();
+});
 </script>
 </head>
 <body>
@@ -93,7 +92,7 @@ function selectPetList(){
 					<div class="page-title-box">
 						<div class="page-title-right">
 							<form class="form-inline">
-								<a href="petInsertForm?per_no=${per_no}" class="btn btn-outline-success">반려동물
+								<a href="petInsertForm?perNo=${perNo}" class="btn btn-outline-success">반려동물
 									등록</a>
 							</form>
 						</div>
