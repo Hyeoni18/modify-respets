@@ -7,14 +7,40 @@
 	<select id="selectPetList" parameterType="map" resultType="camelMap">
 		SELECT PET_NO
 			,PER_NO
-			,PET_CD <!-- 코드명 -->
+			,PET_KND
 			,PET_NAME
-			,PET_BIRTH <!-- 나이계산 -->
-			,PET_SEX
+			,EXTRACT(YEAR FROM CURRENT_DATE)-PET_BIRTH+1 AS PET_BIRTH
+			,CASE WHEN PET_SEX='F' THEN '여자' ELSE '남자' END AS PET_SEX
 			,PET_NTR
 			,PET_FILE_ID 
 			,(SELECT FILE_COURS FROM FILE_TB WHERE FILE_ID = PET_FILE_ID) PET_COURS
 		FROM PET_TB 
 		WHERE PER_NO=#{no} 
 	</select> 
+	
+	<insert id="insertPet" parameterType="map">
+		<selectKey keyProperty="petNo" resultType="string" order="BEFORE">
+			SELECT COALESCE('A'||(SELECT SPLIT_PART(PET_NO, 'A', 2)::INTEGER FROM PET_TB ORDER BY PET_NO DESC LIMIT 1)+1,'A1000001')
+		</selectKey>
+		INSERT INTO PET_TB VALUES 
+		(
+			#{petNo}
+			,#{perNo}
+			,#{petKnd}
+			,#{petName}
+			,${petBirth}
+			,#{petSex}
+			,#{petNtr}
+			,#{petFileId}
+		)
+	</insert>
+	
+	<insert id="insertPetDtl" parameterType="map">
+		INSERT INTO PET_DTL_TB VALUES 
+		(
+			#{petInfoCd}
+			,#{petNo}
+			,#{petDtlInfo}
+		)
+	</insert>
 </mapper>

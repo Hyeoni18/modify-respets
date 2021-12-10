@@ -3,16 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
 <title>Respets :: 나의 반려동물 정보</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta
-	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
-	name="description" />
-<meta content="Coderthemes" name="author" />
 
 <style type="text/css">
 #petProfile {
@@ -45,7 +36,7 @@ function selectPetList(){
 					tbodyHtml += '<img class="rounded-circle img-thumbnail" id="petProfile" src="'+item["petCours"]+'" alt="pet profile"></a>';
 					tbodyHtml += '<div class="card-body">';
 					tbodyHtml += '<h5 class="card-title">'+item["petName"]+'</h5>';
-					tbodyHtml += '<p class="card-text">품종 : '+item["petCd"]+'<br/>성별 : '+item["petNtr"]+'<br/>나이 : '+item["petBirth"]+'살</p>';
+					tbodyHtml += '<p class="card-text">품종 : '+item["petKnd"]+'<br/>성별 : '+item["petSex"]+'<br/>나이 : '+item["petBirth"]+'살</p>';
 					tbodyHtml += '</div></div></div>';
 					tbody.append(tbodyHtml);
 				}); 
@@ -56,22 +47,13 @@ function selectPetList(){
 				} else {
 					showPaging(Math.floor(result.total / $('#pagePerRowSelect'+tab).val()) + 1,10,parseInt(page),'selectAccdtExaminDtaList', $("#paging"+tab));
 				} */
-			} /* else {
+			}  else {
+				var tbody = $(".card-empty");
 				tbodyHtml = "";
-				tbodyHtml += '<tr class="noData">';
-				if(authCd=="AUTH000" || authCd=="AUTH001") {
-					tbodyHtml += '<td colspan=9>';
-				} else {
-					tbodyHtml += '<td colspan=8>';
-				}
-				tbodyHtml += '<div class="text">';
-				tbodyHtml += '<i class="fa fa-exclamation-triangle"></i><br/>검색된 데이터가 없습니다.';
-				tbodyHtml += '</div>';
-				tbodyHtml += '</td>';
-				tbodyHtml += '</tr>';
+				tbodyHtml += '<div class="alert alert-info" role="alert" style="margin-bottom:0;">';
+				tbodyHtml += '<i class="dripicons-information mr-2"></i> 반려동물을 등록하셔야 <strong>예약 서비스</strong>	&nbsp;이용이 가능합니다!</div>';
 				tbody.append(tbodyHtml);
-				showPaging(Math.floor(result.total / 10) + 1,10,parseInt(page),'selectAccdtExaminDtaList', $("#paging"+tab));
-			}  */ 
+			}  
 		},
 		error : function(){
 			console.log("error");
@@ -92,16 +74,11 @@ $(document).ready(function(){
 					<div class="page-title-box">
 						<div class="page-title-right">
 							<form class="form-inline">
-								<a href="petInsertForm?perNo=${perNo}" class="btn btn-outline-success">반려동물
-									등록</a>
+								<a href="petInsertForm?perNo=${perNo}" class="btn btn-outline-success">반려동물 등록</a>
 							</form>
 						</div>
 						<h4 class="page-title">나의 반려동물 목록</h4>
-						<c:if test="${empty petList}">
-							<div class='alert alert-info' role='alert' style='margin-bottom:0;'>
-							<i class='dripicons-information mr-2'></i> 반려동물을 등록하셔야 <strong>예약 서비스</strong>
-						&nbsp;이용이 가능합니다!</div>
-						</c:if>
+						<div class="card-empty"></div>
 					</div>
 					<!-- end page title -->
 
@@ -110,7 +87,6 @@ $(document).ready(function(){
 						
 							<div class="card-deck-wrapper">
 								<div class="card-deck">
-									
 									
 								</div>
 								<!-- end card-deck-->
@@ -123,4 +99,3 @@ $(document).ready(function(){
 				</div>
 				<!-- container -->
 </body>
-</html>
