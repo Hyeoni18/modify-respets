@@ -3,4 +3,26 @@
 
 <mapper namespace="com.teamx.respets.business.mapper.BusinessMapper">
 
+	<!-- 기업 목록 조회 (업종) -->
+	<select id="selectBusinessList" parameterType="String" resultType="camelMap">
+		SELECT B.BUS_NO
+			,B.BUS_NAME
+			,B.BUS_PHONE
+			,B.BUS_ADDR 
+		FROM BUSINESS_TB B 
+		INNER JOIN SERVICE_TB S ON B.BUS_NO = S.BUS_NO 
+		WHERE S.SVC_CD = #{svcCd}
+	</select> 
+	
+	<!-- 기업 목록 조회 (해시태그) -->
+	<select id="selectHashTagBusinessList" parameterType="String" resultType="camelMap">
+		SELECT B.BUS_NO
+			,B.BUS_NAME
+			,B.BUS_PHONE
+			,B.BUS_ADDR 
+		FROM BUSINESS_TB B
+		INNER JOIN HASHTAG_TB H ON B.BUS_NO = H.BUS_NO 
+		WHERE H.TAG_CONTENT = #{hashTag}
+	</select> 
+	
 </mapper>
