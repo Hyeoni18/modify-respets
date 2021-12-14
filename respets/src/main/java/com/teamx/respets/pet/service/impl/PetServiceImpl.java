@@ -1,6 +1,5 @@
 package com.teamx.respets.pet.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +58,44 @@ public class PetServiceImpl implements PetService{
 			}
 		}
 		
+	}
+
+	@Override
+	public Map<String, Object> selectPetInfo(PetVO petVO) throws Exception {
+		return petMapper.selectPetInfo(petVO);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectPetDtlInfo(PetVO petVO) throws Exception {
+		return petMapper.selectPetDtlInfo(petVO);
+	}
+
+	@Override
+	public void updatePet(PetVO petVO) throws Exception {
+		if (!petVO.getUpload().isEmpty()) {
+			Map<String, Object> fileMap = uploadFileUtils.fileUpload(petVO.getUpload());
+			
+			commonMapper.insertFile(fileMap);
+			petVO.setPetFileId(String.valueOf(fileMap.get("fileId")));
+		}
+		
+		petMapper.updatePet(petVO);
+		petMapper.deletePetDtl(petVO);
+		
+		for(int i=0; i<petVO.getPetDtlInfo().length; i++) {
+			if(!petVO.getPetDtlInfo()[i].isEmpty()) {
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("petNo", petVO.getPetNo());
+				map.put("petDtlInfo", petVO.getPetDtlInfo()[i]);
+				map.put("petInfoCd", petVO.getPetInfoCd()[i]);
+				petMapper.insertPetDtl(map);
+			}
+		}
+	}
+
+	@Override
+	public void deletePet(PetVO petVO) throws Exception {
+		petMapper.deletePet(petVO);
 	}
 
 }

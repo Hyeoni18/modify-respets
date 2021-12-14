@@ -62,7 +62,7 @@ public class PetController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value ="/petInsertForm")
-	public String petInsertForm(HttpSession session, Model model) throws Exception {
+	public String petInsertForm(Model model) throws Exception {
 		model.addAttribute("petInfoCode", commonService.selectCode("PCL"));
 		return "myTiles/pet/petInsertForm";
 	}
@@ -74,9 +74,59 @@ public class PetController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value ="/insertPet")
-	public String insertPet(PetVO petVO, @RequestParam Map<String, Object> map) throws Exception {
+	public String insertPet(PetVO petVO) throws Exception {
 		petService.insertPet(petVO); 
 		return "myTiles/pet/petList";
 	}
 	
+	/**
+	 * 반려동물 상세 정보 화면
+	 * @Method : petInfoDetail
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value ="/petInfoDetail")
+	public String petInfoDetail(PetVO petVO, Model model) throws Exception {
+		model.addAttribute("petInfo", petService.selectPetInfo(petVO));
+		model.addAttribute("petDtlInfo", petService.selectPetDtlInfo(petVO));
+		return "myTiles/pet/petInfoDetail";
+	}
+	
+	/**
+	 * 반려동물 수정 화면
+	 * @Method : petInfoUpdateForm
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value ="/petInfoUpdateForm")
+	public String petInfoUpdateForm(PetVO petVO, Model model) throws Exception {
+		model.addAttribute("petInfo", petService.selectPetInfo(petVO));
+		model.addAttribute("petDtlInfo", petService.selectPetDtlInfo(petVO));
+		model.addAttribute("petInfoCode", commonService.selectCode("PCL"));
+		return "myTiles/pet/petInfoUpdateForm";
+	}
+
+	/**
+	 * 반려동물 정보 수정
+	 * @Method : updatePet
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value ="/updatePet")
+	public String updatePet(PetVO petVO) throws Exception {
+		petService.updatePet(petVO); 
+		return "myTiles/pet/petList";
+	}
+	
+	/**
+	 * 반려동물 삭제
+	 * @Method : deletePet
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value ="/deletePet")
+	public String deletePet(PetVO petVO) throws Exception {
+		petService.deletePet(petVO); 
+		return "myTiles/pet/petList";
+	}
 }

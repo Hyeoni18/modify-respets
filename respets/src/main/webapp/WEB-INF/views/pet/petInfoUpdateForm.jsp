@@ -1,14 +1,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<meta charset="utf-8">
+<!DOCTYPE html>
 <html>
 <head>
-<title>Respets :: 반려동물 등록</title>
+<meta charset="utf-8" />
+<title>Respets :: 반려동물 정보 수정</title>
+<style type="text/css">
+#petProfile {
+	width: 150px;
+	height: 150px;
+	margin-top: 20px;
+}
+</style>
 </head>
 <body>
-				<!-- Start Content-->
 				<div class="container-fluid">
-
 					<!-- start page title -->
 					<div class="row">
 						<div class="col-12">
@@ -27,7 +34,8 @@
 								<div class="card-body">
 									<p class="text-muted">반려동물의 정보는 업체에게 매우 필요한 정보로써 최대한 구체적으로
 										작성하실 수록 상호간 소통이 원활합니다.</p>
-									<form action="insertPet" name="petInsertForm"
+
+									<form action="updatePet" name="petInfoUpdateForm"
 										enctype="multipart/form-data" method="post">
 										<div class="row">
 											<div class="col-lg-12">
@@ -42,14 +50,14 @@
 												<div class="form-group mb-3">
 													<label for="petName">이름<span style="color: red">*</span></label>
 													<input type="text" name="petName" id="petName"
-														class="form-control"> <span
+														class="form-control" value="${petInfo.petName}"> <span
 														class="font-13 text-muted">e.g "바둑이"</span>
 												</div>
 
 												<div class="form-group mb-3">
 													<label for="petKnd">품종<span style="color: red">*</span></label>
 													<input type="text" name="petKnd" id="petKnd"
-														class="form-control"> <span
+														class="form-control" value="${petInfo.petKnd}"> <span
 														class="font-13 text-muted">e.g "진돗개"</span>
 												</div>
 
@@ -66,7 +74,7 @@
 												<div class="form-group mb-3">
 													<label for="petBirth">출생년도<span
 														style="color: red">*</span></label> <input type="text"
-														name="petBirth" id="petBirth" class="form-control">
+														name="petBirth" id="petBirth" class="form-control" value="${petInfo.petBirth}">
 													<span class="font-13 text-muted">e.g "YYYY"</span>
 												</div>
 
@@ -86,20 +94,17 @@
 											
 												<c:forEach var="item" items="${petInfoCode}">
 													<div class="form-group mb-3">
-														<label for="petDtlInfo">${item.cdDesc}</label> <input type="text"
-															name="petDtlInfo" id="petDtlInfo" class="form-control">
-														<input type="hidden" id="petInfoCd" name="petInfoCd" value="${item.cmmnCd}">
+														<label for="petDtlInfo">${item.cdDesc}</label> 
+														<input type="text" name="petDtlInfo" id="${item.cmmnCd}" class="form-control">
+														<input type="hidden" name="petInfoCd" value="${item.cmmnCd}">
 													</div>
 									        	</c:forEach>
-
 												<div style="text-align: right;">
-													<input type="hidden" value="${userInfo.no}" name="perNo" />
+													<input type="hidden" value="${petInfo.petNo}" name="petNo" />
 													<input type="reset" class="btn btn-success" value="초기화" />&nbsp;
-													<input type="button" class="btn btn-success" value="등록 완료"
-														id="petInsertSubmit" />
+													<input type="submit" class="btn btn-success" value="수정 완료"
+														id="petUpdateSubmit" />
 												</div>
-
-
 											</div>
 											<!-- end col -->
 										</div>
@@ -116,11 +121,31 @@
 				<!-- container -->
 </body>
 <script>
-${alert}
-
-	$("#petInsertSubmit").click(function() {
-		var frm = document.petInsertForm;
-		var length = frm.length - 3;
+	$(document).ready(function() {
+		//불러온 값에 selected속성 부여하기
+		$("#petSex option").each(function() {
+			if ($(this).val() == "${petInfo.petSex}")
+				$(this).attr("selected", "selected");
+		})
+		$("#petNtr option").each(function() {
+			if ($(this).val() == "${petInfo.petNtr}")
+				$(this).attr("selected", "selected");
+		})
+		
+		var list = new Array();
+		<c:forEach items="${petDtlInfo}" var="item">
+			list.push("${item.petInfoCd}");
+			list.push("${item.petDtlInfo}");
+		</c:forEach>
+		for (var i = 0; i < list.length; i++) {
+			$("#"+list[i]).val(list[++i]);
+		}
+	});
+	
+	$("#petUpdateSubmit").click(function() {
+		console.log(this.value + " 클릭함");
+		var frm = document.petInfoUpdateForm;
+		var length = frm.length - 4;
 		for (var i = 0; i < length; i++) {
 			if (frm[i].name == "petName") {
 				if (frm[i].value == "" || frm[i].value == null) {
@@ -152,7 +177,7 @@ ${alert}
 					frm[i].focus();
 					return false;
 				}
-			}
+			} 
 		}
 		frm.submit();
 	});

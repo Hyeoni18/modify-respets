@@ -74,7 +74,7 @@ $(document).ready(function(){
 					<div class="page-title-box">
 						<div class="page-title-right">
 							<form class="form-inline">
-								<a href="petInsertForm?perNo=${perNo}" class="btn btn-outline-success">반려동물 등록</a>
+								<a href="petInsertForm?perNo=${userInfo.no}" class="btn btn-outline-success">반려동물 등록</a>
 							</form>
 						</div>
 						<h4 class="page-title">나의 반려동물 목록</h4>

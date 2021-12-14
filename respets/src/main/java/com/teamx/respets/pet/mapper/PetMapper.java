@@ -18,4 +18,14 @@ public interface PetMapper {
 
 	public void insertPetDtl(Map<String, Object> map) throws SQLException;
 
+	public Map<String, Object> selectPetInfo(PetVO petVO) throws SQLException;
+
+	public List<Map<String, Object>> selectPetDtlInfo(PetVO petVO) throws SQLException;
+
+	public void updatePet(PetVO petVO) throws SQLException;
+
+	public void deletePetDtl(PetVO petVO) throws SQLException;
+
+	public void deletePet(PetVO petVO) throws SQLException;
+
 }

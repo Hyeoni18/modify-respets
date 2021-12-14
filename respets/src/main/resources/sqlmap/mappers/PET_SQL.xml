@@ -18,6 +18,7 @@
 		WHERE PER_NO=#{no} 
 	</select> 
 	
+	<!-- 반려동물 등록 -->
 	<insert id="insertPet" parameterType="map">
 		<selectKey keyProperty="petNo" resultType="string" order="BEFORE">
 			SELECT COALESCE('A'||(SELECT SPLIT_PART(PET_NO, 'A', 2)::INTEGER FROM PET_TB ORDER BY PET_NO DESC LIMIT 1)+1,'A1000001')
@@ -35,6 +36,7 @@
 		)
 	</insert>
 	
+	<!-- 반려동물 상세정보 등록 -->
 	<insert id="insertPetDtl" parameterType="map">
 		INSERT INTO PET_DTL_TB VALUES 
 		(
@@ -43,4 +45,53 @@
 			,#{petDtlInfo}
 		)
 	</insert>
+	
+	<!-- 반려동물 정보 조회 -->
+	<select id="selectPetInfo" parameterType="map" resultType="camelMap">
+		SELECT PET_NO
+			,PER_NO 
+			,PET_KND
+			,PET_NAME
+			,PET_BIRTH
+			,PET_SEX
+			,PET_NTR
+			,(SELECT FILE_COURS FROM FILE_TB WHERE FILE_ID = PET_FILE_ID) PET_COURS
+		FROM PET_TB 
+		WHERE PET_NO=#{petNo} 
+	</select> 
+	
+	<!-- 반려동물 정보 조회 -->
+	<select id="selectPetDtlInfo" parameterType="map" resultType="camelMap">
+		SELECT (SELECT CD_DESC FROM CMMN_CODE WHERE CMMN_CD=PET_INFO_CD) PET_INFO
+			,PET_DTL_INFO
+			,PET_INFO_CD
+		FROM PET_DTL_TB 
+		WHERE PET_NO=#{petNo} 
+		ORDER BY PET_INFO_CD
+	</select> 
+	
+	<!-- 반려동물 정보 수정 -->
+	<update id="updatePet" parameterType="map">
+		UPDATE PET_TB
+		SET 
+			PET_KND = #{petKnd}
+			,PET_NAME = #{petName}
+			,PET_BIRTH = ${petBirth}
+			,PET_SEX = #{petSex}
+			,PET_NTR = #{petNtr}
+			<if test="petFileId != ''.toString() and petFileId != null">
+				,PET_FILE_ID = #{petFileId}
+			</if>
+		WHERE PET_NO=#{petNo}
+	</update>
+	
+	<delete id="deletePetDtl" parameterType="map">
+		DELETE FROM PET_DTL_TB
+		WHERE PET_NO=#{petNo}
+	</delete>
+	
+	<delete id="deletePet" parameterType="map">
+		DELETE FROM PET_TB
+		WHERE PET_NO=#{petNo}
+	</delete>
 </mapper>

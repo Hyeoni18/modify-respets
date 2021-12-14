@@ -14,4 +14,12 @@ public interface PetService {
 
 	public void insertPet(PetVO petVO) throws Exception;
 
+	public Map<String, Object> selectPetInfo(PetVO petVO) throws Exception;
+
+	public List<Map<String, Object>> selectPetDtlInfo(PetVO petVO) throws Exception;
+
+	public void updatePet(PetVO petVO) throws Exception;
+
+	public void deletePet(PetVO petVO) throws Exception;
+
 }
