@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Respets :: 기업 목록</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
@@ -28,13 +29,33 @@
 							</div> --%>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-12" id="businessList">
-							<div id="businessList">${businessList}</div>
-							<!-- end card-deck-->
-							<!-- end card-deck-wrapper-->
-						</div>
-						<!-- end col-->
+					<div class="row" id="businessList">
+						<c:forEach items="${businessList}" var="list">
+							<div class="col-4" style="padding:15px;">
+								<div class='card-deck-wrapper'>
+									<div class='card-deck'>
+										<div class='card d-block'>
+											<a href='businessDetailPage?busNo='> <img
+												class='card-img-top img-fluid' src='' />
+												<div class='card-body'>
+													<h5 class='card-title'>
+														<c:out value="${list.busName}" />
+													</h5>
+													<h5 class='card-text'>
+														<c:out value="${list.busAddr}" />
+														<br>
+														<c:out value="${list.busPhone}" />
+													</h5>
+												</div>
+											</a>
+										</div>
+									</div>
+									<!-- end card-deck-->
+								</div>
+								<!-- end card-deck-wrapper-->
+							</div>
+							<!-- end col-->
+						</c:forEach>
 					</div>
 					<br />
 					<div id="page">${paging}</div>
