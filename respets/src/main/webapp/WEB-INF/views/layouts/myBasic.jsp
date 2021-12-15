@@ -8,6 +8,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+#petProfile {
+	width: 150px;
+	height: 150px;
+	margin-top: 20px;
+}
+</style>
 	<tiles:insertAttribute name="title" />
 </head>
 <body>

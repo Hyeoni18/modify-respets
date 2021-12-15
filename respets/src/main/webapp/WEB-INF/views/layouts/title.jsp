@@ -19,3 +19,5 @@
 <script src="${pageContext.request.contextPath}/resources/dist/assets/js/vendor/fullcalendar.min.js"></script>
 <script	src="${pageContext.request.contextPath}/resources/dist/assets/js/pages/demo.dashboard.js"></script>
 <script src="${pageContext.request.contextPath}/resources/dist/assets/js/pages/demo.calendar.js"></script>
+<script src="${pageContext.request.contextPath}/resources/dist/assets/js/pages/demo.project-detail.js"></script>
+<script src="${pageContext.request.contextPath}/resources/dist/assets/js/pages/demo.widgets.js"></script>

@@ -27,6 +27,21 @@
 		WHERE PER_NO = #{perNo}
 	</update>
 	
+	<!-- 회원 정보 조회 -->
+	<select id="selectLikeBusiness" parameterType="map" resultType="camelMap">
+		SELECT BUS_NO
+			,BUS_NAME
+			,(SELECT FILE_COURS FROM FILE_TB WHERE FILE_ID=BUS_FILE_ID) BUS_FILE_COURS
+			,(SELECT SVC_CD FROM SERVICE_TB ST WHERE ST.BUS_NO=BT.BUS_NO AND SVC_SORT=1) SVC_CD
+		FROM BUSINESS_TB BT
+		WHERE BUS_NO = (SELECT BUS_NO FROM FAVORITE_TB WHERE PER_NO=#{no})
+	</select>
+	
+	<delete id="deleteLikeBusiness" parameterType="map">
+		DELETE FROM FAVORITE_TB
+		WHERE BUS_NO=#{busNo}
+			AND PER_NO=#{perNo}
+	</delete>
 </mapper>
 
 

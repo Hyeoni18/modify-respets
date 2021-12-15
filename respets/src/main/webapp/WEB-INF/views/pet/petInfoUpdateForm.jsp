@@ -6,13 +6,6 @@
 <head>
 <meta charset="utf-8" />
 <title>Respets :: 반려동물 정보 수정</title>
-<style type="text/css">
-#petProfile {
-	width: 150px;
-	height: 150px;
-	margin-top: 20px;
-}
-</style>
 </head>
 <body>
 				<div class="container-fluid">

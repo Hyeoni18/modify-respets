@@ -2,13 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
 <body>
-
 	<div class="navbar-custom topnav-navbar">
 		<div class="container-fluid">
 
@@ -58,7 +52,7 @@
 							</div>
 
 							<!-- item-->
-							<a href="./myPage" class="dropdown-item notify-item"> <i
+							<a href="./myInfo" class="dropdown-item notify-item"> <i
 								class="mdi mdi-account-circle"></i> <span>마이페이지</span>
 							</a>
 
@@ -97,4 +91,3 @@
 		$('#logoutFrm').submit();
 	}
 </script>
-</html>

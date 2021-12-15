@@ -1,5 +1,6 @@
 package com.teamx.respets.user.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +13,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.teamx.respets.common.mapper.CommonMapper;
 import com.teamx.respets.common.util.UploadFileUtils;
 import com.teamx.respets.login.vo.LoginVO;
+import com.teamx.respets.pet.vo.PetVO;
 import com.teamx.respets.user.mapper.UserMapper;
 import com.teamx.respets.user.service.UserService;
+import com.teamx.respets.user.vo.BusinessVO;
 import com.teamx.respets.user.vo.UserVO;
 
 @Service
@@ -55,6 +58,22 @@ public class UserServiceImpl implements UserService {
 	public boolean deleteUser(LoginVO loginVO) throws Exception {
 		String no = loginVO.getNo();
 		return userMapper.deleteUser(no);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectLikeBusiness(LoginVO loginVO) throws Exception {
+		return userMapper.selectLikeBusiness(loginVO);
+	}
+
+	@Override
+	public Integer selectLikeBusinessCnt(LoginVO loginVO) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteLikeBusiness(Map<String, Object> map) throws Exception {
+		userMapper.deleteLikeBusiness(map);
 	}
 
 }

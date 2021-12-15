@@ -1,5 +1,7 @@
 package com.teamx.respets.user.web;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teamx.respets.login.vo.LoginVO;
+import com.teamx.respets.pet.vo.PetVO;
 import com.teamx.respets.user.service.UserService;
+import com.teamx.respets.user.vo.BusinessVO;
 import com.teamx.respets.user.vo.UserVO;
 
 @Controller
@@ -21,17 +25,6 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
-	/**
-	 * 마이페이지
-	 * @Method : myPage
-	 * @return
-	 * @throws Exception 
-	 */
-	@RequestMapping(value = "/myPage")
-	public String myPage() throws Exception {
-		return "myTiles/user/recentMyBookingList";
-	}
 	
 	/**
 	 * 나의 회원 정보
@@ -49,10 +42,9 @@ public class UserController {
 	 * 비밀번호 수정 화면
 	 * @Method : myPwUpdateForm
 	 * @return
-	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/myPwUpdateForm")
-	public String myPwUpdateForm() throws Exception {
+	public String myPwUpdateForm() {
 		return "myTiles/user/myPwUpdateForm";
 	}
 
@@ -100,4 +92,66 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * 즐겨찾는 기업 목록 화면
+	 * @Method : likeBusinessList
+	 * @return
+	 */
+	@RequestMapping(value = "/likeBusinessList")
+	public String likeBusinessList() {
+		return "myTiles/user/likeBusinessList";
+	}
+	
+	/**
+	 * 즐겨찾는 기업 목록 조회
+	 * @Method : selectLikeBusiness
+	 * @return
+	 * @throws Exception 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/selectLikeBusiness")
+	public Map<String, Object> selectLikeBusiness(HttpSession session) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		List<Map<String,Object>> likeBusinessList = userService.selectLikeBusiness(loginVO);
+		Integer likeBusinessListCnt = userService.selectLikeBusinessCnt(loginVO);
+		result.put("likeBusinessList", likeBusinessList);
+		result.put("total", likeBusinessListCnt);
+		return result;
+	}
+	
+	/**
+	 * 즐겨찾는 기업 삭제
+	 * @Method : deleteLikeBusiness
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value ="/deleteLikeBusiness")
+	public String deleteLikeBusiness(@RequestParam Map<String, Object> map, HttpSession session) throws Exception {
+		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		map.put("perNo", loginVO.getNo());
+		userService.deleteLikeBusiness(map); 
+		return "myTiles/user/likeBusinessList";
+	}
+	
+	/**
+	 * 개인회원 전체 예약 목록
+	 * @Method : personalAllBookingList
+	 * @return
+	 */
+	@RequestMapping(value ="/personalAllBookingList")
+	public String personalAllBookingList() {
+		return "myTiles/user/allBookingList";
+	}
+	
+
+	/**
+	 * 개인회원 최근 예약 목록
+	 * @Method : recentMyBookingList
+	 * @return
+	 */
+	@RequestMapping(value = "/recentMyBookingList")
+	public String myPage() {
+		return "myTiles/user/recentMyBookingList";
+	}
 }
