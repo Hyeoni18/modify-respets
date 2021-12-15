@@ -12,7 +12,7 @@ import com.teamx.respets.user.vo.UserVO;
 
 public interface UserService {
 
-	public Map<String, Object> selectMyInfo(HttpServletRequest request) throws Exception;
+	public Map<String, Object> selectMyInfo(LoginVO loginVO) throws Exception;
 
 	public void updateUserInfo(UserVO userVo) throws Exception;
 
@@ -23,5 +23,7 @@ public interface UserService {
 	public Integer selectLikeBusinessCnt(LoginVO loginVO) throws Exception;
 
 	public void deleteLikeBusiness(Map<String, Object> map) throws Exception;
+
+	public void updateBusinessInfo(BusinessVO businessVO) throws Exception;
 
 }

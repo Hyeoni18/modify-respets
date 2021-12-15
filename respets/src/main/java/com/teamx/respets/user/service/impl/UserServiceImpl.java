@@ -13,7 +13,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.teamx.respets.common.mapper.CommonMapper;
 import com.teamx.respets.common.util.UploadFileUtils;
 import com.teamx.respets.login.vo.LoginVO;
-import com.teamx.respets.pet.vo.PetVO;
 import com.teamx.respets.user.mapper.UserMapper;
 import com.teamx.respets.user.service.UserService;
 import com.teamx.respets.user.vo.BusinessVO;
@@ -32,9 +31,8 @@ public class UserServiceImpl implements UserService {
 	private CommonMapper commonMapper;
 	
 	@Override
-	public Map<String, Object> selectMyInfo(HttpServletRequest request) throws Exception {
-		String no = String.valueOf(request.getAttribute("no"));
-		return userMapper.selectMyInfo(no);
+	public Map<String, Object> selectMyInfo(LoginVO loginVO) throws Exception {
+		return userMapper.selectMyInfo(loginVO);
 	}
 
 	@Override
@@ -48,16 +46,36 @@ public class UserServiceImpl implements UserService {
 			loginVO.setFileId(String.valueOf(fileMap.get("fileCours")));
 		}
 
-		userMapper.updateUserInfo(userVO); // 회원정보 수정
+		userMapper.updatePersonalUserInfo(userVO); // 회원정보 수정
 		loginVO.setPhone(userVO.getPerPhone());
+		request.getSession().setAttribute("userInfo", loginVO);
+	}
+	
+	@Override
+	public void updateBusinessInfo(BusinessVO businessVO) throws Exception {
+		HttpServletRequest request =((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+		LoginVO loginVO = (LoginVO) request.getSession().getAttribute("userInfo");
+		if(!businessVO.getMainPhoto().isEmpty()) {
+			Map<String, Object> fileMap = uploadFileUtils.fileUpload(businessVO.getMainPhoto());
+			commonMapper.insertFile(fileMap);
+			businessVO.setBusFileId(String.valueOf(fileMap.get("fileId")));
+			loginVO.setFileId(String.valueOf(fileMap.get("fileCours")));
+		}
+
+		userMapper.updateBusinessUserInfo(businessVO); // 회원정보 수정
+		loginVO.setPhone(businessVO.getBusPhone());
+		loginVO.setName(businessVO.getBusName());
 		request.getSession().setAttribute("userInfo", loginVO);
 	}
 
 
 	@Override
 	public boolean deleteUser(LoginVO loginVO) throws Exception {
-		String no = loginVO.getNo();
-		return userMapper.deleteUser(no);
+		if(loginVO.getType().equals("B")) {
+			return userMapper.deleteBusiness(loginVO);
+		} else {
+			return userMapper.deleteUser(loginVO);
+		}
 	}
 
 	@Override

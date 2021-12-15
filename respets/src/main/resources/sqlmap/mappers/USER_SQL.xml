@@ -3,28 +3,56 @@
 
 <mapper namespace="com.teamx.respets.user.mapper.UserMapper">
 	
-	<!-- 회원 정보 조회 -->
+	<!-- 회원 정보 조회 (기업 회원일 때 추가 정보 조회) -->
 	<select id="selectMyInfo" parameterType="map" resultType="camelMap">
-		SELECT *
-		FROM PERSONAL_TB 
-		WHERE PER_NO = #{no}
+		SELECT BUS_CEO
+			,BUS_LCNO
+			,BUS_POST
+			,BUS_ADDR
+			,BUS_DTL_ADDR
+			,(SELECT CD_DESC FROM CMMN_CODE WHERE CMMN_CD=
+				(SELECT SVC_CD FROM SERVICE_TB ST WHERE ST.BUS_NO=BT.BUS_NO AND SVC_SORT=1)
+			  ) SVC_NM
+		FROM BUSINESS_TB BT
+		WHERE BUS_NO = #{no}
 	</select>
 	
-	<!-- 개인 회원탈퇴 -->
+	<!-- 개인회원 탈퇴 -->
 	<update id="deleteUser" parameterType="String">
 		UPDATE PERSONAL_TB 
 		SET PER_LEAVE = 'O', PER_LEAVE_DT = NOW() 
 		WHERE PER_NO = #{no}
 	</update>
 	
-	<!-- 개인 정보수정 -->
-	<update id="updateUserInfo" parameterType="map">
+	<!-- 기업회원 탈퇴 -->
+	<update id="deleteBusiness" parameterType="String">
+		UPDATE BUSINESS_TB 
+		SET BUS_LEAVE = 'O', BUS_LEAVE_DT = NOW() 
+		WHERE BUS_NO = #{no}
+	</update>
+	
+	<!-- 개인회원 정보수정 -->
+	<update id="updatePersonalUserInfo" parameterType="map">
 		UPDATE PERSONAL_TB 
 		SET PER_PHONE = #{perPhone}
 		<if test="perFileId != ''.toString() and perFileId != null">
 			,PER_FILE_ID = #{perFileId}
 		</if>
 		WHERE PER_NO = #{perNo}
+	</update>
+	
+	<!-- 기업회원 정보수정 -->
+	<update id="updateBusinessUserInfo" parameterType="map">
+		UPDATE BUSINESS_TB 
+		SET BUS_NAME = #{busName}
+			,BUS_PHONE = #{busPhone}
+			,BUS_POST = #{busPost}
+			,BUS_ADDR = #{busAddr}
+			,BUS_DTL_ADDR = #{busDtlAddr}
+		<if test="busFileId != ''.toString() and busFileId != null">
+			,BUS_FILE_ID = #{busFileId}
+		</if>
+		WHERE BUS_NO = #{busNo}
 	</update>
 	
 	<!-- 회원 정보 조회 -->
@@ -39,8 +67,8 @@
 	
 	<delete id="deleteLikeBusiness" parameterType="map">
 		DELETE FROM FAVORITE_TB
-		WHERE BUS_NO=#{busNo}
-			AND PER_NO=#{perNo}
+		WHERE BUS_NO = #{busNo}
+			AND PER_NO = #{perNo}
 	</delete>
 </mapper>
 

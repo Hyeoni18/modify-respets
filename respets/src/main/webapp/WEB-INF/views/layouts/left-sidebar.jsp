@@ -2,11 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
 <body>
 
 	<div class="left-side-menu">
@@ -75,7 +70,7 @@
 							<i class="dripicons-user-group"></i> <span> 직원 관리 </span>
 					</a></li>
 					
-					<li class="side-nav-item"><a href="businessInfoDetail" class="side-nav-link">
+					<li class="side-nav-item"><a href="myInfo" class="side-nav-link">
 							<i class="dripicons-user"></i> <span> 나의 회원 정보 </span>
 					</a></li>
 	
@@ -120,4 +115,3 @@
 		<!-- Sidebar -left -->
 	</div>
 </body>
-</html>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,6 +60,45 @@
 									<!-- end card-body/ profile-user-box-->
 								</div>
 								<!-- end card -->
+								<c:if test="${userInfo.type=='B'}">
+									<div class="card">
+									<div class="card-body">
+										<h4 class="header-title mt-0 mb-3">Detail Information</h4>
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="text-left">
+													<table>
+														<tr>
+															<td><p class="text-muted" align="right">
+																	<strong>주력 서비스 :&nbsp;&nbsp;</strong>
+																</p></td>
+															<td><p class="text-muted" id="svcNm">${businessInfo.svcNm}</p></td>
+														</tr>
+														<tr>
+															<td><p class="text-muted" align="right">
+																	<strong>대표자명 :&nbsp;&nbsp;</strong>
+																</p></td>
+															<td><p class="text-muted" id="busCeo">${businessInfo.busCeo}</p></td>
+														</tr>
+														<tr>
+															<td><p class="text-muted" align="right">
+																	<strong>사업자등록번호 :&nbsp;&nbsp;</strong>
+																</p></td>
+															<td><p class="text-muted" id="busLcno">${businessInfo.busLcno}</p></td>
+														</tr>
+													</table>
+												</div>
+											</div>
+											<!-- end col -->
+	
+										</div>
+										<!-- end row-->
+	
+									</div>
+									<!-- end card-body -->
+								</div>
+								<!-- end card -->
+							</c:if>
 							</div>
 						</div>
 					</form>

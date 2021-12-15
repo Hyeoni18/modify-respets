@@ -33,8 +33,11 @@ public class UserController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/myInfo")
-	public String myInfo(Model model, HttpServletRequest request) throws Exception {
-		model.addAttribute("paramMap", userService.selectMyInfo(request));
+	public String myInfo(Model model, HttpSession session) throws Exception {
+		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		if(loginVO.getType().equals("B")) {
+			session.setAttribute("businessInfo", userService.selectMyInfo(loginVO));
+		}
 		return "myTiles/user/myInfo";
 	}
 	
@@ -52,24 +55,39 @@ public class UserController {
 	 * 회원정보 수정 화면
 	 * @Method : myInfoUpdateForm
 	 * @return
-	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/myInfoUpdateForm")
-	public String myInfoUpdateForm(String newPw, HttpServletRequest request, Model model) throws Exception {
-		model.addAttribute("paramMap", userService.selectMyInfo(request));
-		return "myTiles/user/myInfoUpdateForm";
+	public String myInfoUpdateForm(HttpSession session) {
+		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		if(loginVO.getType().equals("B")) {
+			return "myTiles/user/businessInfoUpdateForm";
+		} else {
+			return "myTiles/user/myInfoUpdateForm";
+		}
 	}
 	
 	/**
-	 * 회원정보 수정
+	 * 개인회원 정보 수정
 	 * @Method : updateUserInfo
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/myInfoUpdate")
+	@RequestMapping(value = "/updateUserInfo")
 	public String updateUserInfo(UserVO userVo) throws Exception {
 		userService.updateUserInfo(userVo);
 		return "myTiles/user/myInfo";
+	}
+	
+	/**
+	 * 기업회원 정보 수정
+	 * @Method : updateBusinessInfo
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/updateBusinessInfo")
+	public String updateBusinessInfo(BusinessVO businessVO) throws Exception {
+		userService.updateBusinessInfo(businessVO);
+		return "redirect:/myInfo";
 	}
 	
 	/**
