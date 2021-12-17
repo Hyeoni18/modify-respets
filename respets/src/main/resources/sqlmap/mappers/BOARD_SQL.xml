@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.teamx.respets.board.mapper.BoardMapper">
+
+	<select id="selectBusinessNotice" parameterType="map" resultType="camelMap">
+		SELECT BOARD_NO
+			,CTGR_CD
+			,(SELECT CD_DESC FROM CMMN_CODE WHERE CMMN_CD=CTGR_CD) CTGR_NM
+			,BOARD_TITLE
+			,BOARD_CONTENT
+			,INPUT_NO
+			,BOARD_FILE_ID
+			,INPUT_DT
+		FROM BOARD_TB
+		WHERE INPUT_NO = #{no}
+	</select>
+</mapper>
