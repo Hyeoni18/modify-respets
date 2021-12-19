@@ -22,6 +22,8 @@
 					<div class="card">
 						<div class="card-body">
 							<form action="insertBoard" name="businessNoticeWriteForm" method="get">
+							<input type="hidden" name="inputNo" id="inputNo" value="${boardInfo.inputNo}"/>
+							<input type="hidden" name="boardNo" id="boardNo" value="${boardInfo.boardNo}"/>
 								<div class="form-group mb-3">
 									<label for="example-select">카테고리</label> 
 									<select	class="form-control" name="ctgrCd" id="ctgrCd">
@@ -97,6 +99,9 @@
 					return false;
 				}
 			}
+		}
+		if("${boardInfo.boardNo}" != "") {
+			frm.action = "updateBoard";
 		}
 		frm.submit();
 	});

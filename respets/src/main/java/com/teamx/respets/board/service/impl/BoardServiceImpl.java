@@ -41,5 +41,10 @@ public class BoardServiceImpl implements BoardService {
 	public Map<String, Object> selectBoard(BoardVO boardVO) throws Exception {
 		return boardMapper.selectBoard(boardVO);
 	}
+	
+	@Override
+	public void updateBoard(BoardVO boardVO) throws Exception {
+		boardMapper.updateBoard(boardVO);
+	}
 
 }

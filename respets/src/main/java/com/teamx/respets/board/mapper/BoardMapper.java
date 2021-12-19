@@ -20,4 +20,6 @@ public interface BoardMapper {
 
 	public Map<String, Object> selectBoard(BoardVO boardVO) throws SQLException;
 
+	public void updateBoard(BoardVO boardVO) throws SQLException;
+
 }

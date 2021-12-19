@@ -16,7 +16,7 @@
 		WHERE INPUT_NO = #{no}
 	</select>
 	
-	<insert id="insertBoard">
+	<insert id="insertBoard" parameterType="map">
 		<selectKey resultType="String" keyProperty="boardNo" order="BEFORE">
 			SELECT COALESCE(MAX(CAST(BOARD_NO AS INTEGER)),0)+1 AS BOARD_NO FROM BOARD_TB
 		</selectKey>
@@ -38,7 +38,7 @@
 		)
 	</insert>
 	
-	<delete id="deleteBoard">
+	<delete id="deleteBoard" parameterType="map">
 		DELETE FROM BOARD_TB
 		WHERE BOARD_NO=#{boardNo}
 	</delete>
@@ -55,4 +55,13 @@
 		FROM BOARD_TB
 		WHERE BOARD_NO = #{boardNo}
 	</select>
+	
+	<update id="updateBoard" parameterType="map">
+		UPDATE BOARD_TB
+		SET
+			CTGR_CD = #{ctgrCd}
+			,BOARD_TITLE = #{boardTitle}
+			,BOARD_CONTENT = #{boardContent}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 </mapper>

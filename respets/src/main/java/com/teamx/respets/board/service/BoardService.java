@@ -18,4 +18,6 @@ public interface BoardService {
 
 	public Map<String, Object> selectBoard(BoardVO boardVO) throws Exception;
 
+	public void updateBoard(BoardVO boardVO) throws Exception;
+
 }

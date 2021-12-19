@@ -111,8 +111,11 @@ public class BoardController {
 	@RequestMapping(value = "/updateBoard")
 	public String updateBoard(BoardVO boardVO, HttpSession session) throws Exception {
 		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
-		boardVO.setInputNo(loginVO.getNo());
-		boardService.updateBoard(boardVO);
+		if(loginVO.getNo().equals(boardVO.getInputNo())) {
+			boardService.updateBoard(boardVO);
+		} else {
+			System.err.println("권한없음");
+		}
 		return "myTiles/board/businessNoticeList"; //디테일화면
 	}	
 	
