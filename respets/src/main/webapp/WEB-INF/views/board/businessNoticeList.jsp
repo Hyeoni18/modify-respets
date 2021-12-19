@@ -24,11 +24,11 @@ function selectBusinessNotice(){
 				$(result.selectBusinessNotice).each(function(index, item){
 					tbodyHtml = "";
 					tbodyHtml += '<tr><td>'+item["boardNo"]+'</td>';
-					tbodyHtml += '<td>'+item["ctgtNm"]+'</td>';
+					tbodyHtml += '<td>'+item["ctgrNm"]+'</td>';
 					tbodyHtml += '<td><a href="businessNoticeDetail?boardNo='+item["boardNo"]+'">'+item["boardTitle"]+'</a></td>';
 					tbodyHtml += '<td>'+item["inputDt"]+'</td>';
-					tbodyHtml += '<td class="table-action"><a href="./businessNoticeUpdateForm?boardNo='+item["boardNo"]+'" class="action-icon"><i class="mdi mdi-pencil"></i></a>';
-					tbodyHtml += '<a href="./businessNoticeDelete?boardNo='+item["boardNo"]+'" class="action-icon" onclick="return deleteChk(this);"><i class="mdi mdi-delete"></i></a></td></tr>';
+					tbodyHtml += '<td class="table-action"><a href="./businessNoticeWriteForm?boardNo='+item["boardNo"]+'" class="action-icon"><i class="mdi mdi-pencil"></i></a>/';
+					tbodyHtml += '<a href="./deleteBoard?boardNo='+item["boardNo"]+'" class="action-icon" onclick="return deleteChk(this);"><i class="mdi mdi-delete"></i></a></td></tr>';
 					tbody.append(tbodyHtml);
 				}); 
 			/* 	if(result.total % $('#pagePerRowSelect'+tab).val() == 0) {

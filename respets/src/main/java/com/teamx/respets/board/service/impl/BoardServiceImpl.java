@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.teamx.respets.board.mapper.BoardMapper;
 import com.teamx.respets.board.service.BoardService;
+import com.teamx.respets.board.vo.BoardVO;
 import com.teamx.respets.login.vo.LoginVO;
 
 @Service
@@ -24,6 +25,21 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Integer selectBusinessNoticeCnt(LoginVO loginVO) throws Exception {
 		return null;
+	}
+
+	@Override
+	public void insertBoard(BoardVO boardVO) throws Exception {
+		boardMapper.insertBoard(boardVO);
+	}
+
+	@Override
+	public void deleteBoard(BoardVO boardVO) throws Exception {
+		boardMapper.deleteBoard(boardVO);
+	}
+
+	@Override
+	public Map<String, Object> selectBoard(BoardVO boardVO) throws Exception {
+		return boardMapper.selectBoard(boardVO);
 	}
 
 }

@@ -11,8 +11,48 @@
 			,BOARD_CONTENT
 			,INPUT_NO
 			,BOARD_FILE_ID
-			,INPUT_DT
+			,TO_CHAR(INPUT_DT, 'YYYY-MM-DD') INPUT_DT
 		FROM BOARD_TB
 		WHERE INPUT_NO = #{no}
+	</select>
+	
+	<insert id="insertBoard">
+		<selectKey resultType="String" keyProperty="boardNo" order="BEFORE">
+			SELECT COALESCE(MAX(CAST(BOARD_NO AS INTEGER)),0)+1 AS BOARD_NO FROM BOARD_TB
+		</selectKey>
+		INSERT INTO BOARD_TB
+		(
+			BOARD_NO
+			,CTGR_CD
+			,BOARD_TITLE
+			,BOARD_CONTENT
+			,INPUT_NO
+			,INPUT_DT
+		) VALUES (
+			#{boardNo}
+			,#{ctgrCd}
+			,#{boardTitle}
+			,#{boardContent}
+			,#{inputNo}
+			,now()
+		)
+	</insert>
+	
+	<delete id="deleteBoard">
+		DELETE FROM BOARD_TB
+		WHERE BOARD_NO=#{boardNo}
+	</delete>
+	
+	<select id="selectBoard" parameterType="map" resultType="camelMap">
+		SELECT BOARD_NO
+			,CTGR_CD
+			,(SELECT CD_DESC FROM CMMN_CODE WHERE CMMN_CD=CTGR_CD) CTGR_NM
+			,BOARD_TITLE
+			,BOARD_CONTENT
+			,INPUT_NO
+			,BOARD_FILE_ID
+			,TO_CHAR(INPUT_DT, 'YYYY-MM-DD') INPUT_DT
+		FROM BOARD_TB
+		WHERE BOARD_NO = #{boardNo}
 	</select>
 </mapper>

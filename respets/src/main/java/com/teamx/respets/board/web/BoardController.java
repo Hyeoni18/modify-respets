@@ -8,10 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teamx.respets.board.service.BoardService;
+import com.teamx.respets.board.vo.BoardVO;
 import com.teamx.respets.login.vo.LoginVO;
 
 @Controller
@@ -52,10 +54,66 @@ public class BoardController {
 	 * 기업 공지사항 글등록 화면
 	 * @Method : businessNoticeWriteForm
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/businessNoticeWriteForm")
-	public String businessNoticeWriteForm() {
+	public String businessNoticeWriteForm(BoardVO boardVO, Model model) throws Exception {
+		if(null != boardVO.getBoardNo()) {
+			model.addAttribute("boardInfo", boardService.selectBoard(boardVO));
+		}
 		return "myTiles/board/businessNoticeWriteForm";
 	}	
-
+	
+	/**
+	 * 기업 공지사항 글등록
+	 * @Method : insertBoard
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/insertBoard")
+	public String insertBoard(BoardVO boardVO, HttpSession session) throws Exception {
+		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		boardVO.setInputNo(loginVO.getNo());
+		boardService.insertBoard(boardVO);
+		return "myTiles/board/businessNoticeList"; //디테일화면
+	}	
+	
+	/**
+	 * 기업 공지사항 글삭제
+	 * @Method : deleteBoard
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/deleteBoard")
+	public String deleteBoard(BoardVO boardVO) throws Exception {
+		boardService.deleteBoard(boardVO);
+		return "myTiles/board/businessNoticeList";
+	}
+	
+	/**
+	 * 기업 공지사항 게시글 화면
+	 * @Method : businessNoticeDetail
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/businessNoticeDetail")
+	public String businessNoticeDetail(BoardVO boardVO, Model model) throws Exception {
+		model.addAttribute("boardInfo", boardService.selectBoard(boardVO));
+		return "myTiles/board/businessNoticeDetail";
+	}	
+	
+	/**
+	 * 기업 공지사항 글 수정
+	 * @Method : updateBoard
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/updateBoard")
+	public String updateBoard(BoardVO boardVO, HttpSession session) throws Exception {
+		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		boardVO.setInputNo(loginVO.getNo());
+		boardService.updateBoard(boardVO);
+		return "myTiles/board/businessNoticeList"; //디테일화면
+	}	
+	
 }

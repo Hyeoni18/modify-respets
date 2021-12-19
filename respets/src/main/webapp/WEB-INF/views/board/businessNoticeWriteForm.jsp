@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,34 +21,31 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body">
-							<form action="businessNoticeInsert" name="businessNoticeWriteForm" method="get">
-								<!-- <div class="form-group mb-3">
-									<label for="example-select">업종</label> <select
-										class="form-control" name="bct_code">
-										<option value="">선택</option>
-										<option value="M">병원</option>
-										<option value="B">미용</option>
-										<option value="H">호텔</option>
-									</select>
-								</div> -->
+							<form action="insertBoard" name="businessNoticeWriteForm" method="get">
 								<div class="form-group mb-3">
-									<label for="example-select">카테고리</label> <select
-										class="form-control" name="bbc_no">
+									<label for="example-select">카테고리</label> 
+									<select	class="form-control" name="ctgrCd" id="ctgrCd">
 										<option value="">선택</option>
-										<option value="1">공지사항</option>
-										<option value="2">이벤트</option>
+											<c:if test="${userInfo.type=='B'}">
+												<option value="BBC0001">공지사항</option>
+												<option value="BBC0002">이벤트</option>
+											</c:if>
+											<c:if test="${userInfo.type=='A'}">
+												<option value="ABC0001">개인</option>
+												<option value="ABC0002">기업</option>
+											</c:if>
 									</select>
 								</div>
 								<div class="form-group">
 									<label for="simpleinput">제목</label> <input type="text"
-										id="simpleinput" class="form-control" name="bbo_title"
+										id="simpleinput" class="form-control" name="boardTitle" value="${boardInfo.boardTitle}"
 										placeholder="게시글 제목을 입력하세요">
 								</div>
 								<div class="form-group">
 									<label for="simpleinput">내용</label>
 									<textarea data-toggle="maxlength" class="form-control"
-										maxlength="1000" rows="10" name="bbo_ctt"
-										placeholder="게시글 내용을 입력하세요"></textarea>
+										maxlength="1000" rows="10" name="boardContent" 
+										placeholder="게시글 내용을 입력하세요"> ${boardInfo.boardContent} </textarea>
 								</div>
 								<div style="text-align: right">
 									<button id="businessNoticeInsertSubmit"
@@ -68,30 +65,32 @@
 		</div>
  </body>
 <script>
+
+	$(document).ready(function() {
+		//불러온 값에 selected속성 부여하기
+		$("#ctgrCd option").each(function() {
+			if ($(this).val() == "${boardInfo.ctgrCd}")
+				$(this).attr("selected", "selected");
+		})
+	});
+
 	$("#businessNoticeInsertSubmit").click(function() {
-		console.log(this.value + " 클릭함");
 		var frm = document.businessNoticeWriteForm;
 		var length = frm.length - 1;
 		for (var i = 0; i < length; i++) {
-			if (frm[i].name == "bct_code") {
-				if (frm[i].value == "" || frm[i].value == null) {
-					alert("업종이 입력되지 않았습니다");
-					frm[i].focus();
-					return false;
-				}
-			} else if (frm[i].name == "bbc_no") {
+			if (frm[i].name == "ctgrCd") {
 				if (frm[i].value == "" || frm[i].value == null) {
 					alert("카테고리가 입력되지 않았습니다");
 					frm[i].focus();
 					return false;
 				}
-			} else if (frm[i].name == "bbo_title") {
+			} else if (frm[i].name == "boardTitle") {
 				if (frm[i].value == "" || frm[i].value == null) {
 					alert("제목이 입력되지 않았습니다");
 					frm[i].focus();
 					return false;
 				}
-			} else if (frm[i].name == "bbo_ctt") {
+			} else if (frm[i].name == "boardContent") {
 				if (frm[i].value == "" || frm[i].value == null) {
 					alert("내용이 입력되지 않았습니다");
 					frm[i].focus();
