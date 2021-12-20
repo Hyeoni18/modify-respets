@@ -80,7 +80,7 @@
 				
 				</c:if>
 
-				<c:if test="${fn:substring(userInfo.no,0,1) eq '1'}">
+				<c:if test="${fn:substring(userInfo.no,0,1) eq 'A'}">
 					<li class="side-nav-title side-nav-item"><h5>관리자 마이페이지</h5></li>
 	
 					<li class="side-nav-item"><a href="unconfirmBusiness" class="side-nav-link">

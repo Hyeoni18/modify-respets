@@ -18,12 +18,12 @@ public class BoardServiceImpl implements BoardService {
 	private BoardMapper boardMapper;
 	
 	@Override
-	public List<Map<String, Object>> selectBusinessNotice(LoginVO loginVO) throws Exception {
-		return boardMapper.selectBusinessNotice(loginVO);
+	public List<Map<String, Object>> selectBusinessNotice(Map<String, Object> map) throws Exception {
+		return boardMapper.selectBusinessNotice(map);
 	}
 
 	@Override
-	public Integer selectBusinessNoticeCnt(LoginVO loginVO) throws Exception {
+	public Integer selectBusinessNoticeCnt(Map<String, Object> map) throws Exception {
 		return null;
 	}
 

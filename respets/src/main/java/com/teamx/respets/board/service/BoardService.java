@@ -8,9 +8,9 @@ import com.teamx.respets.login.vo.LoginVO;
 
 public interface BoardService {
 
-	public List<Map<String, Object>> selectBusinessNotice(LoginVO loginVO) throws Exception;
+	public List<Map<String, Object>> selectBusinessNotice(Map<String, Object> map) throws Exception;
 
-	public Integer selectBusinessNoticeCnt(LoginVO loginVO) throws Exception;
+	public Integer selectBusinessNoticeCnt(Map<String, Object> map) throws Exception;
 
 	public void insertBoard(BoardVO boardVO) throws Exception;
 

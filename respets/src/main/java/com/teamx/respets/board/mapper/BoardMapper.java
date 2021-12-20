@@ -7,12 +7,11 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.teamx.respets.board.vo.BoardVO;
-import com.teamx.respets.login.vo.LoginVO;
 
 @Mapper
 public interface BoardMapper {
 
-	public List<Map<String, Object>> selectBusinessNotice(LoginVO loginVO) throws SQLException;
+	public List<Map<String, Object>> selectBusinessNotice(Map<String, Object> map) throws SQLException;
 
 	public void insertBoard(BoardVO boardVO) throws SQLException;
 

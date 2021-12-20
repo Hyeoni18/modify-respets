@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teamx.respets.board.service.BoardService;
@@ -40,11 +41,12 @@ public class BoardController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/selectBusinessNotice")
-	public Map<String, Object> selectBusinessNotice(HttpSession session) throws Exception {
+	public Map<String, Object> selectBusinessNotice(@RequestParam Map<String, Object> map, HttpSession session) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
 		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
-		List<Map<String,Object>> selectBusinessNotice = boardService.selectBusinessNotice(loginVO);
-		Integer selectBusinessNoticeCnt = boardService.selectBusinessNoticeCnt(loginVO);
+		map.put("no", loginVO.getNo());
+		List<Map<String,Object>> selectBusinessNotice = boardService.selectBusinessNotice(map);
+		Integer selectBusinessNoticeCnt = boardService.selectBusinessNoticeCnt(map);
 		result.put("selectBusinessNotice", selectBusinessNotice);
 		result.put("total", selectBusinessNoticeCnt);
 		return result;
