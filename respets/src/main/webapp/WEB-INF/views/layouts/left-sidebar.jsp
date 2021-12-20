@@ -100,7 +100,7 @@
 							<i class="dripicons-warning"></i> <span> 블랙리스트 </span>
 					</a></li> -->
 	
-					<li class="side-nav-item"><a href="noticeList" class="side-nav-link">
+					<li class="side-nav-item"><a href="businessNoticeList" class="side-nav-link">
 							<i class="dripicons-clipboard"></i> <span> 공지사항 관리 </span>
 					</a></li>
 				

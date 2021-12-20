@@ -42,10 +42,20 @@ public class AdminController {
 		String view = "";
 		if(loginVO.getNo() != null) {
 			session.setAttribute("userInfo", loginVO);
-			view = "myTiles/admin/unconfirmBusiness";
+			view = "redirect:/unconfirmBusiness";
 		} else {
 			view = "admin/adminLoginForm";
 		}
 		return view;
+	}
+	
+	/**
+	 * 미인증 기업 목록 화면
+	 * @Method : unconfirmBusiness
+	 * @return
+	 */
+	@RequestMapping(value = "/unconfirmBusiness")
+	public String unconfirmBusiness() {
+		return "myTiles/admin/unconfirmBusiness";
 	}
 }

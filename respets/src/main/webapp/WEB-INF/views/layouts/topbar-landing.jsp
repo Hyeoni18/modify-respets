@@ -32,7 +32,7 @@
 									test="${fn:substring(userInfo.no,0,1) == 'P' || fn:substring(userInfo.no,0,1) == 'B'}">
 									<img src="${userInfo.fileId}" alt="user-image"
 										class="rounded-circle">
-								</c:if> <c:if test="${fn:substring(userInfo.no,0,1) == '1'}">
+								</c:if> <c:if test="${fn:substring(userInfo.no,0,1) == 'A'}">
 									<img src="resources/images/defaultProfile/user.png"
 										alt="user-image" class="rounded-circle">
 								</c:if>
@@ -40,7 +40,7 @@
 								class="account-position"> <c:if
 										test="${fn:substring(userInfo.no,0,1) == 'P'}">개인회원</c:if> <c:if
 										test="${fn:substring(userInfo.no,0,1) == 'B'}">기업회원</c:if> <c:if
-										test="${fn:substring(userInfo.no,0,1) == '1'}">관리자</c:if>
+										test="${fn:substring(userInfo.no,0,1) == 'A'}">관리자</c:if>
 							</span>
 						</span>
 					</a>

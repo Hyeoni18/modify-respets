@@ -87,6 +87,8 @@ $(document).ready(function(){
 														<c:if test="${userInfo.type=='A'}">
 															<option value="ABC0001">개인</option>
 															<option value="ABC0002">기업</option>
+															<option value="BBC0001">공지사항</option>
+															<option value="BBC0002">이벤트</option>
 														</c:if>
 													</select>
 												</label>
@@ -141,17 +143,6 @@ $(document).ready(function(){
 			</div>
 </body>
 <script>
-	$(document).ready(function() {
-		//불러온 값에 selected속성 부여하기
-		$("#select option").each(function() {
-			if ($(this).val() == "${param.select}")
-				$(this).attr("selected", "selected");
-		})
-	});
-	$
-	{
-		alert
-	}
 	function deleteChk(a) {
 		var con = confirm('정말로 삭제하겠습니까?');
 		con;

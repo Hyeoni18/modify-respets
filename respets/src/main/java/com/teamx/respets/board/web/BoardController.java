@@ -45,6 +45,7 @@ public class BoardController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
 		map.put("no", loginVO.getNo());
+		map.put("type", loginVO.getType());
 		List<Map<String,Object>> selectBusinessNotice = boardService.selectBusinessNotice(map);
 		Integer selectBusinessNoticeCnt = boardService.selectBusinessNoticeCnt(map);
 		result.put("selectBusinessNotice", selectBusinessNotice);
@@ -87,8 +88,14 @@ public class BoardController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/deleteBoard")
-	public String deleteBoard(BoardVO boardVO) throws Exception {
-		boardService.deleteBoard(boardVO);
+	public String deleteBoard(BoardVO boardVO, HttpSession session) throws Exception {
+		//관리자는 모두 삭제 가능, type is not A 는 글 작성자가 같을 경우에만 삭제 가능
+		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		if(loginVO.getType().equals("A") || loginVO.getNo().equals(boardVO.getInputNo())) {
+			boardService.deleteBoard(boardVO);
+		} else {
+			System.err.println("권한없음");
+		}
 		return "myTiles/board/businessNoticeList";
 	}
 	
@@ -113,7 +120,7 @@ public class BoardController {
 	@RequestMapping(value = "/updateBoard")
 	public String updateBoard(BoardVO boardVO, HttpSession session) throws Exception {
 		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
-		if(loginVO.getNo().equals(boardVO.getInputNo())) {
+		if(loginVO.getNo().equals(boardVO.getInputNo())) { //수정은 작성자만 가능
 			boardService.updateBoard(boardVO);
 		} else {
 			System.err.println("권한없음");

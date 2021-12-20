@@ -13,7 +13,10 @@
 			,BOARD_FILE_ID
 			,TO_CHAR(INPUT_DT, 'YYYY-MM-DD') INPUT_DT
 		FROM BOARD_TB
-		WHERE INPUT_NO = #{no}
+		WHERE INPUT_NO IS NOT NULL
+		<if test="type != 'A'.toString()">
+			AND INPUT_NO = #{no}
+		</if>
 		<if test="ctgrCd != ''.toString() and ctgrCd != null">
 			AND CTGR_CD = #{ctgrCd} 
 		</if>
