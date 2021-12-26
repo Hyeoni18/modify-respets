@@ -10,6 +10,7 @@
 	</settings>
 	
     <typeAliases>
+    	<typeAlias alias="businessVO" type="com.teamx.respets.user.vo.BusinessVO"/>
    		<typeAlias alias="camelMap" type="com.teamx.respets.common.util.CamelMap"/>
 		<typeAlias alias="HashMap" type="java.util.HashMap"/>
 		<typeAlias alias="String" type="java.lang.String"/>

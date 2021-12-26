@@ -33,4 +33,17 @@ public class BusinessController {
 		model.addAttribute("businessList", businessList);
 		return "tiles/business/businessList";
 	}
+	
+	/**
+     * 기업(업체) 상세정보 화면
+     * @Method : businessDetail
+     * @return
+     * @throws Exception 
+     */
+    @RequestMapping(value ="/businessDetail")
+    public String businessDetail(HttpServletRequest request, Model model) throws Exception {        
+        BusinessVO busVO = businessService.selectBusinessDetail(request);
+        model.addAttribute("info", busVO);
+        return "tiles/business/businessDetail";
+    }
 }
