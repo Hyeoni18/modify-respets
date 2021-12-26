@@ -28,10 +28,9 @@ public class BusinessController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value ="/businessList")
-	public String businessList(HttpServletRequest request) throws Exception {		
+	public String businessList(HttpServletRequest request, Model model) throws Exception {		
 		List<Map<String, Object>> businessList = businessService.selectBusinessList(request);
-		HttpSession session = request.getSession();
-		session.setAttribute("businessList", businessList);
+		model.addAttribute("businessList", businessList);
 		return "tiles/business/businessList";
 	}
 }

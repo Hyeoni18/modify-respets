@@ -9,8 +9,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface BusinessMapper {
 
-	public List<Map<String, Object>> selectBusinessList(String svcCd) throws SQLException;
-	
-	public List<Map<String, Object>> selectHashTagBusinessList(String hashTag) throws SQLException;
+    public List<Map<String, Object>> selectSvcCdBusinessList(String svcCd) throws SQLException;
+    
+    public List<Map<String, Object>> selectHashTagBusinessList(String hashTag) throws SQLException;
+
+    public List<Map<String, Object>> selectSvcCdAndHashTagBusinessList(String svcCd, String hashTag) throws SQLException;
 	
 }

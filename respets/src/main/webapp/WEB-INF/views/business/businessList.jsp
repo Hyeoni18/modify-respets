@@ -35,7 +35,7 @@
 								<div class='card-deck-wrapper'>
 									<div class='card-deck'>
 										<div class='card d-block'>
-											<a href='businessDetailPage?busNo='> <img
+											<a href='businessDetail?busNo=${list.busNo}&svcCd=${list.svcCd}'> <img
 												class='card-img-top img-fluid' src='' />
 												<div class='card-body'>
 													<h5 class='card-title'>

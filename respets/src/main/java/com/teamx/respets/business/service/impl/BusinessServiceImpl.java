@@ -23,13 +23,16 @@ public class BusinessServiceImpl implements BusinessService {
 		//선택한 해시태그
 		String hashTag = request.getParameter("hashTag");
 		List<Map<String, Object>> businessList = new ArrayList<Map<String, Object>>();
-		if(svcCd != null) {
-			businessList = businessMapper.selectBusinessList(svcCd);
-		}
-		if(hashTag != null) {
-			businessList = businessMapper.selectHashTagBusinessList(hashTag);
-		}
-		return businessList;
-	}
+		if(svcCd != null && hashTag == null) {
+            businessList = businessMapper.selectSvcCdBusinessList(svcCd);
+        }
+        if(svcCd == null && hashTag != null) {
+            businessList = businessMapper.selectHashTagBusinessList(hashTag);
+        }
+        if(svcCd != null && hashTag != null) {
+            businessList = businessMapper.selectSvcCdAndHashTagBusinessList(svcCd,hashTag);
+        }
+        return businessList;
+    }
 
 }
