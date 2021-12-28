@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.teamx.respets.business.mapper.BusinessMapper;
 import com.teamx.respets.business.service.BusinessService;
+import com.teamx.respets.login.vo.LoginVO;
 import com.teamx.respets.user.vo.BusinessVO;
 
 @Service
@@ -36,6 +37,7 @@ public class BusinessServiceImpl implements BusinessService {
         return businessList;
     }
 	
+	@Override
 	public BusinessVO selectBusinessDetail(HttpServletRequest request) throws Exception {        
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("busNo", request.getParameter("busNo"));
@@ -43,5 +45,17 @@ public class BusinessServiceImpl implements BusinessService {
         BusinessVO busVO = businessMapper.selectBusinessDetail(map);
         return busVO;
     }
+
+	@Override
+	public List<Map<String, Object>> serviceManagement(LoginVO loginVO) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void serviceInsert(LoginVO loginVO) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

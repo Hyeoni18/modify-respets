@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamx.respets.business.service.BusinessService;
+import com.teamx.respets.login.vo.LoginVO;
 import com.teamx.respets.user.vo.BusinessVO;
 
 @Controller
@@ -43,7 +44,43 @@ public class BusinessController {
     @RequestMapping(value ="/businessDetail")
     public String businessDetail(HttpServletRequest request, Model model) throws Exception {        
         BusinessVO busVO = businessService.selectBusinessDetail(request);
-        model.addAttribute("info", busVO);
+        model.addAttribute("businessInfo", busVO);
         return "tiles/business/businessDetail";
+    }
+	
+	/**
+     * 마이페이지 - 서비스 관리
+     * @Method : serviceManagement
+     * @return
+     * @throws Exception 
+     */
+    @RequestMapping(value ="/serviceManagement")
+    public String serviceManagement(LoginVO loginVO, Model model) throws Exception {        
+    	List<Map<String, Object>> serviceList = businessService.serviceManagement(loginVO);
+        model.addAttribute("serviceList", serviceList);
+        return "myTiles/business/serviceManagement";
+    }
+	
+	/**
+     * 마이페이지 - 서비스 관리 - 서비스 등록 화면
+     * @Method : serviceInsertForm
+     * @return
+     * @throws Exception 
+     */
+    @RequestMapping(value ="/serviceInsertForm")
+    public String serviceInsertForm() throws Exception {
+        return "myTiles/business/serviceInsertForm";
+    }
+	
+	/**
+     * 마이페이지 - 서비스 관리 - 서비스 등록
+     * @Method : serviceInsert
+     * @return
+     * @throws Exception 
+     */
+    @RequestMapping(value ="/serviceInsert")
+    public String serviceInsert(LoginVO loginVO, Model model) throws Exception {        
+    	businessService.serviceInsert(loginVO);
+        return "myTiles/business/serviceManagement";
     }
 }

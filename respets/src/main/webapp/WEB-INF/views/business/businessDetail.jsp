@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Respets :: ${info.busName}</title>
+<title>Respets :: ${businessInfo.busName}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
@@ -43,18 +43,18 @@
 												style="width: 100%; height: 100%;">
 
 										</div>
-										<div class="badge badge-secondary" style="margin-top: 20px; margin-botton: 10px;">
-											<c:if test="${info.svcCd eq 'M'}" var="svcName">											
+										<div class="badge badge-secondary" style="margin-top: 20px; margin-botton: 10px;padding:5px 5px 3px;">
+											<c:if test="${businessInfo.svcCd eq 'M'}" var="svcName">											
 											    <c:out value="병원" />
 											</c:if>
-											<c:if test="${info.svcCd eq 'B'}" var="svcName">											
+											<c:if test="${businessInfo.svcCd eq 'B'}" var="svcName">											
 											    <c:out value="미용" />
 											</c:if>
-											<c:if test="${info.svcCd eq 'H'}" var="svcName">											
+											<c:if test="${businessInfo.svcCd eq 'H'}" var="svcName">											
 											    <c:out value="호텔" />
 											</c:if>
 										</div>
-										<h3 class="mb-3">${busName}</h3>
+										<h3 class="mb-3">${businessInfo.busName}</h3>
 									</div>
 
 									<h5>전체 서비스</h5>
@@ -63,7 +63,7 @@
 											<c:forEach var="list" items="${serviceList}"
 												varStatus="status">
 												<a class="btn btn-xs btn-outline-success"
-													href="businessDetail?busNo=${info.busNo}&svcCd=">
+													href="businessDetail?busNo=${businessInfo.busNo}&svcCd=">
 													<c:if test="${'병원' eq list['BCT_NAME']}">진료</c:if> <c:if
 														test="${'병원' ne list['BCT_NAME']}">${list['BCT_NAME']}</c:if>
 												</a>
@@ -170,7 +170,7 @@
 	});
 
 	$("#bookingBtn").click(function() {
-		var no = "${no}";
+		var no = "${userInfo.no}";
 		if (no == null || no == "") {
 			var con = confirm("예약서비스는 로그인 후 이용이 가능합니다. 로그인 하시겠습니까?");
 			con;
