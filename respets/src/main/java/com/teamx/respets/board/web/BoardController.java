@@ -43,9 +43,11 @@ public class BoardController {
 	@RequestMapping(value = "/selectBusinessNotice")
 	public Map<String, Object> selectBusinessNotice(@RequestParam Map<String, Object> map, HttpSession session) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
-		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
-		map.put("no", loginVO.getNo());
-		map.put("type", loginVO.getType());
+		if(session.getAttribute("userInfo")!=null){
+			LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+			map.put("no", loginVO.getNo());
+			map.put("type", loginVO.getType());
+		} 
 		List<Map<String,Object>> selectBusinessNotice = boardService.selectBusinessNotice(map);
 		Integer selectBusinessNoticeCnt = boardService.selectBusinessNoticeCnt(map);
 		result.put("selectBusinessNotice", selectBusinessNotice);

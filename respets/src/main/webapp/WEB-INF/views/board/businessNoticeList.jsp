@@ -124,7 +124,6 @@ $(document).ready(function(){
 											</tr>
 										</thead>
 										<tbody>
-										
 										</tbody>
 									</table>
 								</div>

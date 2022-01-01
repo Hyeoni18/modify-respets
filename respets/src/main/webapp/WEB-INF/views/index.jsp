@@ -32,8 +32,42 @@ function selectSvcCode(){
 	});	
 };
 
+function selectNotice(){
+	
+	var data = {};
+	data.ctgrCd = $("#ctgrCd").val();
+	data.type = "P";
+	$.ajax({
+		url : "${pageContext.request.contextPath}/selectBusinessNotice",	
+		type : 'POST',
+		data : data,
+		success : function(result){
+			var tbody = $(".table tbody");
+			tbody.children().remove();
+			
+			if(result.selectBusinessNotice.length > 0){
+				$(result.selectBusinessNotice).each(function(index, item){
+					tbodyHtml = "";
+					tbodyHtml += '<tr><td style="text-align: center;">'+item["ctgrNm"]+'</td>';
+					tbodyHtml += '<td style="text-align: center;"><a href="businessNoticeDetail?boardNo='+item["boardNo"]+'">'+item["boardTitle"]+'</a></td>';
+					tbodyHtml += '<td style="text-align: center;">'+item["inputDt"]+'</td></tr>';
+					tbody.append(tbodyHtml);
+				}); 
+			}  else {
+				tbodyHtml = "";
+				tbodyHtml += '<tr><td colspan=3 style="text-align: center;">검색된 데이터가 없습니다.</td></tr>';
+				tbody.append(tbodyHtml);
+			}  
+		},
+		error : function(){
+			console.log("error");
+		}
+	});	
+};
+
 $(document).ready(function(){
 	selectSvcCode();
+	selectNotice();
 });
 </script>
 </head>
@@ -60,13 +94,16 @@ $(document).ready(function(){
 								<h4 class="page-title" style="text-align: center;">
 									<c:if test="${userInfo.no == null}">
 								로그인을 하면 더 많은 서비스 이용이 가능합니다!
+									<input type="hidden" id="ctgrCd" name="ctgrCd" value="ABC0001"/>
 								</c:if>
 									<c:if test="${userInfo.no != null}">
 										<c:if test="${fn:substring(userInfo.no,0,1) eq 'P'}">
 											${userInfo.name} 회원님, 반갑습니다! 반려동물 관련 예약서비스를 편리하게 누려보세요:)
+											<input type="hidden" id="ctgrCd" name="ctgrCd" value="ABC0001"/>
 										</c:if>
 										<c:if test="${fn:substring(userInfo.no,0,1) eq 'B'}">
 											${userInfo.name} 회원님, 반갑습니다! 새로운 예약을 확인해보세요:)
+											<input type="hidden" id="ctgrCd" name="ctgrCd" value="ABC0002"/>
 										</c:if>
 										<c:if test="${fn:substring(userInfo.no,0,1) eq '1'}">
 											관리자로 로그인 했습니다.
@@ -211,44 +248,6 @@ $(document).ready(function(){
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="list" items="${list}">
-													<tr>
-														<td style="text-align: center;">${list.abc_name}</td>
-														<td><a href="#" data-toggle="modal"
-															data-target="#B${list.abo_no}">${list.abo_title}</a></td>
-														<!-- Standard modal content -->
-														<div id="B${list.abo_no}" class="modal fade" tabindex="-1"
-															role="dialog" aria-labelledby="myModalLabel"
-															aria-hidden="true">
-															<div class="modal-dialog modal-dialog-centered">
-																<div class="modal-content">
-																	<div class="modal-header">
-
-																		<h4 class="modal-title" id="myModalLabel">${list.abo_title}</h4>
-																		<div class="badge badge-secondary"
-																			style="margin-top: 5px; margin-left: 10px">
-																			<c:if test="${'개인' == list.abc_name}">개인</c:if>
-																			<c:if test="${'기업' == list.abc_name}">기업</c:if>
-																		</div>
-																		<button type="button" class="close"
-																			data-dismiss="modal" aria-hidden="true">×</button>
-																	</div>
-																	<div class="modal-body">
-																		<p>${list.abo_ctt}</p>
-																	</div>
-																	<!-- <div class="modal-footer">
-																		<button type="button" class="btn btn-light"
-																			data-dismiss="modal">Close</button>
-																	</div> -->
-																</div>
-																<!-- /.modal-content -->
-															</div>
-															<!-- /.modal-dialog -->
-														</div>
-														<!-- /.modal -->
-														<td style="text-align: center;">${list.abo_date_string}</td>
-													</tr>
-												</c:forEach>
 											</tbody>
 										</table>
 									</div>
