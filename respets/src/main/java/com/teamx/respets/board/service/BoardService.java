@@ -20,4 +20,6 @@ public interface BoardService {
 
 	public void updateBoard(BoardVO boardVO) throws Exception;
 
+	public List<Map<String, Object>> selectMainNotice(Map<String, Object> map) throws Exception;
+
 }

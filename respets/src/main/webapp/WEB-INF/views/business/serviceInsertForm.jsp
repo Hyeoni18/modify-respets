@@ -51,8 +51,11 @@
 				<div class="card">
 					<div class="card-body">
 						<ul class="nav nav-pills bg-light nav-justified mb-3">
-							${codeCheck}
 							<!--업종 선택 버튼-->
+							<li class='nav-item' id='medical_div'><a onclick='checkCode("M")' data-toggle='tab' aria-expanded='false' class='nav-link rounded-0' > 병원 </a></li>
+							<li class='nav-item' id='beauty_div'><a onclick='checkCode("B")' data-toggle='tab' aria-expanded='false' class='nav-link rounded-0' > 미용 </a></li>
+							<li class='nav-item' id='hotel_div'><a onclick='checkCode("H")' data-toggle='tab' aria-expanded='false' class='nav-link rounded-0' > 호텔 </a></li>
+						
 						</ul>
 						<!-- 병 원 폼 -->
 						<div class="row" id="medical">

@@ -5,15 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Respets :: 기업 회원 이용 약관</title>
-<!-- App favicon -->
-<link rel="shortcut icon"
-	href="resources/dist/assets/images/logo-sm.png">
-
-<!-- App css -->
-<link href="resources/dist/assets/css/icons.min.css" rel="stylesheet"
-	type="text/css" />
-<link href="resources/dist/assets/css/app.min.css" rel="stylesheet"
-	type="text/css" />
 <body class="authentication-bg">
 	<div class="row justify-content-center">
 		<div class="col-7" style="margin-top: 50px;">
@@ -229,45 +220,17 @@
 			<input type="checkbox" class="custom-control-input" name="agreeChk" id="customCheck1">
 			<label class="custom-control-label" for="customCheck1">동의하시겠습니까?</label>
 		</div>
-		<!-- 동의하십니까? <input type="checkbox" name="agreeChk" id="agreeChk" /> <input
-			type="button" class="btn btn-success" value="다음 단계"
-			onclick="agreementChk()" /> -->
 	</div>
 	<div class="row justify-content-center" style="margin-top:20px;">
-		<input
-			type="button" class="btn btn-success" value="다음 단계"
-			onclick="agreementChk()" />
+		<input type="button" class="btn btn-success" value="다음 단계" onclick="agreementChk()" />
 	</div>
-	<!-- <div class="row justify-content-center">
-		동의하십니까? &nbsp;&nbsp; <input type="checkbox" name="agreeChk"
-			id="agreeChk" /> <br />
-	</div>
-	<div>
-		<input type="button" class="btn btn-success" value="가입하러가기"
-			onclick="agreementChk()" />
-	</div>-->
-	
-	
-	<!-- footer start -->
-	<footer class="footer footer-alt"> Copyright Respets Corp. All rights reserved. </footer>
-	<!-- end footer -->
-
-
-
-	<!-- App js -->
-	<script src="/resources/dist/assets/js/app.min.js"></script>
-
-	<!-- demo app -->
-	<script src="/resources/dist/assets/js/pages/demo.project-detail.js"></script>
-	<!-- demo app -->
-	<script src="resources/dist/assets/js/pages/demo.widgets.js"></script>
 </body>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 	function agreementChk() {
 		if ($('#customCheck1').is(':checked')) {
-			location.href = "./businessJoinForm";
+			location.href = "${pageContext.request.contextPath}/login/businessJoinForm";
 		} else {
 			alert("약관에 동의해주세요.");
 		} // else End

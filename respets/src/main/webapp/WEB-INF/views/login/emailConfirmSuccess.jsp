@@ -2,20 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Respets :: 이메일 확인</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-        <meta content="Coderthemes" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="resources/dist/assets/images/logo-sm.png">
+<head>
+<meta charset="utf-8" />
+<title>Respets :: 이메일 확인</title>
+<!-- App favicon -->
+<link rel="shortcut icon" href="resources/dist/assets/images/logo-sm.png">
 
-        <!-- App css -->
-        <link href="resources/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+<!-- App css -->
+<link href="resources/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
-    </head>
+</head>
     <body class="authentication-bg">
 
         <div class="account-pages mt-5 mb-5">
@@ -38,7 +35,7 @@
                                 </div>
 
                                     <div class="form-group mb-0 text-center">
-                                        <input type="button" class="btn btn-success" value="로그인" onclick="location.href='./loginForm'" />
+                                        <input type="button" class="btn btn-success" value="로그인" onclick="location.href='${pageContext.request.contextPath}/login/loginForm'" />
                                     </div>
                                 
                             </div> <!-- end card-body-->

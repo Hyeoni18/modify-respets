@@ -17,44 +17,46 @@ import com.teamx.respets.user.vo.BusinessVO;
 import com.teamx.respets.user.vo.UserVO;
 
 @Controller
+@RequestMapping(value = "/login")
 public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
 
 	/**
-	 * 로그인 화면
+	 * 로그인 화면 (확)
 	 * @Method : loginForm
 	 * @return
 	 */
 	@RequestMapping(value ="/loginForm")
 	public String loginForm(HttpSession session) {
 		if(session.getAttribute("userInfo")!=null){
-			return "redirect:/tiles/index";
+			return "redirect:/";
 		}else{
 			return "tiles/login/loginForm";
 		}
 	}
 	
 	/**
-	 * 로그인
+	 * 로그인 (추)
 	 * @Method : loginProcess
 	 * @return
 	 * @throws Exception 
 	 */
+	//(추) logincheck 어노테이션 추가
 	@RequestMapping(value ="/loginProcess")
 	public String loginProcess(@RequestParam Map<String, Object> map, HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession();
 		LoginVO loginVO = loginService.getUser(map);
-		if(loginVO.getAlert() == null) {
+		if(loginVO.getAlert() == null) { //alert을 어떻게 처리할까
 			session.setAttribute("userInfo", loginVO);
 		}
-		model.addAttribute("alert", loginVO.getAlert());
+		//(추) 어노테이션에 따라 catch 리다이렉트 추가
 		return loginVO.getView();
 	}
 	
 	/**
-	 * 회원가입 첫 화면 (회원선택)
+	 * 회원가입 첫 화면 (회원선택) (완)
 	 * @Method : joinChoiceForm
 	 * @return
 	 */
@@ -64,7 +66,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 약관동의 (개인회원)
+	 * 약관동의 (개인회원) (완)
 	 * @Method : personalJoinAgreement
 	 * @return
 	 */
@@ -74,7 +76,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 약관동의 (기업회원)
+	 * 약관동의 (기업회원) (완)
 	 * @Method : businessJoinAgreement
 	 * @return
 	 */
@@ -84,7 +86,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 회원가입 정보 입력 화면 (개인회원)
+	 * 회원가입 정보 입력 화면 (개인회원) (완)
 	 * @Method : personalJoinForm
 	 * @return
 	 */
@@ -94,7 +96,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 회원가입 정보 입력 화면 (기업회원)
+	 * 회원가입 정보 입력 화면 (기업회원) (완)
 	 * @Method : businessJoinForm
 	 * @return
 	 * @throws Exception 
@@ -106,7 +108,7 @@ public class LoginController {
 	
 	/**
 	 * 회원가입(개인회원)
-	 * @Method : personalJoin
+	 * @Method : personalJoin (추) 메일 전송 재검토 필요
 	 * @return
 	 * @throws Exception 
 	 */
@@ -119,7 +121,7 @@ public class LoginController {
 	
 	/**
 	 * 회원가입(기업회원)
-	 * @Method : businessJoin
+	 * @Method : businessJoin (추) 메일 전송 재검토 필요
 	 * @return
 	 * @throws Exception 
 	 */
@@ -130,7 +132,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 회원가입 이메일 인증 완료
+	 * 회원가입 이메일 인증 완료 (완)
 	 * @Method : updateEmailChk
 	 * @return
 	 * @throws Exception 
@@ -143,7 +145,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 아이디 찾기 화면
+	 * 아이디 찾기 화면 (완)
 	 * @Method : findIdForm
 	 * @return
 	 * @throws Exception 
@@ -154,7 +156,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 아이디 찾기 
+	 * 아이디 찾기 (완)
 	 * @Method : findId
 	 * @return
 	 * @throws Exception 
@@ -168,7 +170,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 비밀번호 찾기 
+	 * 비밀번호 찾기 (완)
 	 * @Method : findPw
 	 * @return
 	 * @throws Exception 
@@ -180,7 +182,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 비밀번호 변경 화면 (메일을 통한)
+	 * 비밀번호 변경 화면 (메일을 통한) (완)
 	 * @Method : resetMyPwForm
 	 * @return
 	 * @throws Exception 
@@ -193,7 +195,7 @@ public class LoginController {
 	}
 	
 	/**
-	 * 비밀번호 변경
+	 * 비밀번호 변경 (완)
 	 * @Method : updatePw
 	 * @return
 	 * @throws Exception 
@@ -212,7 +214,7 @@ public class LoginController {
 	}
 		
 	/**
-	 * 로그아웃
+	 * 로그아웃 (완)
 	 * @Method : logout
 	 * @return
 	 * @throws Exception 
@@ -220,7 +222,6 @@ public class LoginController {
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session, Model model) throws Exception {
 		session.removeAttribute("userInfo");
-		model.addAttribute("alert","alert('로그아웃 되었습니다.');");
-		return "tiles/index";
+		return "redirect:/";
 	}
 }

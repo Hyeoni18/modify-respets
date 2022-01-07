@@ -7,8 +7,6 @@
 <meta charset="UTF-8" />
 <title>Respets</title>
 <script>
-${alert} 
-
 function selectSvcCode(){
 	
 	$.ajax({
@@ -32,23 +30,20 @@ function selectSvcCode(){
 	});	
 };
 
-function selectNotice(){
+//공지사항 조회
+function selectMainNotice(){
 	
-	var data = {};
-	data.ctgrCd = $("#ctgrCd").val();
-	data.type = "P";
 	$.ajax({
-		url : "${pageContext.request.contextPath}/selectBusinessNotice",	
+		url : "${pageContext.request.contextPath}/board/selectMainNotice",	
 		type : 'POST',
-		data : data,
 		success : function(result){
 			var tbody = $(".table tbody");
 			tbody.children().remove();
 			
-			if(result.selectBusinessNotice.length > 0){
-				$(result.selectBusinessNotice).each(function(index, item){
+			if(result.selectMainNotice.length > 0){
+				$(result.selectMainNotice).each(function(index, item){
 					tbodyHtml = "";
-					tbodyHtml += '<tr><td style="text-align: center;">'+item["ctgrNm"]+'</td>';
+					tbodyHtml += '<tr><td style="text-align: center;">'+item["boardNo"]+'</td>';
 					tbodyHtml += '<td style="text-align: center;"><a href="businessNoticeDetail?boardNo='+item["boardNo"]+'">'+item["boardTitle"]+'</a></td>';
 					tbodyHtml += '<td style="text-align: center;">'+item["inputDt"]+'</td></tr>';
 					tbody.append(tbodyHtml);
@@ -67,7 +62,7 @@ function selectNotice(){
 
 $(document).ready(function(){
 	selectSvcCode();
-	selectNotice();
+	selectMainNotice();
 });
 </script>
 </head>
@@ -94,16 +89,13 @@ $(document).ready(function(){
 								<h4 class="page-title" style="text-align: center;">
 									<c:if test="${userInfo.no == null}">
 								로그인을 하면 더 많은 서비스 이용이 가능합니다!
-									<input type="hidden" id="ctgrCd" name="ctgrCd" value="ABC0001"/>
 								</c:if>
 									<c:if test="${userInfo.no != null}">
 										<c:if test="${fn:substring(userInfo.no,0,1) eq 'P'}">
 											${userInfo.name} 회원님, 반갑습니다! 반려동물 관련 예약서비스를 편리하게 누려보세요:)
-											<input type="hidden" id="ctgrCd" name="ctgrCd" value="ABC0001"/>
 										</c:if>
 										<c:if test="${fn:substring(userInfo.no,0,1) eq 'B'}">
 											${userInfo.name} 회원님, 반갑습니다! 새로운 예약을 확인해보세요:)
-											<input type="hidden" id="ctgrCd" name="ctgrCd" value="ABC0002"/>
 										</c:if>
 										<c:if test="${fn:substring(userInfo.no,0,1) eq '1'}">
 											관리자로 로그인 했습니다.
@@ -242,7 +234,7 @@ $(document).ready(function(){
 										<table class="table table-centered mb-0">
 											<thead>
 												<tr style="text-align: center;">
-													<th width="25%">분류</th>
+													<th width="25%">번호</th>
 													<th>제목</th>
 													<th width="25%">날짜</th>
 												</tr>

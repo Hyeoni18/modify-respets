@@ -18,6 +18,7 @@ import com.teamx.respets.board.vo.BoardVO;
 import com.teamx.respets.login.vo.LoginVO;
 
 @Controller
+@RequestMapping(value="/board")
 public class BoardController {
 	
 	@Autowired
@@ -43,11 +44,9 @@ public class BoardController {
 	@RequestMapping(value = "/selectBusinessNotice")
 	public Map<String, Object> selectBusinessNotice(@RequestParam Map<String, Object> map, HttpSession session) throws Exception {
 		Map<String, Object> result = new HashMap<String, Object>();
-		if(session.getAttribute("userInfo")!=null){
-			LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
-			map.put("no", loginVO.getNo());
-			map.put("type", loginVO.getType());
-		} 
+		LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+		map.put("no", loginVO.getNo());
+		map.put("type", loginVO.getType());
 		List<Map<String,Object>> selectBusinessNotice = boardService.selectBusinessNotice(map);
 		Integer selectBusinessNoticeCnt = boardService.selectBusinessNoticeCnt(map);
 		result.put("selectBusinessNotice", selectBusinessNotice);
@@ -129,5 +128,26 @@ public class BoardController {
 		}
 		return "myTiles/board/businessNoticeList"; //디테일화면
 	}	
+	
+	/**
+	 * 메인화면 공지사항 조회 (완)
+	 * @Method : selectMainNotice
+	 * @return
+	 * @throws Exception 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/selectMainNotice")
+	public Map<String, Object> selectMainNotice(@RequestParam Map<String, Object> map, HttpSession session) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		if(session.getAttribute("userInfo")!=null){
+			LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+			map.put("type", loginVO.getType());
+		} else {
+			map.put("type", "P");
+		}
+		List<Map<String,Object>> selectMainNotice = boardService.selectMainNotice(map);
+		result.put("selectMainNotice", selectMainNotice);
+		return result;
+	}
 	
 }

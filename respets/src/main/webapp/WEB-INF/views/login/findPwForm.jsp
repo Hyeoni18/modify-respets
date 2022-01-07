@@ -46,7 +46,7 @@
 								</p>
 							</div>
 						</div>
-						<form action="findPw" name="findPwForm" method="POST">
+						<form action="${pageContext.request.contextPath}/login/findPw" name="findPwForm" method="POST">
 							<div class="form-group mb-0 text-center" style="margin-bottom:30px; text-align:center;">
 								<input type="hidden" name="email" value="${paramMap.email}" />
 								<!-- 정상적인 이메일주소 -->
@@ -57,7 +57,7 @@
 						</form>
 					    <div class="row mt-3">
                             <div class="col-12 text-center">
-                                <p class="text-muted"><a href="./loginForm" class="text-muted"><b>로그인 하러가기</b></a></p>
+                                <p class="text-muted"><a href="${pageContext.request.contextPath}/login/loginForm" class="text-muted"><b>로그인 하러가기</b></a></p>
                             </div> <!-- end col-->
                         </div>
 

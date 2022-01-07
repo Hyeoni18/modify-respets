@@ -1,27 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <title>Respets</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta
-	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
-	name="description" />
-<meta content="Coderthemes" name="author" />
 
-</head>
 <body onunload="logout();">
 	<!-- Topbar Start -->
 	<div class="navbar-custom topnav-navbar">
 		<div class="container-fluid">
 
 			<!-- LOGO -->
-			<a href="./" class="topnav-logo"> <span
-				class="topnav-logo-lg"> <img
-					src="${pageContext.request.contextPath}/resources/images/logo-mint.png"
-					alt="respets logo" height="30">
+			<a href="./" class="topnav-logo"> <span	class="topnav-logo-lg topnav-logo-lg-img"> <img src="${pageContext.request.contextPath}/resources/images/logo-mint.png" alt="respets logo" height="30">
 			</span> <span class="topnav-logo-sm"> <img
 					src="${pageContext.request.contextPath}/resources/images/logo-sm.png"
 					alt="respets logo" height="30">
@@ -30,16 +17,13 @@
 
 			<!-- 로그인 하지 않았을때 -->
 			<div id="logoutTopBar">
-				<a href='./loginForm' id='loginForm'>로그인</a>
-				<a href='./joinChoiceForm' id='joinChoiceForm'>회원가입</a>
-				<!-- <button id="loginForm" onclick="location.href='./loginForm'">로그인</button>
-				<button id="joinChoiceForm"
-					onclick="location.href='./joinChoiceForm'">회원가입</button> -->
+				<a href='${pageContext.request.contextPath}/login/loginForm' id='loginForm'>로그인</a>
+				<a href='${pageContext.request.contextPath}/login/joinChoiceForm' id='joinChoiceForm'>회원가입</a>
 			</div>
 
 			<ul class="list-unstyled topbar-right-menu float-right mb-0"
 				id="loginTopBar">
-				<form id="logoutFrm" action="./logout" method="post">
+				<form id="logoutFrm" action="${pageContext.request.contextPath}/login/logout" method="post">
 					<a href="javascript:logoutFrm()">로그아웃</a>
 				</form>
 				
@@ -77,7 +61,7 @@
 
 						<ul class="list-unstyled topbar-right-menu float-right mb-0"
 							id="loginTopBar">
-							<form id="logoutFrm" action="./logout" method="post">
+							<form id="logoutFrm" action="${pageContext.request.contextPath}/login/logout" method="post">
 								<a href="javascript:logoutFrm()">로그아웃</a>
 							</form>
 							
@@ -214,7 +198,6 @@
 	}
 
 	function logout() {
-		location.href = './logout'
+		location.href = '${pageContext.request.contextPath}/login/logout'
 	}
 </script>
-</html>

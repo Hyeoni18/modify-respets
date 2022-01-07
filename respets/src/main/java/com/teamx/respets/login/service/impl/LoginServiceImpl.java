@@ -63,11 +63,11 @@ public class LoginServiceImpl implements LoginService{
 			}
 			
 			if(loginVO.getEmchk().equals("O")) {
-				loginVO.setView("tiles/index");
+				loginVO.setView("redirect:/");
 			} else {
 				String tomail = loginVO.getEmail();
 				String title = "[Respets] 계정 인증 메일";
-				String content = "링크를 클릭해주세요. http://localhost:8080/emailConfirmSuccess?email="+ tomail + "&type=" + map.get("type");
+				String content = "링크를 클릭해주세요. http://localhost:8080/login/emailConfirmSuccess?email="+ tomail + "&type=" + map.get("type");
 				mailSending(tomail, title, content);
 				String alert = "alert('미인증 회원입니다. 인증을 완료해주세요.');";
 				loginVO.setAlert(alert);
@@ -117,7 +117,7 @@ public class LoginServiceImpl implements LoginService{
 		loginMapper.insertPersonalJoin(userVo);
 		String email = userVo.getPerEmail();
         String title = "[Respets] 계정 인증 메일";
-        String content = "링크를 클릭해주세요. http://localhost:8080/emailConfirmSuccess?email=" + email + "&type=P";
+        String content = "링크를 클릭해주세요. http://localhost:8080/login/emailConfirmSuccess?email=" + email + "&type=P";
 		mailSending(email, title, content);
 	}
 	
@@ -140,7 +140,7 @@ public class LoginServiceImpl implements LoginService{
 		
 		String email = busiVO.getBusEmail();
         String title = "[Respets] 계정 인증 메일";
-        String content = "링크를 클릭해주세요. http://localhost:8080/emailConfirmSuccess?email=" + email + "&type=B";
+        String content = "링크를 클릭해주세요. http://localhost:8080/login/emailConfirmSuccess?email=" + email + "&type=B";
 		mailSending(email, title, content);
 	}
 	

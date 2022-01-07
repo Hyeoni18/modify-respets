@@ -47,4 +47,9 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.updateBoard(boardVO);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectMainNotice(Map<String, Object> map) throws Exception {
+		return boardMapper.selectMainNotice(map);
+	}
+
 }

@@ -7,20 +7,17 @@
 		<div class="container-fluid">
 
 			<!-- LOGO -->
-			<a href="./" class="topnav-logo"> <span class="topnav-logo-lg">
-					<img src="resources/images/logo-mint.png" alt="respets logo"
-					height="30">
-			</span> <span class="topnav-logo-sm"> <img
-					src="resources/images/logo-sm.png" alt="respets logo" height="30">
-			</span>
+			<a href="${pageContext.request.contextPath}/" class="topnav-logo"> 
+			<span class="topnav-logo-lg"><div class="topnav-logo-lg-img"></div></span> 
+			<!-- <span class="topnav-logo-sm"><img src="resources/images/logo-sm.png" alt="respets logo" height="30"></span> -->
 			</a>
 
 			<ul class="list-unstyled topbar-right-menu float-right mb-0">
 				<c:if test="${userInfo.no == null}">
-					<li style="margin-top: 17px;"><a href="./loginForm"
+					<li style="margin-top: 17px;"><a href="${pageContext.request.contextPath}/login/loginForm"
 						class="btn btn-outline-success">로그인</a></li>
 					<li style="margin-top: 17px; margin-left: 10px;"><a
-						href="./joinChoiceForm" class="btn btn-outline-success">회원가입</a></li>
+						href="${pageContext.request.contextPath}/login/joinChoiceForm" class="btn btn-outline-success">회원가입</a></li>
 					<li></li>
 				</c:if>
 				<c:if test="${userInfo.no != null}">
@@ -63,7 +60,7 @@
 								</a>
 							</c:if>
 
-							<form action="logout" id="logoutFrm" method="post">
+							<form action="${pageContext.request.contextPath}/login/logout" id="logoutFrm" method="post">
 								<!-- item-->
 								<a href="javascript:logoutFrm()"
 									class="dropdown-item notify-item"> <i

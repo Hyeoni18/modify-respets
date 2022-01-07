@@ -44,7 +44,7 @@
 						</a>
 					</c:if>
 
-					<form action="logout" id="logoutFrm" method="post">
+					<form action="${pageContext.request.contextPath}/login/logout" id="logoutFrm" method="post">
 						<!-- item-->
 						<a href="javascript:logoutFrm()" class="dropdown-item notify-item">
 							<i class="mdi mdi-logout"></i> <span>로그아웃</span>

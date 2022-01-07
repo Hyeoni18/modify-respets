@@ -37,7 +37,7 @@
                                     <p class="text-muted mb-4">Respets에 계정을 등록하고 편리한 서비스를 이용해보세요. </p>
                                 </div>
 
-                                	<form action="personalJoin" name="personalJoin" id="personalJoin" onsubmit="return formChk();" method="post" 
+                                	<form action="${pageContext.request.contextPath}/login/personalJoin" name="personalJoin" id="personalJoin" onsubmit="return formChk();" method="post" 
 									enctype="multipart/form-data">
 
                                     <div class="form-group">
@@ -81,7 +81,7 @@
 
                        	 <div class="row mt-3">
                             <div class="col-12 text-center">
-                                <p class="text-muted">계정이 이미 있으신가요? <a href="./loginForm" class="text-dark ml-1"><b>로그인 하기</b></a></p>
+                                <p class="text-muted">계정이 이미 있으신가요? <a href="${pageContext.request.contextPath}/login/loginForm" class="text-dark ml-1"><b>로그인 하기</b></a></p>
                             </div> <!-- end col-->
                         </div>
                         

@@ -234,9 +234,6 @@
 			<input type="checkbox" class="custom-control-input" name="agreeChk" id="customCheck1">
 			<label class="custom-control-label" for="customCheck1">동의하시겠습니까?</label>
 		</div>
-		<!-- 동의하십니까? <input type="checkbox" name="agreeChk" id="agreeChk" /> <input
-			type="button" class="btn btn-success" value="다음 단계"
-			onclick="agreementChk()" /> -->
 	</div>
 	<div class="row justify-content-center" style="margin-top:20px;">
 		<input
@@ -262,7 +259,7 @@
 <script>
 	function agreementChk() {
 		if ($('#customCheck1').is(':checked')) {
-			location.href = "./personalJoinForm";
+			location.href = "${pageContext.request.contextPath}/login/personalJoinForm";
 		} else {
 			alert("약관에 동의해주세요.");
 		} // else End

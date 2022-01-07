@@ -21,4 +21,6 @@ public interface BoardMapper {
 
 	public void updateBoard(BoardVO boardVO) throws SQLException;
 
+	public List<Map<String, Object>> selectMainNotice(Map<String, Object> map) throws SQLException;
+
 }

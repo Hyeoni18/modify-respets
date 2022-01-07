@@ -177,7 +177,7 @@
 			if (con == false) {
 				return false;
 			} else {
-				$("#bookingBtn").attr('href', 'loginForm');
+				$("#bookingBtn").attr('href', '${pageContext.request.contextPath}/login/loginForm');
 				$("#bookingBtn").submit();
 			}
 		}else if(no.charAt(0)=='B' || no.charAt(0)=='1'){

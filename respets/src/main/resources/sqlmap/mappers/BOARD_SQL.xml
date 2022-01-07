@@ -73,4 +73,21 @@
 			,BOARD_CONTENT = #{boardContent}
 		WHERE BOARD_NO = #{boardNo}
 	</update>
+	
+	<select id="selectMainNotice" parameterType="map" resultType="camelMap">
+		SELECT BOARD_NO
+			,CTGR_CD
+			,(SELECT CD_DESC FROM CMMN_CODE WHERE CMMN_CD=CTGR_CD) CTGR_NM
+			,BOARD_TITLE
+			,TO_CHAR(INPUT_DT, 'YYYY-MM-DD') INPUT_DT
+		FROM BOARD_TB
+		WHERE INPUT_NO IS NOT NULL
+	 	<if test="type == 'P'.toString()">
+			AND CTGR_CD = 'ABC0001'
+		</if>
+		<if test="type == 'B'.toString()">
+			AND CTGR_CD = 'ABC0002'
+		</if>
+		LIMIT 3
+	</select>
 </mapper>

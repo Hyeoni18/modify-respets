@@ -33,10 +33,6 @@
 	</div>
 	<!-- container -->
 
-	</div>
-	<!-- content -->
-
-
 </body>
 <script>
 	function forward(button) {
