@@ -18,5 +18,7 @@ public interface BusinessService {
 	public List<Map<String, Object>> serviceManagement(LoginVO loginVO) throws Exception;
 
 	public void serviceInsert(LoginVO loginVO) throws Exception;
+
+	public Map<String, Object> selectServiceInfo(LoginVO loginVO) throws Exception;
 	
 }

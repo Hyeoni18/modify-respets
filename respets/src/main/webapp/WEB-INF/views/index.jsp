@@ -196,7 +196,7 @@ $(document).ready(function(){
 								<div class="card-deck">
 									<div class="card">
 										<img class="card-img-top img-fluid"
-											src="resources/images/card-medical.jpg" alt="Card image cap">
+											src="${pageContext.request.contextPath}/resources/images/card-medical.jpg" alt="Card image cap">
 										<div class="card-body">
 											<a href="./businessList?svcCd=M"
 												class="btn btn-block btn-success">병원</a>
@@ -205,7 +205,7 @@ $(document).ready(function(){
 									<!-- end card-->
 									<div class="card">
 										<img class="card-img-top img-fluid"
-											src="resources/images/card-beauty.jpg" alt="Card image cap">
+											src="${pageContext.request.contextPath}/resources/images/card-beauty.jpg" alt="Card image cap">
 										<div class="card-body">
 											<a href="./businessList?svcCd=B"
 												class="btn btn-block btn-success">미용</a>
@@ -214,7 +214,7 @@ $(document).ready(function(){
 									<!-- end card-->
 									<div class="card">
 										<img class="card-img-top img-fluid"
-											src="resources/images/card-hotel.jpg" alt="Card image cap">
+											src="${pageContext.request.contextPath}/resources/images/card-hotel.jpg" alt="Card image cap">
 										<div class="card-body">
 											<a href="./businessList?svcCd=H"
 												class="btn btn-block btn-success">호텔</a>

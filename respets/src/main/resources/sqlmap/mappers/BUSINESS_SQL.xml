@@ -71,4 +71,7 @@
         WHERE B.BUS_NO = #{busNo} AND S.SVC_CD = #{svcCd}
     </select>
 	
+	<select id="selectServiceInfo" parameterType="map" resultType="camelMap">
+		SELECT * FROM SERVICE_TB
+	</select>
 </mapper>

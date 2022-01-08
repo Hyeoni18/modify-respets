@@ -13,10 +13,10 @@
 		<!-- start page title -->
 		<div class="page-title-box">
 			<div class="page-title-right">
-				<form action="serviceInsertForm">
-					<input type="hidden" name="no" value="${no}" />
-					<button class="btn btn-outline-info">업종 등록 신청</button>
-				</form>
+				<%-- <form action="serviceInsertForm">
+					<input type="hidden" name="no" value="${no}" /> --%>
+					<button class="btn btn-outline-info" onclick="location.href='./serviceInsertForm'">업종 등록 신청</button>
+				<!-- </form> -->
 			</div>
 			<h4 class="page-title">서비스 관리</h4>
 		</div>

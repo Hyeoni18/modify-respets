@@ -58,4 +58,9 @@ public class BusinessServiceImpl implements BusinessService {
 		
 	}
 
+	@Override
+	public Map<String, Object> selectServiceInfo(LoginVO loginVO) throws Exception {
+		return businessMapper.selectServiceInfo(loginVO);
+	}
+
 }

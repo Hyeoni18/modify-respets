@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.teamx.respets.login.vo.LoginVO;
 import com.teamx.respets.user.vo.BusinessVO;
 
 @Mapper
@@ -18,5 +19,7 @@ public interface BusinessMapper {
     public List<Map<String, Object>> selectSvcCdAndHashTagBusinessList(String svcCd, String hashTag) throws SQLException;
     
     public BusinessVO selectBusinessDetail(Map<String, Object> map) throws SQLException;
+
+	public Map<String, Object> selectServiceInfo(LoginVO loginVO) throws SQLException;
 	
 }

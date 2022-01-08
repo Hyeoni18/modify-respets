@@ -55,9 +55,10 @@ public class BusinessController {
      * @throws Exception 
      */
     @RequestMapping(value ="/serviceManagement")
-    public String serviceManagement(LoginVO loginVO, Model model) throws Exception {        
-    	List<Map<String, Object>> serviceList = businessService.serviceManagement(loginVO);
-        model.addAttribute("serviceList", serviceList);
+    public String serviceManagement(HttpSession session, Model model) throws Exception {      
+    	LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+    	List<Map<String, Object>> serviceInfo = businessService.serviceManagement(loginVO);
+        model.addAttribute("serviceInfo", serviceInfo);
         return "myTiles/business/serviceManagement";
     }
 	
@@ -68,7 +69,10 @@ public class BusinessController {
      * @throws Exception 
      */
     @RequestMapping(value ="/serviceInsertForm")
-    public String serviceInsertForm() throws Exception {
+    public String serviceInsertForm(HttpSession session, Model model) throws Exception {
+    	LoginVO loginVO = (LoginVO) session.getAttribute("userInfo");
+    	Map<String, Object> serviceInfo = businessService.selectServiceInfo(loginVO);
+    	model.addAttribute("serviceInfo", serviceInfo);
         return "myTiles/business/serviceInsertForm";
     }
 	

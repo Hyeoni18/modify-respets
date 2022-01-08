@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,17 +13,14 @@
 }
 
 #medical {
-	display: none;
 	width: 100%;
 }
 
 #beauty {
-	display: none;
 	width: 100%;
 }
 
 #hotel {
-	display: none;
 	width: 100%;
 }
 </style>
@@ -50,12 +47,9 @@
 				<!-- <div class="col-xl-6"> -->
 				<div class="card">
 					<div class="card-body">
+						<c:if test="${serviceInfo.svcCd == 'B'}">
 						<ul class="nav nav-pills bg-light nav-justified mb-3">
-							<!--업종 선택 버튼-->
-							<li class='nav-item' id='medical_div'><a onclick='checkCode("M")' data-toggle='tab' aria-expanded='false' class='nav-link rounded-0' > 병원 </a></li>
-							<li class='nav-item' id='beauty_div'><a onclick='checkCode("B")' data-toggle='tab' aria-expanded='false' class='nav-link rounded-0' > 미용 </a></li>
-							<li class='nav-item' id='hotel_div'><a onclick='checkCode("H")' data-toggle='tab' aria-expanded='false' class='nav-link rounded-0' > 호텔 </a></li>
-						
+							<li class='nav-item' id='medical_div'><a onclick='checkCode("M")' data-toggle='tab' aria-expanded='false' class='nav-link rounded-0 active show' > 병원 </a></li>
 						</ul>
 						<!-- 병 원 폼 -->
 						<div class="row" id="medical">
@@ -172,7 +166,11 @@
 								</div>
 							</div>
 						</div>
-
+						</c:if>
+						<c:if test="${serviceInfo.svcCd == 'B'}">
+						<ul class="nav nav-pills bg-light nav-justified mb-3">
+							<li class='nav-item' id='beauty_div'><a onclick='checkCode("B")' data-toggle='tab' aria-expanded='false' class='nav-link rounded-0 active show' > 미용 </a></li>
+						</ul>
 						<!-- 미 용 폼 -->
 						<div class="row" id="beauty">
 							<div class="col-12">
@@ -315,31 +313,28 @@
 								</div>
 							</div>
 						</div>
-
+						</c:if>
+						<c:if test="${serviceInfo.svcCd == 'H'}">
+						<ul class="nav nav-pills bg-light nav-justified mb-3">
+							<li class='nav-item' id='hotel_div'><a onclick='checkCode("H")' data-toggle='tab' aria-expanded='false' class='nav-link rounded-0 active show' > 호텔 </a></li>
+						</ul>
 						<!-- 호 텔 폼 -->
 						<div class="row" id="hotel">
 							<div class="col-12">
 								<div class="card">
 									<div class="card-body">
-										<form action="serviceInsert" name="hotel" method="post"
-											enctype="multipart/form-data">
-											<div class="row">
-												<div class="col-lg-6">
-													<input type="hidden" name="bct_code" value="H" /> <input
-														type="hidden" name="cnt" value="${cnt}" /> &nbsp;
-												</div>
-											</div>
+										<form action="serviceInsert" name="hotel" method="post"	enctype="multipart/form-data">
 											<div class="row">
 												<div class="col-lg-6">
 													<div class="form-group mb-3">
 														<label for="simpleinput">업체명</label> <input type="text"
-															class="form-control" name="bus_name" value="${bus_name}"
+															class="form-control" name="bus_name" value="${userInfo.name}"
 															readonly />
 													</div>
 													<div class="form-group mb-3">
 														<label for="simpleinput">연락처</label> <input type="text"
 															class="form-control" name="bus_phone"
-															value="${bus_phone}" readonly />
+															value="${userInfo.phone}" readonly />
 													</div>
 													<div class="form-group mb-3">
 														<label for="example-fileinput" style="margin-right: 15px;">사업장
@@ -467,6 +462,7 @@
 							<!-- end card-->
 						</div>
 						<!-- end col-xl-6 -->
+						</c:if>
 					</div>
 				</div>
 			</div>
