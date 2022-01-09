@@ -72,6 +72,8 @@
     </select>
 	
 	<select id="selectServiceInfo" parameterType="map" resultType="camelMap">
-		SELECT * FROM SERVICE_TB
+		SELECT SVC_CD
+			, (SELECT CD_DESC FROM CMMN_CODE WHERE CMMN_CD=SVC_CD) SVC_NM
+		FROM SERVICE_TB
 	</select>
 </mapper>
