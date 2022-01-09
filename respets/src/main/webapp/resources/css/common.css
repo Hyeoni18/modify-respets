@@ -6,7 +6,7 @@
 	width: 150px;
 	height: 150px;
 	margin: 50px auto 0px auto;
-	background: url("../../images/defaultProfile/woman.png") no-repeat center center;
+	background: url("../images/defaultProfile/woman.png") no-repeat center center;
 	background-size: contain;
 }
 
@@ -14,19 +14,19 @@
 	width: 150px;
 	height: 150px;
 	margin: 50px auto 0px auto;
-	background: url("../../images/defaultProfile/pet-shop.png") no-repeat center center;
+	background: url("../images/defaultProfile/pet-shop.png") no-repeat center center;
 	background-size: contain;
 }
 
 .topnav-logo-lg-img {
 	height: 30px;
 	margin-top: 17px; 
-	background: url("../../images/logo-mint.png") no-repeat center center;
+	background: url("../images/logo-mint.png") no-repeat center center;
 	background-size: contain;
 }
 
 .respets-logo-white {
 	height: 30px;
-	background: url("../../dist/assets/images/logo-white.png") no-repeat center center;
+	background: url("../dist/assets/images/logo-white.png") no-repeat center center;
 	background-size: contain;
 }

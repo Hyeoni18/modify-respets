@@ -11856,6 +11856,22 @@ body.authentication-bg {
 	padding-right: 8px
 }
 
+.daterangepicker .drp-selected-month {
+  display: inline-block;
+  font-size: 12px;
+  padding-right: 8px; 
+}
+
+.daterangepicker .drp-selected-year {
+  display: inline-block;
+  font-size: 12px;
+  padding-right: 8px; 
+}
+
+.daterangepicker .date-span-display {
+	display: none; 
+}  
+
 .daterangepicker .drp-buttons .btn {
 	margin-left: 8px;
 	font-size: 12px;

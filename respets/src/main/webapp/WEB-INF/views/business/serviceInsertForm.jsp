@@ -24,7 +24,20 @@
 	width: 100%;
 }
 </style>
-
+<script>
+function createDateBtn(start, end) {
+	var id = $(".daterangepicker").find(".btn-primary")[0].id;
+	if(id==="once") {
+		console.log($(".drp-selected").text());
+	} else if(id==="month") {
+		console.log("매월");
+		console.log($(".drp-selected-month").text());
+	} else if(id==="year") {
+		console.log("매년");
+		console.log($(".drp-selected-year").text());
+	}
+}
+</script>
 </head>
 <body>
 
@@ -95,23 +108,18 @@
 											<hr>
 											<div class="row">
 												<div class="col-lg-6">
-														<div class="form-group mb-3">
-															<label for="simpleinput">정기휴무일</label> 
-															<div class="d-flex mb-1">
+													<div class="form-group mb-3">
+														<label for="simpleinput">정기휴무일</label> 
+														<div class="d-flex">
+														<div class="form-group">
 															<select class="form-control" id="example-select">
 	                                                            <option>매주</option>
 	                                                            <option>격주</option>
 	                                                            <option>매월</option>
 	                                                        </select>
-	                                                        <div class="btn-group ml-2">
-					                                            <button type="button" class="btn btn-light">첫번째</button>
-					                                            <button type="button" class="btn btn-light">두번째</button>
-					                                            <button type="button" class="btn btn-light">세번째</button>
-					                                            <button type="button" class="btn btn-light">네번째</button>
-					                                            <button type="button" class="btn btn-light">다섯번째</button>
-					                                        </div>
-	                                                        </div>
-                                                        	<div class="btn-group mb-1">
+														</div>
+														<div class="form-group ml-2">
+															<div class="btn-group">
 					                                            <button type="button" class="btn btn-light">월</button>
 					                                            <button type="button" class="btn btn-light">화</button>
 					                                            <button type="button" class="btn btn-light">수</button>
@@ -119,71 +127,86 @@
 					                                            <button type="button" class="btn btn-light">금</button>
 					                                            <button type="button" class="btn btn-light">토</button>
 					                                            <button type="button" class="btn btn-light">일</button>
-					                                        </div>
-															<input type="time" class="form-control" name="work_o" id="am_open" step="1800">
-														</div>
-														<div class="form-group mb-3">
-															<label for="simpleinput">영업 마감시간</label> <input
-																type="time" class="form-control" name="work_c"
-																id="pm_close" step="1800">
-														</div>
-														<div class="form-group mb-3">
-															<label for="simpleinput">점심 시작시간</label> <input
-																type="time" class="form-control" name=lunch_o
-																id="lunch_open" step="1800">
-														</div>
-														<div class="form-group mb-3">
-															<label for="simpleinput">점심 마감시간</label> <input
-																type="time" class="form-control" name="lunch_c"
-																id="lunch_close" step="1800">
-														</div>
-														<div class="form-group mb-3">
-															<label for="simpleinput">고정휴무일</label><br />
-															<div class='custom-control custom-checkbox'>
-																<input type="checkbox" class='custom-control-input'
-																	name="holiday" value="월요일" id='월요일_h' /> <label
-																	class='custom-control-label' for='월요일_h'>월요일</label>
-															</div>
-															<div class='custom-control custom-checkbox'>
-																<input type="checkbox" class='custom-control-input'
-																	name="holiday" value="화요일" id='화요일_h' /> <label
-																	class='custom-control-label' for='화요일_h'>화요일</label>
-															</div>
-															<div class='custom-control custom-checkbox'>
-																<input type="checkbox" class='custom-control-input'
-																	name="holiday" value="수요일" id='수요일_h' /> <label
-																	class='custom-control-label' for='수요일_h'>수요일</label>
-															</div>
-															<div class='custom-control custom-checkbox'>
-																<input type="checkbox" class='custom-control-input'
-																	name="holiday" value="목요일" id='목요일_h' /> <label
-																	class='custom-control-label' for='목요일_h'>목요일</label>
-															</div>
-															<div class='custom-control custom-checkbox'>
-																<input type="checkbox" class='custom-control-input'
-																	name="holiday" value="금요일" id='금요일_h' /> <label
-																	class='custom-control-label' for='금요일_h'>금요일</label>
-															</div>
-															<div class='custom-control custom-checkbox'>
-																<input type="checkbox" class='custom-control-input'
-																	name="holiday" value="토요일" id='토요일_h' /> <label
-																	class='custom-control-label' for='토요일_h'>토요일</label>
-															</div>
-															<div class='custom-control custom-checkbox'>
-																<input type="checkbox" class='custom-control-input'
-																	name="holiday" value="일요일" id='일요일_h' /> <label
-																	class='custom-control-label' for='일요일_h'>일요일</label>
-															</div>
-															<div class='custom-control custom-checkbox'>
-																<input type="checkbox" class='custom-control-input'
-																	name="holiday" value="공휴일" id='공휴일_h' /> <label
-																	class='custom-control-label' for='공휴일_h'>공휴일</label>
-															</div>
+				                                        	</div>
+			                                        	</div>
+				                                        </div>
+	                                                    <div class="btn-group">
+				                                            <button type="button" class="btn btn-light">첫번째</button>
+				                                            <button type="button" class="btn btn-light">두번째</button>
+				                                            <button type="button" class="btn btn-light">세번째</button>
+				                                            <button type="button" class="btn btn-light">네번째</button>
+				                                            <button type="button" class="btn btn-light">다섯번째</button>
+				                                        </div>
+													</div>
+													<div class="form-group mb-3">
+														<label for="simpleinput">공휴일 중 휴무일</label> <br/>
+														<div class="form-group">
+															<div class="custom-control custom-checkbox mb-3">
+		                                                        <input type="checkbox" class="custom-control-input" id="autoSizingCheck">
+		                                                        <label class="custom-control-label" for="autoSizingCheck">설,추석 당일만 휴무</label>
+		                                                    </div>&ensp;
+		                                                    <div class="custom-control custom-checkbox mb-3">
+		                                                        <input type="checkbox" class="custom-control-input" id="autoSizingCheck2">
+		                                                        <label class="custom-control-label" for="autoSizingCheck2">전체 휴무</label>
+		                                                    </div>
+	                                                    </div>
+	                                                    <!-- 반복 -->
+	                                                    <div class="btn-group mb-1">
+				                                            <button type="button" class="btn btn-light">새해 첫날</button>
+				                                        </div>
+													</div>
+												</div>
+												<div class="col-lg-6">
+													<div class="form-group">
+														<label for="simpleinput">그 외 휴무일</label> <br/>
+														<div class="btn-group">
+															<button type="button" class="btn btn-light" data-toggle="date-picker" data-cancel-class="btn-warning"> 
+																<i class="mdi mdi-plus"></i> <span>날짜로 추가</span> 
+															</button>
 														</div>
 													</div>
-													<div class="col-lg-12">
-														<input type="reset" class="btn btn-outline-danger" value="취소" onclick="cancel()" /> <br /> <br />
+													<!-- 반복 -->
+													<div class="btn-group">
+														<div class="alert alert-info alert-dismissible fade show" role="alert">
+				                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				                                                <span aria-hidden="true">×</span>
+				                                            </button>
+				                                            2021-01-10
+				                                        </div>
+			                                         </div>
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-lg-6">
+													<div class="form-group mb-3">
+														<label for="simpleinput">영업 시간</label> <input
+															type="time" class="form-control" name="work_c"
+															id="pm_close" step="1800">
 													</div>
+												</div>
+												<div class="col-lg-6">
+													<div class="form-group mb-3">
+														<label for="simpleinput">영업 시간</label> <input
+															type="time" class="form-control" name="work_c"
+															id="pm_close" step="1800">
+													</div>
+													<div class="form-group mb-3">
+														<label for="simpleinput">점심 시작시간</label> <input
+															type="time" class="form-control" name=lunch_o
+															id="lunch_open" step="1800">
+													</div>
+													<div class="form-group mb-3">
+														<label for="simpleinput">점심 마감시간</label> <input
+															type="time" class="form-control" name="lunch_c"
+															id="lunch_close" step="1800">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12">
+													<input type="reset" class="btn btn-outline-danger" value="취소" onclick="cancel()" /> <br /> <br />
+												</div>
 											</div>
 										</form>
 									</div>
@@ -200,3 +223,4 @@
 	</div>
 </body>
 </html>
+<script src="resources/js/app.min.js"></script>
