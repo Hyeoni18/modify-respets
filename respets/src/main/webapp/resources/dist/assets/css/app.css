@@ -10814,8 +10814,10 @@ div.dt-button-info {
 .bootstrap-timepicker-widget table td input {
   height: 32px;
   width: 32px;
-  color: #fff;
-  background-color: #727cf5;
+  color: #400040;
+/*color: #fff; */
+/*background-color: #727cf5;  */
+  background-color: #d7eff6;
   border-radius: 50%;
   border: 0;
   outline: none !important; }

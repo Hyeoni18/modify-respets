@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dist/assets/css/app.min.css"  type="text/css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dist/assets/css/vendor/fullcalendar.min.css" type="text/css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dist/assets/css/vendor/summernote-bs4.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/src/css/common.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
 
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/dist/assets/js/vendor/jquery-ui.min.js"></script>
@@ -29,3 +29,7 @@
 <script	src="${pageContext.request.contextPath}/resources/dist/assets/js/vendor/dataTables.responsive.min.js"></script>
 <script	src="${pageContext.request.contextPath}/resources/dist/assets/js/vendor/responsive.bootstrap4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/dist/assets/js/vendor/summernote-bs4.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/dist/assets/js/vendor/dropzone.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/dist/assets/js/ui/component.fileupload.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/app.min.js"></script>
+
