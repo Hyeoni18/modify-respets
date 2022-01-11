@@ -31,5 +31,4 @@
 <script src="${pageContext.request.contextPath}/resources/dist/assets/js/vendor/summernote-bs4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/dist/assets/js/vendor/dropzone.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/dist/assets/js/ui/component.fileupload.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/app.min.js"></script>
 
